@@ -159,31 +159,6 @@
     </div>
 </script>
 
-<script id="albums-template" type="text/x-handlebars-template">
-	<img>
-</script>
-
-<script id="roomie-template" type="text/x-handlebars-template">
-	<p><h4><strong>Introducing Roomie&trade;</strong></h4></p>
-	<p>Shared Room for Higher Institution Students</p>
-	<div class="row">
-
-		 {{#each room}}
-	    <div class="col-xs-12 col-md-12"> 
-	        <div class="photo-border album-thumbnail"  data-id="{{@index}}">
-	          <a href="#"><img id="room" src="{{src}}" alt="cozy-spot-with-painted-designs-on-wall_925x"/> </a>
-	            
-	          <div class="caption">
-	              <h4> {{name}} </h4>
-	              <p>Cool Cats Live and Study Together</p>
-	          </div>
-	        </div>
-	    </div> <!-- / col -->
-
-		{{/each}}
-	</div>
-</script>
-
 <!-- this is the template for the photos view of a single album -->
 <!-- 
     like albums view it uses a bootstrap grid format to display the photos in an album

@@ -46,8 +46,6 @@ $(document).ready(function(){
 	source   = $("#photo-template").html();
 	photo_template = Handlebars.compile(source);
 
-	source   = $("#roomie-template").html();
-	roomie_template = Handlebars.compile(source);
 	
 
 	// 

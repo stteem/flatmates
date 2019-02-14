@@ -204,25 +204,5 @@ var gallery = {
 			]
 		}
 
-	],
-
-	room : [
-		{
-			src : "assets/images/woman-3190829_1280.jpg"
-		}
-	]
-};
-
-var masthead = {
-	images: [
-		{ 
-			src : "assets/images/unsplash2.jpg"
-		},
-		{
-			src: "assets/images/brush2.jpg"
-		},
-		{
-			src: "assets/images/kit.jpg"
-		}
 	]
 };
