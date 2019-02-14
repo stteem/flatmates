@@ -71,7 +71,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/style.css",
-    "revision": "175f040e0eab7eac1403a9fd5bbedd55"
+    "revision": "a7a0e2cd206fd5d395f98882fa87b1eb"
   },
   {
     "url": "assets/fonts/Bellota-Bold.otf",
@@ -176,10 +176,6 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "assets/images/homes/cozy-spot-with-painted-designs-on-wall_925x.jpg",
     "revision": "7e2a9989d7c387346211e956c05acce1"
-  },
-  {
-    "url": "assets/images/homes/dinner-party_925x.jpg",
-    "revision": "4ad34c4c69a229a27438d4fa36a652b9"
   },
   {
     "url": "assets/images/homes/fishing-boat-in-thailand_925x.jpg",
@@ -342,6 +338,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "11e834ab26ea68052b1a3172095da4ec"
   },
   {
+    "url": "assets/images/homes/paris/dinner-party_925x.jpg",
+    "revision": "4ad34c4c69a229a27438d4fa36a652b9"
+  },
+  {
     "url": "assets/images/homes/rainy-day-poolside_925x.jpg",
     "revision": "f66175158eebfd7efcca863e1974dc04"
   },
@@ -412,6 +412,38 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "assets/images/hotel-bed-and-side-table_4460x4460.jpg",
     "revision": "23eafa6645367d4a01cc7c4e382fe2d1"
+  },
+  {
+    "url": "assets/images/icons/icon-128x128.png",
+    "revision": "7a024ac5a2dfa457e12fbcd4e4a1bca0"
+  },
+  {
+    "url": "assets/images/icons/icon-144x144.png",
+    "revision": "298645d8e5c9eaa062ba6bbcb9784bf4"
+  },
+  {
+    "url": "assets/images/icons/icon-152x152.png",
+    "revision": "d20dd1d5b76afaa17f58d22c29ded020"
+  },
+  {
+    "url": "assets/images/icons/icon-192x192.png",
+    "revision": "c0c9cf191b9b0f92eb063f22fa0f0489"
+  },
+  {
+    "url": "assets/images/icons/icon-384x384.png",
+    "revision": "6c74e1f479387fbc41efa4a5d646b449"
+  },
+  {
+    "url": "assets/images/icons/icon-512x512.png",
+    "revision": "53001dbd1479efabbc74053f68ac9696"
+  },
+  {
+    "url": "assets/images/icons/icon-72x72.png",
+    "revision": "f0fc44cc560ec5be492adcb4393444e4"
+  },
+  {
+    "url": "assets/images/icons/icon-96x96.png",
+    "revision": "457e12b2b2f74dc6defc7e46d258e934"
   },
   {
     "url": "assets/images/IMG-20171108-WA0051.jpg",
@@ -546,56 +578,16 @@ workbox.precaching.precacheAndRoute([
     "revision": "094ecfda6a22b590fcf8aa7f8c4a31c4"
   },
   {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-111.png",
-    "revision": "d1b48c4ecbb062dd9d591c36b4605c01"
+    "url": "assets/images/LogoMakr_2vw9g6.png",
+    "revision": "5acb4fd65f45904b71a8b7c66948337f"
   },
   {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-134.png",
-    "revision": "2f4c695ebc2f687a2c2e47ece8fe64bd"
+    "url": "assets/images/LogoMakr_8aqNnQ.png",
+    "revision": "12b0a00ba1a1c7ed8ba4f75c7f0ac651"
   },
   {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-138.png",
-    "revision": "d443f2155e12c7725bd4a29ea6c06aa2"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-144.png",
-    "revision": "dd9451b974a925e520c93d15e4bce45b"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-186.png",
-    "revision": "d7499726401d39811fd08ac40aed5513"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-188.png",
-    "revision": "a8ac113e7b0234b86088389563172a0b"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-193.png",
-    "revision": "5581f8c60844d6550eabfd8dfd71c573"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-194.png",
-    "revision": "ff4946ff5e84889604523a882ed9a974"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-211.png",
-    "revision": "9e7012e0c95ea352c54d90e092504556"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-235.png",
-    "revision": "a16b3e485234aef14f9106405718f6f1"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-74.png",
-    "revision": "139dabe457ef9698c4020657304a6d98"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-89.png",
-    "revision": "cbe1e5277554b672faffe6ad9ca8ad4b"
-  },
-  {
-    "url": "assets/images/logo/emblemmatic-flatmates-logo-99.png",
-    "revision": "ac0db2ad99acfbb5b530beb559533169"
+    "url": "assets/images/LogoMakr_9X4bSd.png",
+    "revision": "803eb0cd3bce364587cda8169e03f256"
   },
   {
     "url": "assets/images/room-1336497_1280.jpg",
@@ -623,11 +615,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/collections.js",
-    "revision": "084d7a9cfe7fa9305ca5b36073293082"
+    "revision": "653b0a60586e4a242308b8a0dd752c17"
   },
   {
     "url": "assets/js/gallery.js",
-    "revision": "ca219555982b941f9ff05b3bb94233b9"
+    "revision": "2296f155fc27e4df90e9222f00ef6e87"
   },
   {
     "url": "assets/js/handlebars-v3.0.3.js",
@@ -642,20 +634,16 @@ workbox.precaching.precacheAndRoute([
     "revision": "378087a64e1394fc51f300bb9c11878c"
   },
   {
-    "url": "assets/js/l20n.js",
-    "revision": "78f200ad38ab80cef7963d9ad5c7e42b"
-  },
-  {
     "url": "assets/js/register.js",
     "revision": "0fb3a5058cc845673033ce34d7964672"
   },
   {
     "url": "index.html",
-    "revision": "6d5df951d7a280fc3bd0f1388e3fd26e"
+    "revision": "ef6ae5bb401a3749818a94053815ab66"
   },
   {
     "url": "manifest.json",
-    "revision": "97fa486524051b153f0e2bd9c1792a83"
+    "revision": "6bf49629a100a7bdfd322b7ed5576c05"
   }
 ]);
 

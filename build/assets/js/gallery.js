@@ -8,21 +8,11 @@
 // templates many times
 var albums_template, photos_template, photo_template;
 
-/*const picturesInArray = async() => {
-	try {
-		// variables to store the current displayed album and photo
-		var current_album = gallery.albums[0];
-		var current_photo = current_album.photos[0];
-		const showPicture = await Promise.all([current_album, current_photo])
 
-		throw 'broken!'
-
-		return showPicture;
-
-	} catch(error) {
-		console.log(error);
-	}
-}*/
+// variables to store the current displayed album and photo
+var current_album = gallery.albums[0];
+var current_photo = current_album.photos[0];
+		
 
 
 var installation_price, hairstyle, hairstyle_src, title, album;
