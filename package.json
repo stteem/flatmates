@@ -1,0 +1,11 @@
+{
+  "name": "flatmates",
+  "version": "1.0.0",
+  "description": "Rent sharing app",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Uwem Uke",
+  "license": "ISC"
+}
