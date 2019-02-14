@@ -1,0 +1,55 @@
+runtime: php55
+api_version: 1
+threadsafe: true
+handlers:
+
+- url: /assets
+  static_dir: assets
+  
+- url: /css
+  static_dir: css
+
+- url: /images
+  static_dir: images
+  
+- url: /collections
+  static_dir: collections  
+  
+- url: /hair_images
+  static_dir: hair_images 
+  
+- url: /nail_images
+  static_dir: nail_images 
+  
+- url: /photos
+  static_dir: photos
+  
+- url: /js
+  static_dir: js
+
+- url: /(.+\.(gif|png|jpg|js|css))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg|js|css)$
+  application_readable: true
+  
+# Serve php scripts.
+- url: /(.+\.php)$
+  script: \1  
+
+- url: /
+  script: index.php
+ 
+- url: /index
+  script: index.php  
+  
+- url: /register
+  script: register.php 
+
+  - url: /login
+  script: login.php
+  
+env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/charm-beauty:us-central1:insta3;dbname=charm
+  MYSQL_USER: root

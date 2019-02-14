@@ -1,0 +1,66 @@
+	
+#about, #about2, #about3 {
+	width: 95%;
+	line-height: 1.5em;
+	margin-top: 1%;
+	margin-bottom: 4%;
+	padding: 15px;
+	box-shadow: 1px 1px 9px #888888;
+}
+
+@media (min-width: 992px) {	
+	#about {
+		width: 46%;
+		margin-left: 0%;
+		line-height: 1.5em;
+		
+	}
+
+	#about2 {
+		width: 46%;
+		display: inline-block;
+		margin-left: 0%;
+		margin-top: 21px;
+		line-height: 1.5em;
+		
+	}
+
+	#about3 {
+		line-height: 1.5em;
+		width: 63%;
+		margin-left: 20%;
+	
+	}
+}
+
+.conta {
+	width: 100%;
+}
+
+.banner-about {
+	width: 100%;
+	margin-bottom: 10px;
+	margin-top: ;
+}
+
+#award-photo1, #award-photo2 {
+	width: 98%;
+	margin: 1%; 
+	
+}
+
+@media (min-width: 992px) {
+	#award-photo1 {
+		width: 24%;
+		float: right; 
+		margin-right: 28%;
+		border-radius: 4px;
+	}
+
+	#award-photo2 {
+	 	width: 20%;
+		float: left;
+		margin-left: 20%;
+		margin-top: 20px;
+	 }
+}

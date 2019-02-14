@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" >
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="Flatmates" content="The urban upwardly mobile working class, and students of tertiary institutions in Nigeria go to Flatmates to share accomodation rent. Do you want to make extra money? Rent out 1 bedroom of your flat, or share your off campus room with fellow students.">
+	<title>Apartment Rent Sharing Platform</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/collections.css">
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/about.css">
+	
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	
+	<script src="assets/js/handlebars-v3.0.3.js"></script>
+	
+	<script src="assets/js/collections.js" async> </script>
+    <script src="assets/js/gallery.js" async> </script>
+    <script src="assets/js/idb.js" async> </script>
+    <!--<script src="assets/js/vue.js"> </script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+     <!-- Add to home screen for Chrome and Opera mobile on Andriod -->
+  <link rel="manifest" href="manifest.json">
+
+    <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Flatmates">
+  <link rel="apple-touch-icon" href="assets/images/icons/icon-152x152.png">
+  <link rel="icon" href="assets/images/icons/icon-72x72.png" type="image/png" sizes="any">
+
+  <!-- Add to home screen for Windows desktop -->
+  <meta name="msapplication-TileImage" content="assets/images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#9c27b0">
+
+</head>
+<body>
+
+	 <nav class="header navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="index.html">Flatmates</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
+		  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		    <div class="navbar-nav">
+		      
+		    </div>
+
+
+
+		    <div id="logout" class="nav1 logout"><a href="logout.php">Log out</a></div>
+
+		     <div id="username" style='color: #fff'></div>
+
+		     <div id="login" class="nav1">
+		     	<a id="bout" href="#">About<span class="sr-only">(current)</span></a>
+		     	<a href="login.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
+		     	<a href="register.php">Register</a>
+		     </div>
+		    
+		    
+		  </div>
+		</nav>
+		
+			
+		
+
+
+	
+
+	<div class="container">
+
+	<!-- A navigation menu that selects different views -->
+      <ul class="nav nav-tabs">
+      	
+            <li role="" class="active"><button style="background-color: transparent;" type="button" class="btn btn-link" id="albums-tab">Home</button></li>
+            <li role=""><button style="background-color: transparent;" type="button" class="btn btn-link" id="photos-tab" >Photos</button></li>
+            <li role=""><button style="background-color: transparent;" type="button" class="btn btn-link" id="dashboard" >Dashboard</button></li>
+          </ul>
+      <br/><br/>
+
+     
+
+      <!--<ul class="nav nav-tabs">
+            <li role="" class="active"><a href="#" id="albums-tab" >Albums</a></li>
+            <li role=""><a href="#" id="photos-tab" >Photos</a></li>
+            <li role=""><a href="#" id="slideshow-tab" >Slideshow</a></li>                   
+          </ul>
+      <br/><br/>-->
+
+      <!-- the content section is empty as we will fill it 
+            via javascript and templates -->
+  <div id="content"  class="container-fluid"  role="main">
+      <div class="loader">
+    <svg viewBox="0 0 32 32" width="32" height="32">
+      <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+    </svg>
+  </div>
+
+  </div><!--/ content ends -->
+
+  
+	  
+
+</div> <!-- / container -->
+
+<script id="albums-template" type="text/x-handlebars-template">
+	<p><strong><h4>Earn Extra Income by Sharing Your Rent. It's That Easy.</h4></strong></p>
+	<div class="space-div">
+  	<img class="space-img" src="assets/images/three-friends-working-on-couch_925x.jpg">
+  	</div>
+	<p><strong><h4>Recommended For You</h4></strong></p>
+  <div class="row">
+
+    {{#each albums}}
+    <div class="col-xs-12 col-md-3"> 
+        <div class="photo-border album-thumbnail"  data-id="{{@index}}">
+          <a href="#"><img class="crop-img" src="{{thumbnail}}" alt="Top recommended apartments in major cities"/> </a>
+            
+          <div class="caption">
+              <h4> {{name}} </h4>
+              <p> {{photos.length}} Apartments</p>
+          </div>
+         </div>
+    </div> <!-- / col -->
+
+    {{/each}}
+
+  </div> <!-- / row -->
+
+  	<div id="roomie">
+    <p><h4><strong>Introducing Roomie&trade;</strong></h4></p>
+	<p>Shared Room for Higher Institution Students</p>
+	</div>
+
+	<div class="row">
+    	{{#each albums}}
+    <div class="col-xs-12 col-md-3" id="space"> 
+        <div class="photo-border albums-thumbnail"  data-id="{{@index}}">
+          <a href="#"><img class="crop-img" src="{{thumbnail}}" alt="Top recommended apartments in major cities"/> </a>
+            
+          <div class="caption">
+              <h4> {{name}} </h4>
+              <p> {{photos.length}} Apartments</p>
+          </div>
+         </div>
+    </div> <!-- / col -->
+
+    {{/each}}
+    </div>
+</script>
+
+<script id="albums-template" type="text/x-handlebars-template">
+	<img>
+</script>
+
+<script id="roomie-template" type="text/x-handlebars-template">
+	<p><h4><strong>Introducing Roomie&trade;</strong></h4></p>
+	<p>Shared Room for Higher Institution Students</p>
+	<div class="row">
+
+		 {{#each room}}
+	    <div class="col-xs-12 col-md-12"> 
+	        <div class="photo-border album-thumbnail"  data-id="{{@index}}">
+	          <a href="#"><img id="room" src="{{src}}" alt="cozy-spot-with-painted-designs-on-wall_925x"/> </a>
+	            
+	          <div class="caption">
+	              <h4> {{name}} </h4>
+	              <p>Cool Cats Live and Study Together</p>
+	          </div>
+	        </div>
+	    </div> <!-- / col -->
+
+		{{/each}}
+	</div>
+</script>
+
+<!-- this is the template for the photos view of a single album -->
+<!-- 
+    like albums view it uses a bootstrap grid format to display the photos in an album
+    
+    Each photos is displayed with thumbnail image, a name and 
+    a description
+-->
+<script id="photos-template" type="text/x-handlebars-template">
+
+  <div class="row thumb">
+    <!-- xs-12 : small display shows a single column (taking up 12 grid columns)-->
+    <!-- md-3 : medium and up displays use 3 grid columns per column -->
+
+    {{#each photos}}
+    <div class=" col-xs-12 col-md-3"> 
+     <div class="photo-border photo-thumbnail"  data-id="{{@index}}">
+        <img class="crop-img thumb-photo" src="{{src}}" alt=""/> 
+          
+         <div class="caption">
+            <h5>{{title}}</h5>
+            <p>&#8358;{{price}} {{symbol}}</p>
+         </div>
+      </div>
+       
+    </div> <!-- / col -->
+    {{/each}}
+
+  </div> <!-- / row -->
+</script>
+
+<!-- this is the template for the view a single photo -->
+<!-- 
+    It is displayed as a large image with title and description
+-->
+<script id="photo-template" type="text/x-handlebars-template">
+  <div class="row phots">
+    <div class="col-xs-12 col-md-6 phot">
+    	
+        <img class="large-img" src="{{src}}" alt=""/> 
+          
+        <div class="caption">
+            <h3>{{title}}</h3>
+            <p>{{price}} {{symbol}}</p>
+             
+        </div>
+    </div> <!-- / col -->
+    
+  </div> <!-- / row -->
+</script>
+
+<script id="bookings-template" type="text/x-handlebars-template">
+<div class="container">
+	<div class="row">
+	<div class="table-responsive-sm services col-lg-10">
+	<table class="table table-bordered">
+	<thead class="thead-light">
+		<th>Service</th>
+		<th id="dash_img1" >Product Image</th>
+		<th>Product Name</th>
+		<th>Booked Date</th>
+		<th>Booked Time</th>
+		<th>Installation Price</th>
+	</thead>
+	<tbody>
+	  {{#categories}}
+	    <tr>
+	      <td>{{album}}</td>
+	      <td><img id="dash_img" src="{{source}}" alt=""/></td>
+	      <td>{{title}}</td>
+	      <td>{{booked_date}}</td>
+	      <td>{{booked_time}}</td>
+	      <td>GHC {{installation_price}}</td>
+	    </tr>
+	  {{/categories}}
+	</tbody>
+	</table>
+<div>
+<div>
+<div>
+</script>
+
+
+<script id="about-template" type="text/x-handlebars-template">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+    	          
+        <img id="award-photo1" src="assets/images/IMG-20171108-WA0051.jpg" alt="Selfie of Uwem Uke outdoor, behind is a golf course pool"/>
+	
+		<div id="about">
+			
+			<p>
+				I needed to move to Lagos, to be closer to job interviews. A good apartment in Yaba is pricey since it became Yabacon Valley, (though it is hardly a valley). 
+				Anyways i didn't have all the money in  the world, then a light bulb shone in my head that it should be possible to share rent with another tenant. Pay half, or a little more if my bedroom, and the common-room were furnished already. Co-incidentally, a twitter user posted that she was looking for a new flatmate, since her flatmate wouldn't be renewing rent. No i didn't move in, if only she were a he. Welcome to shared living economy. Welcome to Flatmates.
+				<p><strong>
+				Uwem Uke<br>
+				Founder
+				</strong>
+				</p>
+			</p>
+		</div>
+		
+		<div id="about2">
+			<p>
+				<h4>Mission</h4>
+				In a nutshell, our mission is to make it easier and safe for urban dwellers to find accomodations.
+			</p>
+		</div>
+	
+	
+    </div> <!-- / col -->
+    
+  </div> <!-- / row -->
+</div> <!-- / container -->
+</script>
+
+
+
+<div class="container">
+<div id="booking_form" style="display: none;">
+<form id="dateTimeData" method="post" action="index.php">	
+	<div id="warning"><div id="success"></div></div>
+	Choose date and time you wish to go for inspection: <br>
+	<input type="date" id="bookd_date" class="form-control empty" class="is-invalid .is-valid"  name="bookd_date" value="" required />
+	<input type="time" id="bookd_time" class="form-control empty" class="is-invalid .is-valid"  name="bookd_time" value="" required />
+	
+	<input type="hidden" class="empty" id="installation_price" name="installation_price" value="" />
+	<input type="hidden" class="empty" id="hairstyle_title" name="hairstyle_title" value="" />
+	<input type="hidden" class="empty" id="hairstyle_src" name="hairstyle_src" value="" />
+	<input type="hidden" class="empty" id="album" name="album" value="" />
+	
+	<button id="product_button" type="submit" name="product_button" class="btn btn-light">Request Inspection</button>
+</form>
+</div>
+</div>
+
+<!--<div class="space-div">
+<img id="" class="space-img" src="assets/images/loft-style-bedroom_925x.jpg" alt="loft-style-bedroom_4460x4460">
+</div>-->
+
+<footer>
+
+
+	<div class="foot">
+		<p><h5> Do you wish to earn extra money? contact us on any of our channels.</h5></p>
+	<div class="container">
+	<div class="row">
+	  <div class="centre col-sm-1 col-lg-2">
+	    <i id="phone" class="fas fa-phone fa-2x "></i>
+	    <p><a class="social" href="tel:+2349071064360">phone</a></p>
+	  </div>
+	
+	
+	  <div class="centre col-sm-2 col-lg-2 ">
+	    <i id="envelope" class="fas fa-envelope fa-2x"></i>
+	    <p>
+	      <a class="social" href="mailto:info@charm.com">email</a>
+	    </p>
+	  </div>
+
+  	
+	  <div class="centre col-sm-1 col-lg-2 ">
+	    <i id="facebook" class="fab fa-facebook-square fa-2x"></i>
+	    <p>
+	      <a class="social" href="https://facebook.com/uwemuke" target="_blank">facebook</a>
+	    </p>
+	  </div>
+  
+  
+	  <div class="centre col-sm-1 col-lg-2 ">
+	    <i id="instagram" class="fab fa-instagram fa-2x"></i>
+	    <p>
+	      <a class="social" href="https://instagram.com/uwemuke" target="_blank">instagram</a>
+	    </p>
+	  </div>
+  
+  
+	  <div class="centre col-sm-1 col-lg-2 ">
+	    <i id="twitter" class="fab fa-twitter fa-2x"></i>
+	    <p>
+	      <a class="social" href="https://twitter.com/uwemuke" target="_blank">twitter</a>
+	    </p>
+	  </div>
+  
+
+	  <div class="centre col-sm-1 col-lg-2 ">
+	    <i id="whatsapp" class="fab fa-whatsapp-square fa-2x"></i>
+	    <p>
+	      <a class="social" href="https://Whatsapp.com/uwemuke" target="_blank">Whatsapp</a>
+	    </p>
+	  </div>
+
+  </div>
+</div>
+</div>
+
+  <p id="copyright">A Uwem Uke Production &copy;2019 Youke Greendy Nigeria Limited </p>
+</footer>
+
+
+
+	<script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+
+        }
+
+        // Then later, request a one-off sync:
+		navigator.serviceWorker.ready.then(function(swRegistration) {
+		  return swRegistration.sync.register('myFirstSync');
+		});
+
+    </script>
+
+
+
+</body>
+</html>

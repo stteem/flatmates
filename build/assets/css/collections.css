@@ -1,0 +1,164 @@
+.crop-img{
+  max-height:325px;
+  max-width:100%;
+  border-radius: 4px;
+}
+
+.large-img{
+  max-width:100%;
+}
+
+.caption {
+  margin-top: 5px;
+}
+
+.carousel-img{
+    margin: auto;
+    padding: 3px;
+    height:100%;
+    width: 100%;
+}
+
+#dash_img1 {
+	width: 15%;
+}
+
+#dash_img {
+  width: 80%;
+}
+
+@media (min-width: 992px) {
+  .carousel-item {
+    min-height: 400px;
+    max-width: 100%;
+  }
+}
+
+.photo-border {
+  margin: 2px;
+  
+  
+}
+
+.thumb-photo:hover {
+  background: #e7d4ff;
+  opacity: 0.5;
+}
+
+.phots, .phot {
+  border: 1px solid #dee2e6;
+  padding: 5px;
+}
+
+#bookd_date, #bookd_time {
+  margin-bottom: 10px;
+}
+
+#product_button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#warning {
+  color: red;
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+
+#success {
+  color: #08d408;
+  background-color: #048804;
+  font-size: 0.9em;
+  width: 252px;
+  height: 23px;
+  padding: 3px;
+  border-radius: 3px;
+  display: none;
+}
+
+#booking_form {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 992px) {
+
+    .products {
+      margin-left: 40px;
+    }
+
+   
+   /*#product_button {
+      margin-left: 53%;
+    }*/
+
+
+    #booking_form {
+      margin-top: 20px;
+    }
+
+    #bookd_date {
+      width: 25%;
+      margin-bottom: 10px;
+    }
+
+    #bookd_time {
+      width: 25%;
+      margin-bottom: 10px;
+    }
+
+    #product_button {
+      width: 25%;
+      margin-bottom: 10px;
+    }
+
+}
+
+.form-control:focus {
+  border-color: #e7d4ff;
+  box-shadow :  0 0 0 0.2rem rgb(231, 212, 255);
+}
+
+.car {
+  min-height: 300px;
+  min-width: 100%;
+  background: #ffff;
+}
+
+/*.scarfold {
+  border: 1px solid red;
+}
+
+.prompt {
+  background: green;
+}*/
+
+#car {
+  margin-top: 20px;
+  border: 1px solid #e0dcbf;
+  background-color: #fff8dc;
+}
+
+#bods {
+  border-top: 1px solid #e0dcbf;
+  border-bottom: 1px solid #e0dcbf;
+  padding: 10px;
+}
+
+
+.photos {
+  width: 95%;
+  margin: 2%;
+  border: 1px solid #000;
+}
+
+@media (min-width: 992px) {
+  .photos {
+    width: 20%;
+    margin: 2%;
+  }
+}
+
+
+
