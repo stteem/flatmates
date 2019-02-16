@@ -127,10 +127,10 @@ if (isset($_POST['register'])) {
 	<link rel="stylesheet" type="text/css" href="assets/css/register_style.css">
 	<link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="any">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="any">
+	<link rel="icon" href="assets/images/icons/icon-72x72.png" type="image/png" sizes="any">
 
 	<script src="assets/js/jquery-3.3.1.min.js"></script>
-  
+  	
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
     
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
@@ -138,7 +138,7 @@ if (isset($_POST['register'])) {
 <body>
 
 <nav class="header navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="index.php"><b>Charm</b> |</a>
+      <a class="navbar-brand" href="index.html"><b>Flatmates</b> |</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -146,8 +146,6 @@ if (isset($_POST['register'])) {
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           
-          <a class="nav-item nav-link" href="dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="about.php">About</a>
           <a class="nav-item nav-link" href="#"><i class="fab fa-whatsapp-square fa-lg" style="color: green"></i> +233503989513</a>
         </div>
 
@@ -165,7 +163,7 @@ if (isset($_POST['register'])) {
 
           else {
 
-            echo('<div class="nav1"><a href="pogin.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
+            echo('<div class="nav1"><a href="login.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
                    
                   <a href="register.php">Register</a></div>');
           }
@@ -239,7 +237,7 @@ if (isset($_SESSION['error'])) {
 			<input type="submit" name="register" value="Register">
 			</p>
 			<p>
-			Already have an account?<a href="Pogin.php" style="color: red"> Sign in here</a>
+			Already have an account?<a href="login.php" style="color: red"> Sign in here</a>
 			</p>
 		</form>
 	</div>
