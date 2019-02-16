@@ -8,7 +8,7 @@ var gallery = {
 	albums : [
 		{
 			name : "Lagos", 
-			thumbnail : "assets/images/landmarks/sidney-342584_640.jpg",
+			thumbnail : "assets/images/landmarks/lagos_city1.jpg",
 			photos : [
 				{	
 					src : "assets/images/homes/lagos/yellow-couch-by-black-and-white-mural_925x.jpg",
@@ -74,7 +74,7 @@ var gallery = {
 		},
 		{
 			name : "Abuja", 
-			thumbnail : "assets/images/landmarks/architecture-3212248_640.jpg",
+			thumbnail : "assets/images/landmarks/abuja_city1.jpg",
 			photos : [
 				{	
 					src : "assets/images/homes/abuja/diy-organic-candle_925x.jpg",
@@ -132,59 +132,59 @@ var gallery = {
 		},
 		{
 			name : "Calabar", 
-			thumbnail : "assets/images/landmarks/bridge-944904_640.jpg",
+			thumbnail : "assets/images/landmarks/crossriver_city1.jpg",
 			photos : [
 				{	
-					src : "assets/images/homes/Newyork/bungalow-house-exterior_925x.jpg",
+					src : "assets/images/homes/calabar/bungalow-house-exterior_925x.jpg",
 					title : "Shared flat in Calabar South", 
 					price : 300000,
 					description : "ghc"
 				}, 
 				{	
-					src : "assets/images/homes/Newyork/casual-sitting-area-with-cactus_925x.jpg",
+					src : "assets/images/homes/calabar/casual-sitting-area-with-cactus_925x.jpg",
 					title : "Shared Flat in Ndidem Usang Isong", 
 					price : 250000,
 					description : "ghc"
 				}, 
 				{	
-					src : "assets/images/homes/Newyork/brick-country-home_925x.jpg",
-					title : "Brick Country Home", 
+					src : "assets/images/homes/calabar/brick-country-home_925x.jpg",
+					title : "Brick Country Home By MCC Road, Calabar", 
 					price : 170000,
 					description : "ghc"
 				},
 				{	
-					src : "assets/images/homes/Newyork/bedroom-bed-with-brown-throw-pillows_925x.jpg",
-					title : "Manhattan Apartment", 
+					src : "assets/images/homes/calabar/bedroom-bed-with-brown-throw-pillows_925x.jpg",
+					title : "Shared Apartment in Ikot Efa Road Off Old Parliamentary Calabar", 
 					price : 180000,
 					description : "ghc"
 				},
 				{	
-					src : "assets/images/homes/Newyork/bedroom-end-table-with-dad-gift_925x.jpg",
-					title : "Shared Apartment in New York", 
+					src : "assets/images/homes/calabar/bedroom-end-table-with-dad-gift_925x.jpg",
+					title : "Shared Apartment in Murtala Mohammed Highway", 
 					price : 190000,
 					description : "ghc"
 				},
 				{	
-					src : "assets/images/homes/Newyork/bedroom-side-table-light_925x.jpg",
-					title : "Shared Apartment in New York", 
+					src : "assets/images/homes/calabar/bedroom-side-table-light_925x.jpg",
+					title : "Shared Apartment in Ekorinim Industrial Estate Off M/M Highway", 
 					price : 150000,
 					description : "ghc"
 				},
 				{	
-					src : "assets/images/homes/Newyork/comfortable-living-room-cat_925x.jpg",
-					title : "New York Shared Apartment", 
+					src : "assets/images/homes/calabar/comfortable-living-room-cat_925x.jpg",
+					title : "Shared Apartment 45th Street, State Housing Estate", 
 					price : 150000,
 					description : "ghc"
 				},
 				{	
-					src : "assets/images/homes/Newyork/country-house_925x.jpg",
-					title : "Shared Country Home in New York", 
+					src : "assets/images/homes/calabar/country-house_925x.jpg",
+					title : "Shared Country Home in Northern Industrial Layout, Esuk Utan", 
 					price : 150000,
 					description : "ghc"
 				},
 				{	
-					src : "assets/images/homes/Newyork/cute-cat-photo_925x.jpg",
-					title : "Shared Apartment in New York", 
+					src : "assets/images/homes/calabar/cute-cat-photo_925x.jpg",
+					title : "Shared Apartment in Abasi Obori Layout By System Metal (Off RCC Junction", 
 					price : 200000,
 					description : "ghc"
 				}
@@ -193,12 +193,54 @@ var gallery = {
 		},
 		{
 			name : "Uyo", 
-			thumbnail : "assets/images/landmarks/paris-2534660_640.jpg",
+			thumbnail : "assets/images/landmarks/uyo_city1.jpg",
 			photos : [
 				{	
-					src : "assets/images/homes/paris/dinner-party_925x.jpg",
-					title : "Beauty Soap", 
+					src : "assets/images/homes/uyo/dinner-party_925x.jpg",
+					title : "Snared Apartment in Shelter Afrique", 
 					price : 200000,
+					description : "ghc"
+				},
+				{	
+					src : "assets/images/homes/uyo/hotel-room-bed_925x.jpg",
+					title : "Snared Apartment in Shelter Afrique", 
+					price : 150000,
+					description : "ghc"
+				},
+				{	
+					src : "assets/images/homes/uyo/cat-on-sofa-near-window_925x.jpg",
+					title : "Snared Apartment in Shelter Afrique", 
+					price : 100000,
+					description : "ghc"
+				},
+				{	
+					src : "assets/images/homes/uyo/bright-hotel-room-bed_925x.jpg",
+					title : "Snared Apartment in Ewet Housing Estate", 
+					price : 300000,
+					description : "ghc"
+				},
+				{	
+					src : "assets/images/homes/uyo/a-home-filled-with-elaborate-gold-decor_925x.jpg",
+					title : "Snared Apartment in Federal Housing Estate", 
+					price : 250000,
+					description : "ghc"
+				},
+				{	
+					src : "assets/images/homes/uyo/rainy-day-poolside_925x.jpg",
+					title : "Snared Apartment in Wellington Bassey Road", 
+					price : 200000,
+					description : "ghc"
+				},
+				{	
+					src : "assets/images/homes/uyo/soft-livingroom-sofa_925x.jpg",
+					title : "Snared Apartment in Osongama Estate", 
+					price : 200000,
+					description : "ghc"
+				},
+				{	
+					src : "assets/images/homes/uyo/red-and-yellow-daisies_925x.jpg",
+					title : "Snared Apartment in Ewet Housing Estate", 
+					price : 1800000,
 					description : "ghc"
 				}
 			]
