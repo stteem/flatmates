@@ -46,8 +46,6 @@ $(document).ready(function(){
 	source   = $("#photo-template").html();
 	photo_template = Handlebars.compile(source);
 
-	source   = $("#roomie-template").html();
-	roomie_template = Handlebars.compile(source);
 	
 
 	// 
@@ -225,6 +223,21 @@ $(document).ready(function(){
 	}
 
 
+	function validateResponse(response) {
+	  if (!response.ok) {
+	    throw Error(response.statusText);
+	  }
+	  return response;
+	}
+
+	function readResponseAsJSON(response) {
+	  return response.json();
+	}
+
+	function readResponseAsText(response) {
+	  return response.text();
+	}
+
 	
 	var flash;
 	// Ajax function to post date, time, and product data to our php backend
@@ -251,22 +264,30 @@ $(document).ready(function(){
 		}
 
 
+		// Here we first fetch session.php to make sure user has logged in before they can 
+		// request inspection
 		fetch('session.php')
-		.then(response => response.json())
-		.then(function() {
+		.then(validateResponse)
+		.then(readResponseAsText)
+		.then(function(data) {
 
-			let formData = new FormData(document.getElementById('dateTimeData'));
-			navigator.serviceWorker.controller.postMessage(formData);
+		    // Examine the text in the response
+			console.log('checking for session ',data);
+
+			if (data === "ACCESS DENIED") {
+				throw 'You have to log in to be able to request inspection.';
+			}			
 
 			// Fetch an HTML <form> with id of 'dateTimeData'
 			fetch('index.php', {
 			  method: 'POST',
 			  body: new FormData(document.getElementById('dateTimeData'))
 			})
+			.then(validateResponse)
 			.then(function() {
 			  	console.log('promise posted')
 
-			  	var success = "Congratulations, your reservation was successfull";
+			  	var success = "Congratulations, your reservation was successfull.";
 				$("#success").css({"display": "initial"});
 				flash = $("#success").html(success);
 
@@ -281,15 +302,18 @@ $(document).ready(function(){
 				});
 
 			})
-			.catch(function() {
+			.catch(function(err) {		
+
 			  	var success = "Failed, check your network and try again";
 				$("#success").css({"display": "initial", "background-color": "brown"});
 				flash = $("#success").html(success);
-			  });
-			})
-		.catch(function() {
+			});
+
+			
+		})
+		.catch(function(error) {
 			$("#booking_form").hide(0);
-			return $('#content').html("you are not logged in");
+			return $('#content').html(error);
 		});
 
 		
@@ -300,18 +324,6 @@ $(document).ready(function(){
 	// Calling clear input function to clear form of data sent to the PHP backend
 	clearInput();
 	
-
-	function validateResponse(response) {
-	  if (!response.ok) {
-	    throw Error(response.statusText);
-	  }
-	  return response;
-	}
-
-	function readResponseAsJSON(response) {
-	  return response.json();
-	}
-
 
 	//Fetch and Show logout link and username only if user is in session
 	//Otherwise show login and register links if user is not in session
