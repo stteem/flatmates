@@ -200,18 +200,7 @@ h4 {
     -webkit-transform: rotate(90deg);
             transform: rotate(90deg); } }
 
-.foot {
-  margin-top: 100px;
-  background-color: #a492a7; 
-  width: 100%;
-  padding-top: 7px;
-}
 
-@media (min-width: 992px){
-  .foot {
-    height: 150px;
-  }
-} 
 
 .social {
   font-size: 0.8em;
@@ -243,10 +232,6 @@ h4 {
   color: green;
 }
 
-#copyright {
-  font-size: 0.7em;
-}
-
 .btn-light {
   color: #fff;
   background-color: #9c27b0 !important;
@@ -272,8 +257,21 @@ h4 {
   height: 350px;
 }
 
-footer {
+#copyright {
+  font-size: 0.7em;
   text-align: center;
-  margin-top: 50px;
-  width: 100%;
+  color: #fff;
 }
+
+#footer_message {
+  text-align: center;
+  color: #fff;
+}
+
+footer {
+  margin-top: 100px;
+  background-color: #1e394e; 
+  width: 100%;
+  padding-top: 7px;
+}
+
