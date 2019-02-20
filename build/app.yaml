@@ -37,32 +37,11 @@ handlers:
   static_dir: icons 
   
 - url: /landmarks
-  static_dir: landmarks 
-  
-- url: /js
-  static_dir: js
+  static_dir: landmarks
 
-  # Serve js scripts.
+   # Serve js scripts.
 - url: /(.+\.js)$
   script: \1
-
-- url: /gallery.js
-  script: gallery.js
-
-- url: /collections.js
-  script: collections.js
-
-- url: /bootstrap.min.js
-  script: bootstrap.min.js
-
-- url: /handlebars-v3.0.3.js
-  script: handlebars-v3.0.3.js
-
-- url: /jquery-3.3.1.min.js
-  script: jquery-3.3.1.min.js
-
-- url: /idb.js
-  script: idb.js
 
 - url: /sw.js
   script: sw.js
@@ -71,7 +50,10 @@ handlers:
   script: src_sw.js
 
 - url: /workbox-config.js
-  script: workbox-config.js
+  script: workbox-config.js 
+  
+- url: /js
+  static_dir: js
 
   # Serve json scripts.
 - url: /(.+\.json)$
