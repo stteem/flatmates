@@ -437,7 +437,7 @@ $(document).ready(function(){
 		
 	});
 		
-	$('#bout').click(async function() {
+	$('.bout').click(async function() {
 		var about_source = $('#about-template').html();
 		var about_template = Handlebars.compile(about_source);
 		await $('#content').html(about_template);
