@@ -79,6 +79,7 @@ if ( isset($_POST['email']) && isset($_POST['password'])  ) {
   <link rel="stylesheet" type="text/css" href="assets/css/register_style.css">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="any">
+  <link rel="icon" href="assets/images/icons/icon-72x72.png" type="image/png" sizes="any">
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="assets/js/register.js"></script>-->
   <script src="assets/js/jquery-3.3.1.min.js"></script>
@@ -92,7 +93,7 @@ if ( isset($_POST['email']) && isset($_POST['password'])  ) {
 <body>
 
 <nav class="header navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="index.html"><b>Flatmates</b> |</a>
+      <a class="navbar-brand" href="index.html"><img id="logo" src="assets/images/icons/icon-72x72.png"><b>Flatmates</b></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -100,8 +101,6 @@ if ( isset($_POST['email']) && isset($_POST['password'])  ) {
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           
-          
-          <a class="nav-item nav-link" href="#"><i class="fab fa-whatsapp-square fa-lg" style="color: green"></i> +233503989513</a>
         </div>
 
         <?php 
@@ -118,7 +117,7 @@ if ( isset($_POST['email']) && isset($_POST['password'])  ) {
 
           else {
 
-            echo('<div class="nav1"><a href="pogin.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
+            echo('<div class="nav1"><a href="login.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
                    
                   <a href="register.php">Register</a></div>');
           }
