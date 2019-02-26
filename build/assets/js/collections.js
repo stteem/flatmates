@@ -197,49 +197,49 @@ var gallery = {
 			photos : [
 				{	
 					src : "assets/images/homes/uyo/dinner-party_925x.jpg",
-					title : "Snared Apartment in Shelter Afrique", 
+					title : "Shared Apartment in Shelter Afrique", 
 					price : 200000,
 					description : "ghc"
 				},
 				{	
 					src : "assets/images/homes/uyo/hotel-room-bed_925x.jpg",
-					title : "Snared Apartment in Shelter Afrique", 
+					title : "Shared Apartment in Shelter Afrique", 
 					price : 150000,
 					description : "ghc"
 				},
 				{	
 					src : "assets/images/homes/uyo/cat-on-sofa-near-window_925x.jpg",
-					title : "Snared Apartment in Shelter Afrique", 
+					title : "Shared Apartment in Shelter Afrique", 
 					price : 100000,
 					description : "ghc"
 				},
 				{	
 					src : "assets/images/homes/uyo/bright-hotel-room-bed_925x.jpg",
-					title : "Snared Apartment in Ewet Housing Estate", 
+					title : "Shared Apartment in Ewet Housing Estate", 
 					price : 300000,
 					description : "ghc"
 				},
 				{	
 					src : "assets/images/homes/uyo/a-home-filled-with-elaborate-gold-decor_925x.jpg",
-					title : "Snared Apartment in Federal Housing Estate", 
+					title : "Shared Apartment in Federal Housing Estate", 
 					price : 250000,
 					description : "ghc"
 				},
 				{	
 					src : "assets/images/homes/uyo/rainy-day-poolside_925x.jpg",
-					title : "Snared Apartment in Wellington Bassey Road", 
+					title : "Shared Apartment in Wellington Bassey Road", 
 					price : 200000,
 					description : "ghc"
 				},
 				{	
 					src : "assets/images/homes/uyo/soft-livingroom-sofa_925x.jpg",
-					title : "Snared Apartment in Osongama Estate", 
+					title : "Shared Apartment in Osongama Estate", 
 					price : 200000,
 					description : "ghc"
 				},
 				{	
 					src : "assets/images/homes/uyo/red-and-yellow-daisies_925x.jpg",
-					title : "Snared Apartment in Ewet Housing Estate", 
+					title : "Shared Apartment in Ewet Housing Estate", 
 					price : 1800000,
 					description : "ghc"
 				}
