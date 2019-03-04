@@ -47,7 +47,7 @@ workbox.routing.registerRoute(
 workbox.precaching.precacheAndRoute([
   {
     "url": "app.yaml",
-    "revision": "dce2d0174366baf2ff4988b789169a05"
+    "revision": "1a7edc0bb413b2824deb8e7949a37fce"
   },
   {
     "url": "assets/css/about.css",
@@ -63,15 +63,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/collections.css",
-    "revision": "fa3e8bf6467e4ab8c08948c69270aa8e"
+    "revision": "7ea40a177c8dc79b6ca260434cf219e5"
   },
   {
     "url": "assets/css/register_style.css",
-    "revision": "a81c1b7b32052b9b06b3b8f32e4f2af5"
+    "revision": "beefc4b082cc3f14791d14dd67c907f8"
   },
   {
     "url": "assets/css/style.css",
-    "revision": "b63e4e5dd53b30d5e20364b66658c21b"
+    "revision": "16eead551b53995b3c6495f73586d7d9"
   },
   {
     "url": "assets/fonts/Bellota-Bold.otf",
@@ -275,35 +275,35 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/images/icons/icon-128x128.png",
-    "revision": "52a22072df0c6ecdab4e737f29a1a1ad"
+    "revision": "ac3ed8c00685c06152753011366d49c9"
   },
   {
     "url": "assets/images/icons/icon-144x144.png",
-    "revision": "d5d890e6f05b1e487a5829d5270eb68c"
+    "revision": "35692684cecd6fe4f6915368501f0892"
   },
   {
     "url": "assets/images/icons/icon-152x152.png",
-    "revision": "a1e5f2933d0639edcad7c7b4923105a3"
+    "revision": "578cacf491c274927676b8bbdcfbaffb"
   },
   {
     "url": "assets/images/icons/icon-192x192.png",
-    "revision": "3014987885b36bd369ee7827e838ef2f"
+    "revision": "1c6bc0981ef7e5d467c2e23a9a14164a"
   },
   {
     "url": "assets/images/icons/icon-384x384.png",
-    "revision": "7cc2988a5c6b44f93e9c4fd8e3c03540"
+    "revision": "7264ced32884cac3066ad9588a7e453a"
   },
   {
     "url": "assets/images/icons/icon-512x512.png",
-    "revision": "db5376f41a32c535ca07839d1b881523"
+    "revision": "c5f0d57a5efdacf9476e32f663f466ef"
   },
   {
     "url": "assets/images/icons/icon-72x72.png",
-    "revision": "a0364e974e28351080a15e4fa5896842"
+    "revision": "25ea1fbb70e1ea39c5232c999a0d5aa3"
   },
   {
     "url": "assets/images/icons/icon-96x96.png",
-    "revision": "1181b71403d37c2fb4d32b62d62ad3fc"
+    "revision": "99801a208214a508350259ebc37a3553"
   },
   {
     "url": "assets/images/IMG-20171108-WA0051.jpg",
@@ -318,8 +318,16 @@ workbox.precaching.precacheAndRoute([
     "revision": "47106c569c77538b035c78c3925e9877"
   },
   {
+    "url": "assets/images/landmarks/DJuAuvEU8AAG2XF.jpg",
+    "revision": "b3aaadb75e44a6af6585d4220fec9626"
+  },
+  {
     "url": "assets/images/landmarks/lagos_city1.jpg",
     "revision": "bfe9c59950dcb106b056caa9ee955d06"
+  },
+  {
+    "url": "assets/images/landmarks/LogoMakr_5sl3LX.png",
+    "revision": "ac5b5962a9a1781055a212c708199d0d"
   },
   {
     "url": "assets/images/landmarks/owerri_city1.jpg",
@@ -334,22 +342,6 @@ workbox.precaching.precacheAndRoute([
     "revision": "e7eb4b70e968125fca88233c5a1cc63b"
   },
   {
-    "url": "assets/images/LogoMakr_2vw9g6.png",
-    "revision": "5acb4fd65f45904b71a8b7c66948337f"
-  },
-  {
-    "url": "assets/images/LogoMakr_3X8Dfe.png",
-    "revision": "6555c5d078ffe22130f67982d4f49482"
-  },
-  {
-    "url": "assets/images/LogoMakr_7pay1X.png",
-    "revision": "09a3628008805db0c44c18e9e9ec6422"
-  },
-  {
-    "url": "assets/images/LogoMakr_9X4bSd.png",
-    "revision": "803eb0cd3bce364587cda8169e03f256"
-  },
-  {
     "url": "assets/images/three-friends-working-on-couch_925x.jpg",
     "revision": "a7866e6816a1532a7591e5e2d8769065"
   },
@@ -359,11 +351,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/collections.js",
-    "revision": "8ffc6102aad4c1e9b3769b877bbca52e"
+    "revision": "96cd2750f96dcf8c8dbe2f75079b8c3a"
   },
   {
     "url": "assets/js/gallery.js",
-    "revision": "853be88eaea3c8198823d791b8a3f360"
+    "revision": "14fa7ab85df94aee41630698dac7fd3e"
   },
   {
     "url": "assets/js/handlebars-v3.0.3.js",
@@ -383,11 +375,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "cad36adaf654dd68a375834e885a14ee"
+    "revision": "3f19e7536efb26174cc80b150de73171"
   },
   {
     "url": "manifest.json",
-    "revision": "bac0e294a590b3d6c9692e793923f101"
+    "revision": "e72374778195f411e54afe50526c92d2"
   }
 ]);
 
