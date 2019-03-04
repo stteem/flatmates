@@ -138,7 +138,7 @@ if (isset($_POST['register'])) {
 <body>
 
 <nav class="header navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="index.html"><b>Flatmates</b> |</a>
+      <a class="navbar-brand" href="index.html"><img id="logo" src="assets/images/icons/icon-72x72.png"><b>Flatmates</b></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -146,7 +146,7 @@ if (isset($_POST['register'])) {
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           
-          <a class="nav-item nav-link" href="#"><i class="fab fa-whatsapp-square fa-lg" style="color: green"></i> +233503989513</a>
+          <!--<a class="nav-item nav-link" href="#"><i class="fab fa-whatsapp-square fa-lg" style="color: green"></i> +233503989513</a>-->
         </div>
 
         <?php 

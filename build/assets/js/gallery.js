@@ -418,21 +418,32 @@ $(document).ready(function(){
 			 
 			
 				$('#content').html(err);
-				var $login_div = $("<div>", {id: "login_div", "class": "a"});
+				var $login_div = $("<div>", {id: "login_div"});
+				var $signup_div = $("<div>", {id: "signup_div"});
 				
 				//$login_div.click(function(){ /* ... */ });
 				$("#content").append($login_div);
+				$("#content").append($signup_div);
 				
 				//const id = document.getElementById('content');
 								
-				let login_button = document.createElement('button');
-				//let login_div = document.createElement('div');
-								
-				login_button.innerHTML = "Login";
+				let login_button = $('<button>', {'class': 'button-size'});
+				let signup_button = $('<button>', {'class': 'button-size'});
+				//Vanilla JS implementation
+				//let signup_button = document.createElement('button');
+
+				login_button.text('Sign in');
+				signup_button.text('Sign up');
+				//signup_button.innerHTML = "Sign up";
 				
 				//id.appendChild(login_div);
-				$("#login_div").append(login_button);
-			
+				$("#login_div").append(login_button).click(function() {
+					window.location = "login.php";
+				});
+
+				$("#signup_div").append(signup_button).click(function() {
+					window.location = "register.php";
+				});
 		}
 		
 	});
