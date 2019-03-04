@@ -247,6 +247,7 @@ $(document).ready(function(){
 		var bookd_date = $('#bookd_date').val();
 		var bookd_time = $('#bookd_time').val();
 		var today = Date.now();
+
 		
 		if (bookd_date == null || bookd_date == "" || bookd_time == null || bookd_time == "") {
 			var error = "Date and time must be chosen";
@@ -262,6 +263,8 @@ $(document).ready(function(){
 			//alert('date and time must be chosen');
 			return false;
 		}
+		
+		
 
 
 		// Here we first fetch session.php to make sure user has logged in before they can 

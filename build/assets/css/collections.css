@@ -24,7 +24,17 @@
 }
 
 #dash_img {
-  width: 80%;
+  width: 111%;
+}
+
+@media (min-width: 992px) {
+  #dash_img1 {
+    width: 15%;
+  }
+
+  #dash_img {
+    width: 80%;
+  }
 }
 
 @media (min-width: 992px) {

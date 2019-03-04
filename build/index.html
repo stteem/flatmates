@@ -68,7 +68,7 @@
 		     <div id="login" class="nav1">
 		     	<a class="bout" href="#">About<span class="sr-only">(current)</span></a>
 		     	<a href="login.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
-		     	<a href="register.php">Register</a>
+		     	<a href="register.php">Sign up</a>
 		     </div>
 		    
 		    
@@ -200,12 +200,12 @@
 	<div class="table-responsive-sm services col-lg-10">
 	<table class="table table-bordered">
 	<thead class="thead-light">
-		<th>Service</th>
-		<th id="dash_img1" >Product Image</th>
-		<th>Product Name</th>
-		<th>Booked Date</th>
-		<th>Booked Time</th>
-		<th>Installation Price</th>
+		<th>Location</th>
+		<th id="dash_img1" >Image</th>
+		<th>Description</th>
+		<th>Inspection Date</th>
+		<th>Inspection Time</th>
+		<th>Shared Rent</th>
 	</thead>
 	<tbody>
 	  {{#categories}}
@@ -215,7 +215,7 @@
 	      <td>{{title}}</td>
 	      <td>{{booked_date}}</td>
 	      <td>{{booked_time}}</td>
-	      <td>GHC {{installation_price}}</td>
+	      <td>&#8358;{{installation_price}}</td>
 	    </tr>
 	  {{/categories}}
 	</tbody>
@@ -284,6 +284,8 @@
 <img id="" class="space-img" src="assets/images/loft-style-bedroom_925x.jpg" alt="loft-style-bedroom_4460x4460">
 </div>-->
 
+<div id="push"></div>
+
 <footer>
 	<p><h6 id="footer_message"> Flatmates is currently in beta, contact us on any of our channels if you wish to share your apartment.</h6></p>	
 
@@ -320,7 +322,7 @@
 		</div>
 	</div>
 
-  <p id="copyright">A @uwemUke Production &copy;2019 Youke Greendy LLC </p>
+  <p id="copyright">A @uwemuke Production &copy;2019 Youke Greendy LLC </p>
 </footer>
 
 

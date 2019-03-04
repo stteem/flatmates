@@ -291,6 +291,11 @@ h4 {
   color: #fff;
 }
 
+#push {
+  width: 100%;
+  height: 250px;
+}
+
 
 footer {
   margin-top: 100px;

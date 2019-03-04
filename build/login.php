@@ -119,7 +119,7 @@ if ( isset($_POST['email']) && isset($_POST['password'])  ) {
 
             echo('<div class="nav1"><a href="login.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
                    
-                  <a href="register.php">Register</a></div>');
+                  <a href="register.php">Sign up</a></div>');
           }
 
         } catch (Exception $e) {
@@ -163,7 +163,7 @@ if ( isset($_POST['email']) && isset($_POST['password'])  ) {
 				?>" required></p>
 				<p>
 				<input type="password" size="40" name="password" placeholder="Password"></p>
-				<p><a href="#"><input type="submit" value="Login"/></a></p>
+				<p><a href="#"><input type="submit" value="Sign in"/></a></p>
 				<div style="border-bottom: 1px solid #e5e5e5; padding:20px;">Don't have an account?<a href="register.php" id="signup" class="signup" style="color: red;"> Sign up here!</a></div>
 				<br>
 				<a href="" style="color: red;">Forgot password?</a>

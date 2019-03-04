@@ -165,7 +165,7 @@ if (isset($_POST['register'])) {
 
             echo('<div class="nav1"><a href="login.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
                    
-                  <a href="register.php">Register</a></div>');
+                  <a href="register.php">Sign up</a></div>');
           }
 
         } catch (Exception $e) {
@@ -234,7 +234,7 @@ if (isset($_SESSION['error'])) {
 			</p>
 			
 			<p>
-			<input type="submit" name="register" value="Register">
+			<input type="submit" name="register" value="Sign up">
 			</p>
 			<p>
 			Already have an account?<a href="login.php" style="color: red"> Sign in here</a>
