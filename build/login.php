@@ -154,6 +154,8 @@ if ( isset($_POST['email']) && isset($_POST['password'])  ) {
 			<p style="font-size: 1.3em;">Login Below to Continue</p>
 			</div><br>
 			<?php 
+
+      
 			if ( isset($_SESSION["error"]) ) {
 				  echo('<p style="color:red; font-size: 0.9em;">'.htmlentities($_SESSION["error"])."</p>\n");
 				  unset($_SESSION["error"]);
