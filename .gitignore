@@ -3,4 +3,3 @@ node_modules/
 unit-testing/
 vendor
 composer.lock
-.env
