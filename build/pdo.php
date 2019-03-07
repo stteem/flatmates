@@ -4,11 +4,11 @@ include 'bootstrap.php';
 
 $dsn = getenv('MYSQL_DSN');
 $user = getenv('MYSQL_USER');
-//$password = getenv('MYSQL_PASSWORD');
+$password = getenv('MYSQL_PASSWORD');
 
 try {
 
-	$pdo = new PDO($dsn, $user, '');
+	$pdo = new PDO($dsn, $user, $password);
 
 	// See the "errors" folder for details...
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
