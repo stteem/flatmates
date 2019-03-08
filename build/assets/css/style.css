@@ -47,7 +47,7 @@ a:hover {
 
 @media (min-width: 992px){
   .nav1 {
-  	margin-left: 70%;
+  	margin-left: 67%;
   }
 }
 
@@ -63,6 +63,10 @@ a:hover {
 
 .nav1 a:hover {
 	color: #00bcd4;
+}
+
+.nav-tabs {
+  margin-top: 30px;
 }
 
 .navbar {
