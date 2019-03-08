@@ -47,7 +47,7 @@ a:hover {
 
 @media (min-width: 992px){
 .nav1 {
-	margin-left: 75%;
+	margin-left: 70%;
 }
 
 }
@@ -138,7 +138,7 @@ h4 {
 }
 
 #logo {
-  width: 15%;
+  width: 20%;
 }
 
 .loader {
