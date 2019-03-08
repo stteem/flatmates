@@ -63,7 +63,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/collections.css",
-    "revision": "7ea40a177c8dc79b6ca260434cf219e5"
+    "revision": "259b3c37dd145366678589e334b7ab35"
   },
   {
     "url": "assets/css/register_style.css",
@@ -71,7 +71,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/style.css",
-    "revision": "16eead551b53995b3c6495f73586d7d9"
+    "revision": "6be2f4253bcf20a2a836c183e68b0efc"
   },
   {
     "url": "assets/fonts/Bellota-Bold.otf",
@@ -274,36 +274,132 @@ workbox.precaching.precacheAndRoute([
     "revision": "562cca59f21ace74697e0117d1ed3ad9"
   },
   {
-    "url": "assets/images/icons/icon-128x128.png",
+    "url": "assets/images/icons-transparent/icon-128x128.png",
+    "revision": "9a583b054432865c2241fbc843450a98"
+  },
+  {
+    "url": "assets/images/icons-transparent/icon-144x144.png",
+    "revision": "28cf0037cf7ffcbb4c84a0929c88451d"
+  },
+  {
+    "url": "assets/images/icons-transparent/icon-152x152.png",
+    "revision": "8e9c84a20bf56c51b6788498f85fdaa6"
+  },
+  {
+    "url": "assets/images/icons-transparent/icon-192x192.png",
+    "revision": "46fc5bc39a2fbd778549fdc042563fd8"
+  },
+  {
+    "url": "assets/images/icons-transparent/icon-384x384.png",
+    "revision": "add1ed2ce942f1aa40d42f2a32031d21"
+  },
+  {
+    "url": "assets/images/icons-transparent/icon-512x512.png",
+    "revision": "f6d7ad3e893fcafefcf61e8ffb021998"
+  },
+  {
+    "url": "assets/images/icons-transparent/icon-72x72.png",
+    "revision": "234195714f465be0a783e74af7983f40"
+  },
+  {
+    "url": "assets/images/icons-transparent/icon-96x96.png",
+    "revision": "42c87bfda725600e89de4ad2ff4acb28"
+  },
+  {
+    "url": "assets/images/icons-w-background/icon-128x128.png",
     "revision": "ac3ed8c00685c06152753011366d49c9"
   },
   {
-    "url": "assets/images/icons/icon-144x144.png",
+    "url": "assets/images/icons-w-background/icon-144x144.png",
     "revision": "35692684cecd6fe4f6915368501f0892"
   },
   {
-    "url": "assets/images/icons/icon-152x152.png",
+    "url": "assets/images/icons-w-background/icon-152x152.png",
     "revision": "578cacf491c274927676b8bbdcfbaffb"
   },
   {
-    "url": "assets/images/icons/icon-192x192.png",
+    "url": "assets/images/icons-w-background/icon-192x192.png",
     "revision": "1c6bc0981ef7e5d467c2e23a9a14164a"
   },
   {
-    "url": "assets/images/icons/icon-384x384.png",
+    "url": "assets/images/icons-w-background/icon-384x384.png",
     "revision": "7264ced32884cac3066ad9588a7e453a"
   },
   {
-    "url": "assets/images/icons/icon-512x512.png",
+    "url": "assets/images/icons-w-background/icon-512x512.png",
     "revision": "c5f0d57a5efdacf9476e32f663f466ef"
   },
   {
-    "url": "assets/images/icons/icon-72x72.png",
+    "url": "assets/images/icons-w-background/icon-72x72.png",
     "revision": "25ea1fbb70e1ea39c5232c999a0d5aa3"
   },
   {
-    "url": "assets/images/icons/icon-96x96.png",
+    "url": "assets/images/icons-w-background/icon-96x96.png",
     "revision": "99801a208214a508350259ebc37a3553"
+  },
+  {
+    "url": "assets/images/icons-white/icon-128x128.png",
+    "revision": "330af941751a5227ddb74d80f098a707"
+  },
+  {
+    "url": "assets/images/icons-white/icon-144x144.png",
+    "revision": "d6a2555b6f61336d1778ed6983c7b1fb"
+  },
+  {
+    "url": "assets/images/icons-white/icon-152x152.png",
+    "revision": "e2daa0f902f6613e87696b50ee2c421b"
+  },
+  {
+    "url": "assets/images/icons-white/icon-192x192.png",
+    "revision": "7f89cd9d8f6ba964ffe34dd51f35e90f"
+  },
+  {
+    "url": "assets/images/icons-white/icon-384x384.png",
+    "revision": "177d23dbf75649d04c340a1c640110e1"
+  },
+  {
+    "url": "assets/images/icons-white/icon-512x512.png",
+    "revision": "3522967fdf2f7775586b1bde3257ec2b"
+  },
+  {
+    "url": "assets/images/icons-white/icon-72x72.png",
+    "revision": "c89c71e4f96545b2c77b375dce89eb3b"
+  },
+  {
+    "url": "assets/images/icons-white/icon-96x96.png",
+    "revision": "208f7f61de362adf09cd1f55a2eb0b03"
+  },
+  {
+    "url": "assets/images/icons/icon-128x128.png",
+    "revision": "330af941751a5227ddb74d80f098a707"
+  },
+  {
+    "url": "assets/images/icons/icon-144x144.png",
+    "revision": "d6a2555b6f61336d1778ed6983c7b1fb"
+  },
+  {
+    "url": "assets/images/icons/icon-152x152.png",
+    "revision": "e2daa0f902f6613e87696b50ee2c421b"
+  },
+  {
+    "url": "assets/images/icons/icon-192x192.png",
+    "revision": "7f89cd9d8f6ba964ffe34dd51f35e90f"
+  },
+  {
+    "url": "assets/images/icons/icon-384x384.png",
+    "revision": "177d23dbf75649d04c340a1c640110e1"
+  },
+  {
+    "url": "assets/images/icons/icon-512x512.png",
+    "revision": "3522967fdf2f7775586b1bde3257ec2b"
+  },
+  {
+    "url": "assets/images/icons/icon-72x72.png",
+    "revision": "234195714f465be0a783e74af7983f40"
+  },
+  {
+    "url": "assets/images/icons/icon-96x96.png",
+    "revision": "42c87bfda725600e89de4ad2ff4acb28"
   },
   {
     "url": "assets/images/IMG-20171108-WA0051.jpg",
@@ -342,6 +438,18 @@ workbox.precaching.precacheAndRoute([
     "revision": "e7eb4b70e968125fca88233c5a1cc63b"
   },
   {
+    "url": "assets/images/LogoMakr_20b7CE.png",
+    "revision": "a953a8ab7de16ae626fb92ca131a32fa"
+  },
+  {
+    "url": "assets/images/LogoMakr_2GCt8t.png",
+    "revision": "ec5b8b57212281c336e38ccb12321c33"
+  },
+  {
+    "url": "assets/images/three-friends-drinking-coffee.jpg",
+    "revision": "b3aaadb75e44a6af6585d4220fec9626"
+  },
+  {
     "url": "assets/images/three-friends-working-on-couch_925x.jpg",
     "revision": "a7866e6816a1532a7591e5e2d8769065"
   },
@@ -351,7 +459,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/collections.js",
-    "revision": "96cd2750f96dcf8c8dbe2f75079b8c3a"
+    "revision": "2847b5f32dd83732db678b19b24990a4"
   },
   {
     "url": "assets/js/gallery.js",
@@ -375,11 +483,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "3f19e7536efb26174cc80b150de73171"
+    "revision": "cfb7420e70e9640401f1eb2ef2a6eaef"
   },
   {
     "url": "manifest.json",
-    "revision": "e72374778195f411e54afe50526c92d2"
+    "revision": "d0b72962ee63c41dbc45a91661420db0"
   }
 ]);
 
