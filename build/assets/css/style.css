@@ -46,11 +46,11 @@ a:hover {
 }
 
 @media (min-width: 992px){
-.nav1 {
-	margin-left: 70%;
+  .nav1 {
+  	margin-left: 70%;
+  }
 }
 
-}
 .nav1 a{
 	font-family:  inherit sans-serif;
 	position: relative;
@@ -128,7 +128,7 @@ a:hover {
 
 @media (min-width: 900px) {
   .space-img {
-    width: 50%;
+    width: 56%;
     border-bottom-right-radius: 100px;
   }
 }
