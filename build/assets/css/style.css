@@ -209,6 +209,31 @@ h4 {
 
 }
 
+#services {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#address-card {
+  color: #d4004e;
+}
+
+#clipboard {
+  color: #b3d400;
+}
+
+#handshake {
+  color: #d47500;
+}
+
+#credit-card {
+  color: #298627;
+}
+
+#truck {
+
+}
+
 .button-size {
   width: 100%;
   height: 50px;
