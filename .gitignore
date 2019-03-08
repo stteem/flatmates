@@ -1,5 +1,4 @@
 # ignore all files in any directory named here
 node_modules/
 unit-testing/
-vendor
 composer.lock
