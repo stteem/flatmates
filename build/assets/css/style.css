@@ -67,6 +67,7 @@ a:hover {
 
 .nav-tabs {
   margin-top: 30px;
+  font-size: 0.9em;
 }
 
 .navbar {
@@ -89,6 +90,14 @@ a:hover {
   #banner {
     height: 400px;
   }
+}
+
+h5 {
+  color: #484848;
+}
+
+p {
+  line-height: 1.5em;
 }
 
 #caption {
@@ -143,6 +152,11 @@ h4 {
 
 #logo {
   width: 20%;
+  color: #484848;
+}
+
+.allow {
+  margin-top: 30px;
 }
 
 .loader {
@@ -235,7 +249,7 @@ h4 {
 }
 
 #truck {
-
+  color: #484848;
 }
 
 .button-size {

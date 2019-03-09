@@ -80,7 +80,7 @@
 		     <div id="username" style='color: #000'></div>
 
 		     <div id="login" class="nav1">
-		     	<a class="bout" href="#">About<span class="sr-only">(current)</span></a>
+		     	<a class="bout" href="#"><i class="fas fa-info-circle"></i>About<span class="sr-only">(current)</span></a>
 		     	<a href="login.php"><i class="fas fa-sign-in-alt"></i> Sign in</a> 
 		     	<a href="register.php">Sign up</a>
 		     </div>
@@ -96,23 +96,23 @@
 
 	<div class="container">
 
-	<!-- A navigation menu that selects different views -->
+	<!-- A navigation menu that selects different views 
       <ul class="nav nav-tabs">
       	
             <li role="" class="active"><button style="background-color: transparent;" type="button" class="btn btn-link" id="albums-tab"><i class="fas fa-home"></i>Home</button></li>
             <li role=""><button style="background-color: transparent;" type="button" class="btn btn-link" id="photos-tab" ><i class="fas fa-images"></i>Photos</button></li>
             <li role=""><button style="background-color: transparent;" type="button" class="btn btn-link" id="dashboard"><i class="fas fa-list-alt"></i>Dashboard</button></li>
           </ul>
-      <br/><br/>
+      <br/><br/>-->
 
      
 
-      <!--<ul class="nav nav-tabs">
-            <li role="" class="active"><a href="#" id="albums-tab" >Albums</a></li>
-            <li role=""><a href="#" id="photos-tab" >Photos</a></li>
-            <li role=""><a href="#" id="slideshow-tab" >Slideshow</a></li>                   
+      <ul class="nav nav-tabs">
+            <li role="" class="active"><a href="#" id="albums-tab" ><i class="fas fa-home"></i>Home</a></li>
+            <li role=""><a href="#" id="photos-tab" ><i class="fas fa-images"></i>Apartments</a></li>
+            <li role=""><a href="#" id="dashboard" ><i class="fas fa-list-alt"></i>Dashboard</a></li>                   
           </ul>
-      <br/><br/>-->
+      <br/><br/>
 
       <!-- the content section is empty as we will fill it 
             via javascript and templates -->
@@ -131,12 +131,7 @@
 </div> <!-- / container -->
 
 <script id="albums-template" type="text/x-handlebars-template">
-	<p><strong><h5>Earn Extra Income by Sharing Your Apartment. It's That Easy.</h5></strong></p>
-	<div class="space-div">
-  	<img class="space-img" src="assets/images/three-friends-drinking-coffee.jpg">
-  	<p id="caption">Africa's premium share<br> accommodation platform</p>
-  	</div>
-
+	
 	<p><strong><h5>Recommended Cities Where Most People Are Sharing Apartments</h5></strong></p>
   <div class="row">
 
@@ -156,6 +151,16 @@
 
   </div> <!-- / row -->
 
+  <br>
+  <hr class="my-4">
+  <br>
+  <p><strong><h5>Earn Extra Income by Sharing Your Apartment. It's That Easy.</h5></strong></p>
+
+  <div class="space-div">
+  	<img class="space-img" src="assets/images/three-friends-drinking-coffee.jpg">
+  	<p id="caption">Africa's premium share<br> accommodation platform</p>
+  	</div>
+
    <section id="services">
       <div class="container">
         <div class="row">
@@ -172,7 +177,7 @@
             <div class="service-box mt-5 mx-auto">
               
               
-              <i class="fas fa-4x fa-address-card" id="address-card"></i>
+              <i class="fas fa-4x fa-address-card icons" id="address-card"></i>
               <h5 class="mb-3 mb-10">1. Flat Owner Lists Apartment On Flatmates Africa</h5>
               
               <p class="text-muted mb-0">After registration, a ID verified member begins transaction by listing her apartment on Flatmates Africa for free, stating amongst other details, how long she wishes to have a flatmate, eg. 1 year.</p>
@@ -182,17 +187,17 @@
           <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               
-              <i class="fas fa-4x fa-clipboard-check" id="clipboard"></i>
+              <i class="fas fa-4x fa-clipboard-check icons" id="clipboard"></i>
               <h5 class="mb-3 mb-10">2. Prospective Flatmate Requests Inspection</h5>
               
-              <p class="text-muted mb-0">Potential flatmate requests inspection, stating date and time. And pays authentication fee of &#8358;1000 to help us filter real prospects. Flat owner gets notified, however, both are expected to agree on a date and time suitable for all.</p>
+              <p class="text-muted mb-0">Potential flatmate requests inspection, stating date and time. And pays authentication fee of &#8358;1000 to help us filter real prospects. Until he accepts offer, authentication fee remains vaild, he can continue to inspect more flats with same authentication fee. Flat owner gets notified, however, both are expected to agree on a date and time suitable for all.</p>
               
             </div>
           </div>
           <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               
-              <i class="fas fa-4x fa-handshake" id="handshake"></i>
+              <i class="fas fa-4x fa-handshake icons" id="handshake"></i>
               
               <h5 class="mb-3 mb-10">3. Owner and Prospect Agree Terms</h5>
               
@@ -203,7 +208,7 @@
           <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               
-              <i class="fas fa-4x fa-credit-card" id="credit-card"></i>
+              <i class="fas fa-4x fa-credit-card icons" id="credit-card"></i>
               <h5 class="mb-3 mb-10">4. Prospect Makes Payment</h5>
               
               <p class="text-muted mb-0">Prospect makes payment to owner on flatmates.africa platform, a finder's fee of 2% is charged, and remainder is forwarded to flat owner's bank account, safely and securely. It is advisable that payment be made through our platform to guard against scam.</p>
@@ -212,7 +217,7 @@
           </div>
           <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-truck" id="truck"></i>
+              <i class="fas fa-4x fa-truck icons" id="truck"></i>
               <h5 class="mb-3 mb-10">5. Flatmate Moves In</h5>
               <p class="text-muted mb-0">At this point, you now have a spanking new flatmate, transaction is complete, and everyone is happy!</p>
               
