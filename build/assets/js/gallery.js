@@ -238,6 +238,24 @@ $(document).ready(function(){
 	  return response.text();
 	}
 
+
+	function minDate() {
+		var today = new Date();
+		var yyyy = today.getFullYear();
+		var mm =  today.getMonth() + 1;
+		var dd = today.getDate();
+
+		mm = (mm < 10) ? ('0'+ mm) : mm;
+	 	dd = (dd < 10) ? ('0' + dd) : dd;
+
+		var currentDate = yyyy + '-' + mm + "-" + dd;
+		console.log('currentDate ', currentDate)
+
+		return currentDate;
+	}
+
+	$('#bookd_date').attr('min', minDate());
+
 	
 	var flash;
 	// Ajax function to post date, time, and product data to our php backend
@@ -261,6 +279,14 @@ $(document).ready(function(){
 
 			
 			//alert('date and time must be chosen');
+			return false;
+		}
+
+		if (bookd_date < minDate()) {
+			var error = 'Date must be today or ahead of today';
+			$(".notice").css({"display": "initial", "color" : "red"});
+			$('.notice').html(error);
+
 			return false;
 		}
 		
