@@ -86,6 +86,11 @@
   display: none;
 }
 
+.row {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
 #booking_form {
   width: 90%;
   margin-top: 10px;
