@@ -222,6 +222,36 @@ $(document).ready(function(){
 		});
 	}
 
+	function generateLoginButton() {
+		var $login_div = $("<div>", {id: "login_div"});
+		var $signup_div = $("<div>", {id: "signup_div"});
+		
+		//$login_div.click(function(){ /* ... */ });
+		$("#content").append($login_div);
+		$("#content").append($signup_div);
+		
+		//const id = document.getElementById('content');
+						
+		let login_button = $('<button>', {'class': 'button-size'});
+		let signup_button = $('<button>', {'class': 'button-size'});
+		//Vanilla JS implementation
+		//let signup_button = document.createElement('button');
+
+		login_button.text('Sign in');
+		signup_button.text('Sign up');
+		//signup_button.innerHTML = "Sign up";
+		
+		//id.appendChild(login_div);
+		$("#login_div").append(login_button).click(function() {
+			window.location = "login.php";
+		});
+
+		$("#signup_div").append(signup_button).click(function() {
+			window.location = "register.php";
+		});	
+		
+	}
+
 
 	function validateResponse(response) {
 	  if (!response.ok) {
@@ -253,7 +283,7 @@ $(document).ready(function(){
 
 		return currentDate;
 	}
-
+	//Disable past dates
 	$('#bookd_date').attr('min', minDate());
 
 	
@@ -264,8 +294,6 @@ $(document).ready(function(){
 
 		var bookd_date = $('#bookd_date').val();
 		var bookd_time = $('#bookd_time').val();
-		var today = Date.now();
-
 		
 		if (bookd_date == null || bookd_date == "" || bookd_time == null || bookd_time == "") {
 			var error = "Date and time must be chosen";
@@ -284,14 +312,13 @@ $(document).ready(function(){
 
 		if (bookd_date < minDate()) {
 			var error = 'Date must be today or ahead of today';
-			$(".notice").css({"display": "initial", "color" : "red"});
-			$('.notice').html(error);
+			$("#warning").css({"display": "initial", "color" : "red"});
+			$('#warning').html(error);
 
 			return false;
 		}
 		
 		
-
 
 		// Here we first fetch session.php to make sure user has logged in before they can 
 		// request inspection
@@ -304,7 +331,7 @@ $(document).ready(function(){
 			console.log('checking for session ',data);
 
 			if (data === "ACCESS DENIED") {
-				throw 'You have to log in to be able to request inspection.';
+				throw 'You have to sign in to be able to request inspection.';
 			}			
 
 			// Fetch an HTML <form> with id of 'dateTimeData'
@@ -316,12 +343,13 @@ $(document).ready(function(){
 			.then(function() {
 			  	console.log('promise posted')
 
-			  	var success = "Congratulations, your reservation was successfull.";
+			  	var success = "Congratulations, request successfull.";
 				$("#success").css({"display": "initial"});
 				flash = $("#success").html(success);
 
 				setTimeout(function() {
-					flash.css({"display": "none"});
+					(flash).fadeOut(3000);
+					//flash.css({"display": "none"});
 					console.log("hid success message")
 				}, 3000);
 
@@ -344,7 +372,8 @@ $(document).ready(function(){
 		})
 		.catch(function(error) {
 			$("#booking_form").hide(0);
-			return $('#content').html(error);
+			$('#content').html(error);
+			generateLoginButton();
 		});
 
 		
@@ -449,32 +478,9 @@ $(document).ready(function(){
 			 
 			
 				$('#content').html(err);
-				var $login_div = $("<div>", {id: "login_div"});
-				var $signup_div = $("<div>", {id: "signup_div"});
-				
-				//$login_div.click(function(){ /* ... */ });
-				$("#content").append($login_div);
-				$("#content").append($signup_div);
-				
-				//const id = document.getElementById('content');
-								
-				let login_button = $('<button>', {'class': 'button-size'});
-				let signup_button = $('<button>', {'class': 'button-size'});
-				//Vanilla JS implementation
-				//let signup_button = document.createElement('button');
 
-				login_button.text('Sign in');
-				signup_button.text('Sign up');
-				//signup_button.innerHTML = "Sign up";
+				generateLoginButton();
 				
-				//id.appendChild(login_div);
-				$("#login_div").append(login_button).click(function() {
-					window.location = "login.php";
-				});
-
-				$("#signup_div").append(signup_button).click(function() {
-					window.location = "register.php";
-				});
 		}
 		
 	});
