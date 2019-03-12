@@ -60,18 +60,13 @@
 
 	 <nav class="header navbar navbar-expand-lg navbar-light bg-light">
 	 	<div class="container">
-		  <a class="navbar-brand" href="index.html"><img id="logo" src="assets/images/icons/icon-96x96.png">&nbsp;<b>Flatmates</b></a>
+		  <a class="navbar-brand" href="index.html"><img id="logo" src="assets/images/icons/icon-96x96.png">&nbsp;<b><span>Flatmates Africa</span></b></a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
 		  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
-		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-		    <div class="navbar-nav">
-		      
-		    </div>
-
-
-
+		  <div class="collapse navbar-collapse left-tab" id="navbarNavAltMarkup">
+		    
 		    <div id="logout" class="nav1 logout">
 		    	<a class="bout" href="#"><i class="fas fa-info-circle"></i>About<span class="sr-only">(current)</span></a>
 		    	<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Sign out&nbsp;&nbsp;</a>
@@ -108,9 +103,9 @@
      
 
       <ul class="nav nav-tabs">
-            <li role="" class="active"><a href="#" id="albums-tab" ><i class="fas fa-home"></i>Home</a></li>
-            <li role=""><a href="#" id="photos-tab" ><i class="fas fa-images"></i>Apartments</a></li>
-            <li role=""><a href="#" id="dashboard" ><i class="fas fa-list-alt"></i>Dashboard</a></li>                   
+            <li role="" class="active"><a href="#" id="albums-tab" ><i class="fas fa-home"></i> Home</a></li>
+            <li role=""><a href="#" id="photos-tab" ><i class="fas fa-images"></i> Apartments</a></li>
+            <li role=""><a href="#" id="dashboard" ><i class="fas fa-list-alt"></i> Dashboard</a></li>                   
           </ul>
       <br/><br/>
 
@@ -354,7 +349,7 @@
 <div id="booking_form" style="display: none;">
 <form id="dateTimeData" method="post" action="index.php">	
 	<div id="warning"><div id="success"></div></div>
-	Choose date and time you wish to go for inspection: <br>
+	<p>Choose date and time you wish to go for inspection:</p>
 	<input type="date" id="bookd_date" class="form-control empty" class="is-invalid .is-valid"  name="bookd_date" value="" required />
 	<input type="time" id="bookd_time" class="form-control empty" class="is-invalid .is-valid"  name="bookd_time" value="" required />
 	
