@@ -240,7 +240,7 @@ var gallery = {
 				{	
 					src : "assets/images/homes/uyo/red-and-yellow-daisies_925x.jpg",
 					title : "Shared Apartment in Ewet Housing Estate", 
-					price : 1800000,
+					price : 180000,
 					description : "Per year"
 				}
 			]

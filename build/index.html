@@ -127,7 +127,7 @@
 
 <script id="albums-template" type="text/x-handlebars-template">
 	
-	<p><strong><h5>Recommended Cities Where Most People Are Sharing Apartments</h5></strong></p>
+	<h5 class="recommended">Recommended Cities Where People Are Sharing Apartments</h5>
   <div class="row">
 
     {{#each albums}}
@@ -136,7 +136,7 @@
           <a href="#"><img class="crop-img" src="{{thumbnail}}" alt="Top recommended apartments in major cities"/> </a>
             
           <div class="caption">
-              <h4> {{name}} </h4>
+              <h5 class="recommended"> {{name}} </h5>
               <p> {{photos.length}} Apartments</p>
           </div>
          </div>
@@ -149,7 +149,7 @@
   <br>
   <hr class="my-4">
   <br>
-  <p><strong><h5>Earn Extra Income by Sharing Your Apartment. It's That Easy.</h5></strong></p>
+  <h5 class="recommended">Earn Extra Income by Sharing Your Apartment. It's That Easy.</h5>
 
   <div class="space-div">
   	<img class="space-img" src="assets/images/three-friends-drinking-coffee.jpg">

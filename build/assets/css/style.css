@@ -77,7 +77,7 @@ a:hover {
 
 @media(max-width: 290px) {
   .navbar-toggler {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 0.70rem;
     font-size: 0.25rem !important;
   }
 }
@@ -156,7 +156,14 @@ p {
     margin-right: 3%;
   }
 }
+.recommended {
 
+}
+@media(max-width: 700px) {
+  .recommended {
+    font-size: 1em;
+  }
+}
 #space {
   margin-bottom: 70px;
 }

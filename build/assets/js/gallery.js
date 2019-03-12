@@ -325,6 +325,8 @@ $(document).ready(function(){
 					console.log("hid success message")
 				}, 3000);
 
+				//$(flash).fadeOut(3000);
+
 				$(".empty").each(function(){
 					$(this).val(" ");
 					console.log('emptied');
