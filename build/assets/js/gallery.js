@@ -343,7 +343,7 @@ $(document).ready(function(){
 			.then(function() {
 			  	console.log('promise posted')
 
-			  	var success = "Congratulations, request successfull.";
+			  	var success = "Congratulations, request sent.";
 				$("#success").css({"display": "initial"});
 				flash = $("#success").html(success);
 

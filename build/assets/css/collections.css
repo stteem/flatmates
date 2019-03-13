@@ -79,9 +79,11 @@
   color: #9ece9e;
   background-color: #048804;
   font-size: 0.9em;
-  width: 297px;
+  text-align: center
+  width: 298px;
   height: 37px;
   padding: 3px;
+  margin-bottom: 10px;
   border-radius: 3px;
   display: none;
 }
