@@ -19,13 +19,13 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-self.addEventListener('message', function (event) {
+/*self.addEventListener('message', function (event) {
   console.log('form data is', event.data)
   if (event.data.hasOwnProperty('formData')) {
     // receives form data from script.js upon submission
     formData = event.data.formData
   }
-});
+});*/
 
 
 workbox.routing.registerRoute(
@@ -51,11 +51,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/about.css",
-    "revision": "b562bdfd458c52d6dd43bd8674ea2f62"
+    "revision": "7da924868f475bebcb4e592fdbd8a810"
   },
   {
     "url": "assets/css/bootstrap.css",
-    "revision": "c17ae4f0529e0bc2fc887d2471ae124b"
+    "revision": "e3ecb1f64761daccef059bfc56f5abab"
   },
   {
     "url": "assets/css/bootstrap.min.css",
@@ -63,7 +63,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/collections.css",
-    "revision": "259b3c37dd145366678589e334b7ab35"
+    "revision": "0d3a2a20e57eeb7e1045b5410576d1ce"
   },
   {
     "url": "assets/css/register_style.css",
@@ -71,7 +71,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/style.css",
-    "revision": "6be2f4253bcf20a2a836c183e68b0efc"
+    "revision": "c547e6a430bc685468a8716d63eab227"
   },
   {
     "url": "assets/fonts/Bellota-Bold.otf",
@@ -402,6 +402,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "42c87bfda725600e89de4ad2ff4acb28"
   },
   {
+    "url": "assets/images/icons/icon-a96x96.png",
+    "revision": "42c87bfda725600e89de4ad2ff4acb28"
+  },
+  {
     "url": "assets/images/IMG-20171108-WA0051.jpg",
     "revision": "d36deb412b04cdd55844bd3d92e345f1"
   },
@@ -459,11 +463,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/collections.js",
-    "revision": "2847b5f32dd83732db678b19b24990a4"
+    "revision": "2c95b6dc145f027cc02d0cafe54c8e79"
   },
   {
     "url": "assets/js/gallery.js",
-    "revision": "14fa7ab85df94aee41630698dac7fd3e"
+    "revision": "bf3663534a7341a6c99c3ba05d8e974e"
   },
   {
     "url": "assets/js/handlebars-v3.0.3.js",
@@ -483,7 +487,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "cfb7420e70e9640401f1eb2ef2a6eaef"
+    "revision": "63df2b1ca84742359728d441222136f4"
   },
   {
     "url": "manifest.json",

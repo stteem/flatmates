@@ -19,13 +19,13 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-self.addEventListener('message', function (event) {
+/*self.addEventListener('message', function (event) {
   console.log('form data is', event.data)
   if (event.data.hasOwnProperty('formData')) {
     // receives form data from script.js upon submission
     formData = event.data.formData
   }
-});
+});*/
 
 
 workbox.routing.registerRoute(

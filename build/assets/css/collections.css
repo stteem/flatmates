@@ -19,21 +19,34 @@
     width: 100%;
 }
 
-#dash_img1 {
-	width: 15%;
+.dashboard-buttons {
+  width: 90%;
 }
 
-#dash_img {
-  width: 111%;
+.list {
+  font-size: 0.7em;
+  box-shadow: 1px 1px 9px #888888;
+  padding-top: 30px;
+  padding-right: 10px;
+}
+
+
+.dash_img {
+  width: 90%;
 }
 
 @media (min-width: 992px) {
-  #dash_img1 {
-    width: 15%;
+  
+  .dash_img {
+    width: 40%;
   }
 
-  #dash_img {
-    width: 80%;
+  .dashboard-buttons {
+    width: 40%;
+  }
+
+  .list {
+    font-size: 1em;
   }
 }
 

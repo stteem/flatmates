@@ -3,6 +3,8 @@
  *		This file contains the javascript code for our gallery
  */
 
+//importScripts('collections.js');
+
 // variables for all of the templates so we only have to compile
 // them once on page load and can then use the same compiled 
 // templates many times
@@ -255,7 +257,7 @@ $(document).ready(function(){
 
 	function validateResponse(response) {
 	  if (!response.ok) {
-	    throw Error(response.statusText);
+	    throw 'Failed! check your network and try again';
 	  }
 	  return response;
 	}
@@ -268,7 +270,56 @@ $(document).ready(function(){
 	  return response.text();
 	}
 
+	//Fetch and Show logout link and username only if user is in session
+	//Otherwise show login and register links if user is not in session
+	const fetchSession = async () => {
+		fetch('session.php')
+	    .then(validateResponse)
+	    .then(readResponseAsJSON)
+	    .then(data => {
 
+	    	console.log('this is data', data);
+	        
+	        return data.map(function(row) {
+
+	        	console.log('username is: ', row.username);
+
+	    		document.getElementById("logout").style.display = "inline";
+	    		document.getElementById("username").style.display = "inline";
+	    		document.getElementById("username").innerHTML = row.username;
+	        });
+	    })
+	    .catch((err) => {
+	    	console.log('Username not found here');
+	    	document.getElementById('login').style.display = 'inline';
+	    });	
+	}
+	fetchSession();
+		
+
+
+
+
+	/*var fetchJsonData = async(url) => {
+		await fetch(url)
+		.then(validateResponse)
+		.then(readResponseAsJSON)
+		.then(data => {
+			console.log('this is json_data length ', data.length);
+
+			return data;
+			
+		})
+		.catch(err => {
+			$('#warning').html('Either you are not logged in or you have no internet');	
+		});
+	}
+	//fetchJsonData('json_data.php');*/
+
+
+	//function using Date objects to return today's date
+	//so it can be called on the 'min' attribute of 
+	//form input type=date of the inspection date calendar.
 	function minDate() {
 		var today = new Date();
 		var yyyy = today.getFullYear();
@@ -283,17 +334,132 @@ $(document).ready(function(){
 
 		return currentDate;
 	}
+
 	//Disable past dates
 	$('#bookd_date').attr('min', minDate());
 
+
+	/*async function pingBackend() {
+		// Here we first fetch session.php to make sure user has logged in before they can 
+		// request inspection
+		fetch('session.php')
+		.then(validateResponse)
+		.then(readResponseAsText)
+		.then(function(data) {
+		    // Examine the text in the response
+			console.log('checking for session ',data);
+
+			if (data === "ACCESS DENIED") {
+				throw 'You have to sign in to be able to request inspection.';
+			}
+			else{
+
+				try{
+					
+
+				}catch(error) {
+					$("#warning").html('Failed! check your network and try again');
+				}
+					
+
+			}			
+
+		})
+		.catch(async function(error) {
+			await $("#booking_form").hide(0);
+			$('#content').html(error);
+			generateLoginButton();
+		});
+  
+  	}*/
+  	
+  	async function checkLengthBeforePosting() {
+  		const response = await fetch('json_data.php');
+		let data = await response.json();
+		
+			console.log('length is ', data.length);
+			//return $('#content').html('You have to login to view your dashboard.');
+		try{
+			if (data.length >= 2) {
+				throw 'You can only make maximum of 2 requests, decline at least one offer in your dashboard to add another request.';
+				
+			}
+			else {
+				
+				// Fetch an HTML <form> with id of 'dateTimeData'
+				await fetch('index.php', {				  
+				  method: 'POST',
+				  body: new FormData(document.getElementById('dateTimeData'))
+				})
+				.then(validateResponse)
+				.then(function() {
+					console.log('promise posted')
+
+				  	var success = "Congratulations, request sent successfully.";
+					$("#success").css({"display": "initial"});
+					flash = $("#success").html(success);
+
+					setTimeout(function() {
+						(flash).fadeOut(3000);
+						//flash.css({"display": "none"});
+						console.log("hid success message")
+					}, 3000);
+
+					//$(flash).fadeOut(3000);
+
+					$(".empty").each(function(){
+						$(this).val(" ");
+						console.log('emptied');
+					});
+				})
+				.catch((error) => {
+					$("#warning").html(error);
+				});	
+			}
+		}
+		catch(err) {
+			$('#warning').html(err);	
+		}
+		
+  	}
+  	
+
+  	async function checkSessionBeforePosting() {
+  		const response = await fetch('session.php')
+		let data = await response.text();
+		
+			console.log('data is ', data);
+			//return $('#content').html('You have to login to view your dashboard.');
+			try{
+				if (data === 'ACCESS DENIED') {
+					throw 'You have to sign in to be able to request inspection.';
+					
+				}
+				else {
+					console.log("sESSION aLIVE")	
+				}
+			}	
+			
+			catch(err) {
+				await $("#booking_form").hide(0);	
+				$('#content').html(err);
+
+				generateLoginButton();
+				
+			}
+		
+  	}
+  	
+  	
+		
 	
-	var flash;
 	// Ajax function to post date, time, and product data to our php backend
-	$("#product_button").click(function() {
+	$("#product_button").click(async function() {
 		event.preventDefault();
 
 		var bookd_date = $('#bookd_date').val();
 		var bookd_time = $('#bookd_time').val();
+		var flash;
 		
 		if (bookd_date == null || bookd_date == "" || bookd_time == null || bookd_time == "") {
 			var error = "Date and time must be chosen";
@@ -317,98 +483,16 @@ $(document).ready(function(){
 
 			return false;
 		}
-		
-		
 
-		// Here we first fetch session.php to make sure user has logged in before they can 
-		// request inspection
-		fetch('session.php')
-		.then(validateResponse)
-		.then(readResponseAsText)
-		.then(function(data) {
+		checkSessionBeforePosting();
 
-		    // Examine the text in the response
-			console.log('checking for session ',data);
+		checkLengthBeforePosting();
 
-			if (data === "ACCESS DENIED") {
-				throw 'You have to sign in to be able to request inspection.';
-			}			
-
-			// Fetch an HTML <form> with id of 'dateTimeData'
-			fetch('index.php', {
-			  method: 'POST',
-			  body: new FormData(document.getElementById('dateTimeData'))
-			})
-			.then(validateResponse)
-			.then(function() {
-			  	console.log('promise posted')
-
-			  	var success = "Congratulations, request sent.";
-				$("#success").css({"display": "initial"});
-				flash = $("#success").html(success);
-
-				setTimeout(function() {
-					(flash).fadeOut(3000);
-					//flash.css({"display": "none"});
-					console.log("hid success message")
-				}, 3000);
-
-				//$(flash).fadeOut(3000);
-
-				$(".empty").each(function(){
-					$(this).val(" ");
-					console.log('emptied');
-				});
-
-			})
-			.catch(function(err) {		
-
-			  	var success = "Failed, check your network and try again";
-				$("#success").css({"display": "initial", "background-color": "brown"});
-				flash = $("#success").html(success);
-			});
-
-			
-		})
-		.catch(function(error) {
-			$("#booking_form").hide(0);
-			$('#content').html(error);
-			generateLoginButton();
-		});
-
-		
-
-		
-	});
+	}); //product-button ends
 
 	// Calling clear input function to clear form of data sent to the PHP backend
 	clearInput();
 	
-
-	//Fetch and Show logout link and username only if user is in session
-	//Otherwise show login and register links if user is not in session
-
-	fetch('session.php')
-	    .then(validateResponse)
-	    .then(readResponseAsJSON)
-	    .then(data => {
-
-	    	console.log('this is data', data);
-	        
-	        return data.map(function(row) {
-
-	        	console.log('username is: ', row.username);
-
-        		document.getElementById("logout").style.display = "inline";
-        		document.getElementById("username").style.display = "inline";
-        		document.getElementById("username").innerHTML = row.username;
-	        });
-	    })
-	    .catch((err) => {
-	    	console.log('Username not found here');
-	    	document.getElementById('login').style.display = 'inline';
-	    });
-
 
     //fetches bookings in dashboard
     var fetchBookings = async function(url) {
@@ -423,6 +507,8 @@ $(document).ready(function(){
 
 		        var source = $("#bookings-template").html();
 				var template = Handlebars.compile(source);
+
+
 				var output = {
 				    categories: []
 				};
@@ -472,20 +558,17 @@ $(document).ready(function(){
 		
 		catch(err) {
 			
-			console.log('No data here');
-			let timer = new Date();
-            console.log('time is ', timer);
-			 
-			
-				$('#content').html(err);
+			console.log('No data here');	
+			$('#content').html(err);
 
-				generateLoginButton();
-				
+			generateLoginButton();
+			
 		}
 		
 	});
 		
 	$('.bout').click(async function() {
+		await $("#booking_form").hide(0);
 		var about_source = $('#about-template').html();
 		var about_template = Handlebars.compile(about_source);
 		await $('#content').html(about_template);

@@ -2,4 +2,3 @@
 node_modules/
 unit-testing/
 composer.lock
-.env
