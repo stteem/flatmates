@@ -27,6 +27,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/about.css">
+	<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	
 	<script src="assets/js/jquery-3.3.1.min.js"></script>
 
@@ -283,35 +284,35 @@
 
 
 <script id="bookings-template" type="text/x-handlebars-template">
-
-	<div>
+	
 	<p><b>Dashboard</b></p>
-		{{#categories}}
-		<ul class="list" style="list-style-type:none;">
-		<li><img class="dash_img" src="{{source}}" alt=""/></li>
-		  &nbsp;
-		  <li><b>Location:</b> {{album}}</li>
-		  &nbsp;
-		  
-		  <li><b>Title:</b> {{title}}</li>
-		  &nbsp;
-		  <li><b>Inpection Date:</b> {{booked_date}}</li>
-		  &nbsp;
-		  <li><b>Inspection Time:</b> {{booked_time}}</li>
-		  &nbsp;
-		  <li><b>Shared Rent:</b> &#8358;{{installation_price}}</li>
-		  &nbsp;
-		  <li><button id="accept" class="btn btn-light dashboard-buttons">Accept</button></li>
-		  &nbsp;
-		  <li><button id="decline" class="btn btn-light dashboard-buttons">Decline</button></li>
-		  &nbsp;
-		</ul>
+		{{#each categories}}
+		<div class="col-xs-12 col-md-8"> 
+			
+			<ul class="list">
+			  <li><img class="dash_img" src="{{source}}" alt=""/></li>
+			  &nbsp;
+			  <li><b>Location:</b> {{album}}</li>
+			  &nbsp;
+			  <li><b>Title:</b> {{title}}</li>
+			  &nbsp;
+			  <li><b>Inpection Date:</b> {{booked_date}}</li>
+			  &nbsp;
+			  <li><b>Inspection Time:</b> {{booked_time}}</li>
+			  &nbsp;
+			  <li><b>Shared Rent:</b> &#8358;{{installation_price}}</li>
+			  &nbsp;
+			  <li><button class='btn-light accept' data-id="{{@index}}">Accept</button></li>
+			  &nbsp;
+			  <li><button class='decline btn-light' data-id="{{@index}}">Decline and Delete</button></li>
+			  &nbsp;
+			</ul>
+			
+		</div>
 		&nbsp;
 		<hr>
 		&nbsp;
-		{{/categories}}
-	</div>
-
+		{{/each}}
 
 </script>
 
@@ -378,7 +379,7 @@
 
 
 <footer>
-	<p><h6 id="footer_message"> Flatmates is currently in beta, contact us on any of our channels if you wish to share your apartment.</h6></p>	
+	<p><h6 id="footer_message"> Flatmates is currently in beta, contact us on any of our channels below to share your apartment.</h6></p>	
 
 	<div class="container">
 		

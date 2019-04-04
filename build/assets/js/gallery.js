@@ -56,9 +56,9 @@ $(document).ready(function(){
 	//
 	$("#albums-tab").click(async function () {
 
-		//$(".wrapper").show(0);
+		
 
-		$("#booking_form").hide(0);
+		//$("#booking_form").hide(0);
 
 		// displays the albums template
 		await showTemplate(albums_template, gallery);
@@ -79,7 +79,6 @@ $(document).ready(function(){
 		// call $(".photo-thumbnail").click() ) 
 		$(".album-thumbnail").click(function (){
 
-			$(".wrapper").hide(0);
 			
 			// get the index (position in the array)
 			// of the album we clicked on
@@ -104,7 +103,8 @@ $(document).ready(function(){
 			// which displays the photo in a modal popup
 			$(".photo-thumbnail").click(function(){
 
-				$("#booking_form").show(0);
+				
+				$("#booking_form").css({'display':'initial'});
 				// get the index (position in the array)
 				// of the photo we clicked on
 				// "this" is the element that was clicked on
@@ -116,7 +116,7 @@ $(document).ready(function(){
 				// set the current photo to this photo
 				current_photo = current_album.photos[index];
 
-				$("#booking_form").show(0);
+				//$("#booking_form").show(0);
 
 				// displays the single photo template
 
@@ -152,7 +152,7 @@ $(document).ready(function(){
 	//
 	$("#photos-tab").click(function () {
 
-		$("#booking_form").hide(0);
+		$("#booking_form").css({'display':'none'});
 		
 		// displays the photos template
 		showTemplate(photos_template, current_album);
@@ -170,6 +170,8 @@ $(document).ready(function(){
 		// add an on click al all the photo thumbnails
 		// which displays the photo in a modal popup
 		$(".photo-thumbnail").click(function (){
+
+			
 			// get the index (position in the array)
 			// of the photo we clicked on
 			// "this" is the element that was clicked on
@@ -177,12 +179,13 @@ $(document).ready(function(){
 			// (which we set to the index of the photo in
 			// the array - @index)
 			var index = $(this).data("id");
+			console.log('This is index ', index);
 
 
 			// set the current photo to this photo
 			current_photo = current_album.photos[index];
 
-			$("#booking_form").show(0);
+			$("#booking_form").css({'display':'initial'});
 
 			// displays the single photo template
 
@@ -272,8 +275,8 @@ $(document).ready(function(){
 
 	//Fetch and Show logout link and username only if user is in session
 	//Otherwise show login and register links if user is not in session
-	const fetchSession = async () => {
-		fetch('session.php')
+	const fetchSession = async (url) => {
+		fetch(url)
 	    .then(validateResponse)
 	    .then(readResponseAsJSON)
 	    .then(data => {
@@ -294,27 +297,8 @@ $(document).ready(function(){
 	    	document.getElementById('login').style.display = 'inline';
 	    });	
 	}
-	fetchSession();
+	fetchSession('session.php');
 		
-
-
-
-
-	/*var fetchJsonData = async(url) => {
-		await fetch(url)
-		.then(validateResponse)
-		.then(readResponseAsJSON)
-		.then(data => {
-			console.log('this is json_data length ', data.length);
-
-			return data;
-			
-		})
-		.catch(err => {
-			$('#warning').html('Either you are not logged in or you have no internet');	
-		});
-	}
-	//fetchJsonData('json_data.php');*/
 
 
 	//function using Date objects to return today's date
@@ -339,42 +323,10 @@ $(document).ready(function(){
 	$('#bookd_date').attr('min', minDate());
 
 
-	/*async function pingBackend() {
-		// Here we first fetch session.php to make sure user has logged in before they can 
-		// request inspection
-		fetch('session.php')
-		.then(validateResponse)
-		.then(readResponseAsText)
-		.then(function(data) {
-		    // Examine the text in the response
-			console.log('checking for session ',data);
 
-			if (data === "ACCESS DENIED") {
-				throw 'You have to sign in to be able to request inspection.';
-			}
-			else{
-
-				try{
-					
-
-				}catch(error) {
-					$("#warning").html('Failed! check your network and try again');
-				}
-					
-
-			}			
-
-		})
-		.catch(async function(error) {
-			await $("#booking_form").hide(0);
-			$('#content').html(error);
-			generateLoginButton();
-		});
-  
-  	}*/
   	
-  	async function checkLengthBeforePosting() {
-  		const response = await fetch('json_data.php');
+  	async function checkLengthBeforePosting(url) {
+  		const response = await fetch(url);
 		let data = await response.json();
 		
 			console.log('length is ', data.length);
@@ -441,7 +393,7 @@ $(document).ready(function(){
 			}	
 			
 			catch(err) {
-				await $("#booking_form").hide(0);	
+				await $("#booking_form").css({'display':'none'});	
 				$('#content').html(err);
 
 				generateLoginButton();
@@ -486,7 +438,7 @@ $(document).ready(function(){
 
 		checkSessionBeforePosting();
 
-		checkLengthBeforePosting();
+		checkLengthBeforePosting('json_data.php');
 
 	}); //product-button ends
 
@@ -494,8 +446,22 @@ $(document).ready(function(){
 	clearInput();
 	
 
+	//Handlebars helper function to dynamically generate Accept buttons
+	/*Handlebars.registerHelper('acceptButton', function() {
+		let accept_button = '<button class="btn-light accept">';
+	    return new Handlebars.SafeString( accept_button + 'Accept' + '</button>' );
+	});
+
+	//Handlebars helper function to dynamically generate Decline buttons
+	Handlebars.registerHelper('declineButton', function() {
+		let decline_button = '<button class="btn-light decline">';
+	    return new Handlebars.SafeString( decline_button + 'Decline' + '</button>' );
+	});*/
+
+	
+
     //fetches bookings in dashboard
-    var fetchBookings = async function(url) {
+   	var fetchBookings = async function(url) {
     	await fetch(url)
 	    	.then(validateResponse)
 			.then(readResponseAsJSON)
@@ -508,12 +474,53 @@ $(document).ready(function(){
 		        var source = $("#bookings-template").html();
 				var template = Handlebars.compile(source);
 
-
 				var output = {
 				    categories: []
 				};
 
-		        return data.map(async function(row) {
+				
+				for (var i = 0; i < data.length; i++) {
+						output.categories.push({
+						album : data[i].album,
+						source : data[i].source,
+						title : data[i].title,
+						booked_date : data[i].booked_date,
+						booked_time : data[i].booked_time,
+						installation_price : data[i].installation_price
+					});
+
+					showTemplate(template, output);
+				}
+
+				$('body').on('click', '.accept', function() {
+					console.log('accept button clicked');
+			
+					var index = $(this).data('id');
+					console.log('index ', index)
+
+					console.log(data[index]);
+
+					console.log('Your card will be debited ',data[index].installation_price)
+					
+				});
+
+				$('body').on('click', '.decline', function() {
+					console.log('decline button clicked');
+			
+					var index = $(this).data('id');
+					console.log('index ', index)
+
+					console.log(data[index]);
+
+					console.log('This will be deleted when you decline, are you sure you want to continue?')
+					
+				});
+	    			
+
+				
+				
+
+		       /* return data.map(async function(row) {
 		            					
 					output.categories.push({
 						album : row.album,
@@ -526,9 +533,10 @@ $(document).ready(function(){
 					
 
 					console.log("Now Awaiting: ", await output.categories);
-					$("#content").html(await template(output));
+					//$("#content").html(await template(output));
+					await showTemplate(template, output);
 
-		        });
+		        });*/
 		    })
 		    .catch((error) => {	    				    					    				    			    			    			    	
 		    	//console.log('this is array length ', response.length);
@@ -536,9 +544,11 @@ $(document).ready(function(){
 		    });
     }
 
+   
+
 
 	$('#dashboard').click(async function() {
-		await $("#booking_form").hide(0);	 
+		await $("#booking_form").css({'display':'none'});	 
 
 		const response = await fetch('dashboard_session.php')
 		let data = await response.json();
@@ -566,9 +576,12 @@ $(document).ready(function(){
 		}
 		
 	});
-		
+
+	
+
+	//Function for About tab	
 	$('.bout').click(async function() {
-		await $("#booking_form").hide(0);
+		await $("#booking_form").css({'display':'none'});
 		var about_source = $('#about-template').html();
 		var about_template = Handlebars.compile(about_source);
 		await $('#content').html(about_template);

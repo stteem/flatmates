@@ -24,6 +24,7 @@
 }
 
 .list {
+  list-style-type: none;
   font-size: 0.7em;
   box-shadow: 1px 1px 9px #888888;
   padding-top: 30px;
@@ -107,6 +108,7 @@
 }
 
 #booking_form {
+  display: none;
   width: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -190,5 +192,17 @@
   }
 }
 
+.decline, .accept {
+  width: 90%;
+  text-align: center;
+  border: 1px solid #00bcd4;
+  border-radius: 3px;
+  padding: 5px;
+  background: #00bcd4;
+}
 
-
+@media (min-width: 992px) {
+  .decline, .accept {
+    width: 40%;
+  }
+}
