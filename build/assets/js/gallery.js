@@ -333,7 +333,7 @@ $(document).ready(function(){
 			//return $('#content').html('You have to login to view your dashboard.');
 		try{
 			if (data.length >= 2) {
-				throw 'You can only make maximum of 2 requests, decline at least one offer in your dashboard to add another request.';
+				throw 'You can only make maximum of 2 requests, decline and delete at least one offer in your dashboard to add another request.';
 				
 			}
 			else {
@@ -370,7 +370,12 @@ $(document).ready(function(){
 			}
 		}
 		catch(err) {
-			$('#warning').html(err);	
+			var flash = $('#warning').html(err);
+			setTimeout(function() {
+				(flash).fadeOut(3000);
+				//flash.css({"display": "none"});
+				console.log("hid success message")
+			}, 8000);	
 		}
 		
   	}
@@ -457,71 +462,42 @@ $(document).ready(function(){
 		let decline_button = '<button class="btn-light decline">';
 	    return new Handlebars.SafeString( decline_button + 'Decline' + '</button>' );
 	});*/
-
 	
 
     //fetches bookings in dashboard
    	var fetchBookings = async function(url) {
-    	await fetch(url)
-	    	.then(validateResponse)
-			.then(readResponseAsJSON)
-			.then(data => {
+	await fetch(url)
+    	.then(validateResponse)
+		.then(readResponseAsJSON)
+		.then(data => {
 
-		    	if (data.length === 0) {
-		    		throw "You have no reservations.";
-		    	}
+	    	if (data.length === 0) {
+	    		throw "You have no reservations.";
+	    	}
 
-		        var source = $("#bookings-template").html();
-				var template = Handlebars.compile(source);
+	        var source = $("#bookings-template").html();
+			var template = Handlebars.compile(source);
 
-				var output = {
-				    categories: []
-				};
+			var output = {
+			    categories: []
+			};
 
-				
-				for (var i = 0; i < data.length; i++) {
-						output.categories.push({
-						album : data[i].album,
-						source : data[i].source,
-						title : data[i].title,
-						booked_date : data[i].booked_date,
-						booked_time : data[i].booked_time,
-						installation_price : data[i].installation_price
-					});
-
-					showTemplate(template, output);
-				}
-
-				$('body').on('click', '.accept', function() {
-					console.log('accept button clicked');
 			
-					var index = $(this).data('id');
-					console.log('index ', index)
-
-					console.log(data[index]);
-
-					console.log('Your card will be debited ',data[index].installation_price)
-					
+			for (var i = 0; i < data.length; i++) {
+					output.categories.push({
+					album : data[i].album,
+					source : data[i].source,
+					title : data[i].title,
+					booked_date : data[i].booked_date,
+					booked_time : data[i].booked_time,
+					installation_price : data[i].installation_price
 				});
 
-				$('body').on('click', '.decline', function() {
-					console.log('decline button clicked');
-			
-					var index = $(this).data('id');
-					console.log('index ', index)
+				showTemplate(template, output);
+			}
 
-					console.log(data[index]);
-
-					console.log('This will be deleted when you decline, are you sure you want to continue?')
-					
-				});
-	    			
-
-				
-				
-
-		       /* return data.map(async function(row) {
-		            					
+			/* return data.map(async function(row) {
+	            					
 					output.categories.push({
 						album : row.album,
 						source : row.source,
@@ -531,17 +507,64 @@ $(document).ready(function(){
 						installation_price : row.installation_price
 					});
 					
-
 					console.log("Now Awaiting: ", await output.categories);
 					//$("#content").html(await template(output));
 					await showTemplate(template, output);
 
-		        });*/
-		    })
-		    .catch((error) => {	    				    					    				    			    			    			    	
-		    	//console.log('this is array length ', response.length);
-    			$('#content').html(error);			    
-		    });
+	        	});*/
+
+			$('body').on('click', '.accept', function() {
+				console.log('accept button clicked');
+		
+				var index = $(this).data('id');
+				console.log('index ', index)
+
+				console.log(data[index]);
+
+				console.log('Your card will be debited ',data[index].installation_price)
+				
+			});
+
+			$('body').on('click', '.decline', async function() {
+				console.log('decline button clicked');
+
+				var index = $(this).data('id');
+
+				var confam = confirm('Are you sure you want to decline and delete this item?');
+
+				if (confam == true) {
+					
+					console.log('index ', index)
+
+					var values = [];
+					
+					values.push({ name: 'id', value: data[index].booking_id });   
+
+					var post = $.post("delete_booking.php", values);
+
+					post.fail(function() {
+						var error = 'Failed to post, check internet connection and try again';
+						$('#warning').html(error);
+					});
+					
+					//Callback function to display ajax post request on DOM without page reload
+					post.done(function() {
+						//Calling dashboard click event to update list
+						$('#dashboard').click();
+
+						console.log('Deleted')
+
+					});
+				} 
+				else {
+					console.log("Canceled!");
+				}
+			});
+	    })
+	    .catch((error) => {	    				    					    				    			    			    			    	
+	    	//console.log('this is array length ', response.length);
+			$('#content').html(error);			    
+	    });
     }
 
    

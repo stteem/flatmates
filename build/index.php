@@ -6,32 +6,6 @@ session_start();
 $timezone = date_default_timezone_set("Africa/Accra");
 
 
-/*//Show login link only if user is not in session
-try {
-		if (isset($_SESSION['user_id'])) { 
-			echo ('<div class="nav1 logout"><a href="logout.php">Log out</a></div>'); 
-			echo "&nbsp";
-			echo "&nbsp";
-			echo "<div style='color:rgba(0, 0, 0, 0.5)'>";
-			echo ($_SESSION['username']);
-			echo "</div>";
-		} 
-
-		else {
-
-			echo('<div class="nav1"><a href="login.php"><i class="fas fa-sign-in-alt fa-lg"></i> Sign in</a> 
-						 
-						<a href="register.php">Register</a></div>');
-		}
-
-	} catch (Exception $e) {
-		error_log($e->getMessage());
-	}	
-
-	//Show logout link only if user is in session
-	*/			
-
-
 
 if (isset($_POST['bookd_date']) || isset($_POST['bookd_time'])  || isset($_POST['installation_price'])
 	|| isset($_POST['hairstyle_title']) || isset($_POST['hairstyle_src']) || isset($_POST['album'])) {
