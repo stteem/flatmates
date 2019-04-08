@@ -14,7 +14,8 @@ var albums_template, photos_template, photo_template;
 // variables to store the current displayed album and photo
 var current_album = gallery.albums[0];
 var current_photo = current_album.photos[0];
-		
+
+var current_object = [];
 
 
 var installation_price, hairstyle, hairstyle_src, title, album;
@@ -129,6 +130,29 @@ $(document).ready(function(){
 				installation_price = current_photo.price;
 				album = current_album.name;
 
+				var obj = {
+					hairstyle : current_photo.title,
+					hairstyle_src : current_photo.src,
+					installation_price : current_photo.price,
+					album : current_album.name
+				}
+				console.log('obj is ', obj)
+
+				//Here we set the current_object global array length
+				// to zero to make sure we always have 1 object per time
+				if (current_object.length > 0) {
+					current_object.length = 0;
+					console.log('cleared current_object')
+				}
+
+				if (current_object.length == 0) {
+					var push = current_object.push(obj);
+					console.log('pushed ', push)
+					console.log('new current_object ', current_object)
+				}   
+
+				console.log('current hairstyle_src is ', current_object[0].hairstyle_src)
+
 				//console.log("new title is :", hairstyle);
 				console.log("new title is :", hairstyle);
 				console.log("new source is :", hairstyle_src);
@@ -196,6 +220,31 @@ $(document).ready(function(){
 			hairstyle_src = current_photo.src;
 			installation_price = current_photo.price;
 			album = current_album.name;
+
+
+			var obj = {
+		        hairstyle : current_photo.title,
+		        hairstyle_src : current_photo.src,
+		        installation_price : current_photo.price,
+		        album : current_album.name
+		    }
+		      console.log('obj is ', obj)
+
+		      //Here we set the current_object global array length
+		      // to zero to make sure we always have 1 object per time
+			if (current_object.length > 0) {
+				current_object.length = 0;
+				console.log('cleared current_object')
+			}
+
+			if (current_object.length == 0) {
+				var push = current_object.push(obj);
+				console.log('pushed ', push)
+				console.log('new current_object ', current_object)
+			}   
+		      
+		    console.log('current hairstyle_src is ', current_object[0].hairstyle_src)
+
 
 			console.log("new title is :", hairstyle);
 			console.log("new source is :", hairstyle_src);
@@ -322,61 +371,81 @@ $(document).ready(function(){
 	//Disable past dates
 	$('#bookd_date').attr('min', minDate());
 
+	function minTime() {
+		var today = new Date();
+		var hr = today.getHours();
+		var mins = today.getMinutes();
+
+		var currentTime = hr + ':' + mins;
+		return currentTime;
+	}
+
 
 
   	
   	async function checkLengthBeforePosting(url) {
-  		const response = await fetch(url);
-		let data = await response.json();
-		
+  		await fetch(url)
+		.then(response => response.json())
+		.then(data => {
+
 			console.log('length is ', data.length);
-			//return $('#content').html('You have to login to view your dashboard.');
-		try{
+
 			if (data.length >= 2) {
 				throw 'You can only make maximum of 2 requests, decline and delete at least one offer in your dashboard to add another request.';
 				
 			}
-			else {
-				
-				// Fetch an HTML <form> with id of 'dateTimeData'
-				await fetch('index.php', {				  
-				  method: 'POST',
-				  body: new FormData(document.getElementById('dateTimeData'))
-				})
-				.then(validateResponse)
-				.then(function() {
-					console.log('promise posted')
 
-				  	var success = "Congratulations, request sent successfully.";
-					$("#success").css({"display": "initial"});
-					flash = $("#success").html(success);
-
-					setTimeout(function() {
-						(flash).fadeOut(3000);
-						//flash.css({"display": "none"});
-						console.log("hid success message")
-					}, 3000);
-
-					//$(flash).fadeOut(3000);
-
-					$(".empty").each(function(){
-						$(this).val(" ");
-						console.log('emptied');
-					});
-				})
-				.catch((error) => {
-					$("#warning").html(error);
-				});	
+			if (data.length != 0) {
+				if (data[0].source == current_object[0].hairstyle_src) {
+					throw 'You have already made this request';
+				}
 			}
-		}
-		catch(err) {
-			var flash = $('#warning').html(err);
+
+
+			// Fetch an HTML <form> with id of 'dateTimeData'
+			fetch('index.php', {				  
+			  method: 'POST',
+			  body: new FormData(document.getElementById('dateTimeData'))
+			})
+			.then(validateResponse)
+			.then(function() {
+				console.log('promise posted')
+
+			  	var success = "Congratulations, request sent successfully.";
+				$("#success").css({"display": "initial"});
+				$("#success").html(success);
+
+				setTimeout(function() {
+					$("#success").fadeOut(3000, function() {
+						$(this).empty();
+					});
+					//flash.css({"display": "none"});
+					console.log("hid success message")
+				}, 3000);
+
+				
+
+				$(".empty").each(function(){
+					$(this).val(" ");
+					console.log('emptied');
+				});
+			})
+			.catch((error) => {
+				$("#warning").html(error);
+			});	
+
+		})
+		.catch((err) => {
+
+			$('#warning').html(err);
 			setTimeout(function() {
-				(flash).fadeOut(3000);
+			$('#warning').fadeOut(3000, async function() {
+					await $(this).empty().show();
+				});
 				//flash.css({"display": "none"});
-				console.log("hid success message")
-			}, 8000);	
-		}
+				console.log("hid message")
+			}, 7000);
+		});
 		
   	}
   	
@@ -385,31 +454,26 @@ $(document).ready(function(){
   		const response = await fetch('session.php')
 		let data = await response.text();
 		
-			console.log('data is ', data);
-			//return $('#content').html('You have to login to view your dashboard.');
-			try{
-				if (data === 'ACCESS DENIED') {
-					throw 'You have to sign in to be able to request inspection.';
-					
-				}
-				else {
-					console.log("sESSION aLIVE")	
-				}
-			}	
-			
-			catch(err) {
-				await $("#booking_form").css({'display':'none'});	
-				$('#content').html(err);
-
-				generateLoginButton();
-				
+		console.log('data is ', data);
+		//return $('#content').html('You have to login to view your dashboard.');
+		try{
+			if (data === 'ACCESS DENIED') {
+				throw 'You have to sign in to be able to request inspection.';	
 			}
+			else {
+				console.log("sESSION aLIVE")	
+			}
+		}	
 		
+		catch(err) {
+			await $("#booking_form").css({'display':'none'});	
+			$('#content').html(err);
+
+			generateLoginButton();
+		}	
   	}
   	
   	
-		
-	
 	// Ajax function to post date, time, and product data to our php backend
 	$("#product_button").click(async function() {
 		event.preventDefault();
@@ -436,7 +500,25 @@ $(document).ready(function(){
 		if (bookd_date < minDate()) {
 			var error = 'Date must be today or ahead of today';
 			$("#warning").css({"display": "initial", "color" : "red"});
-			$('#warning').html(error);
+			flash = $('#warning').html(error);
+
+			setTimeout(function() {
+				flash.empty();
+				console.log("emptied error message")
+			}, 3000);
+
+			return false;
+		}
+
+		if (bookd_date == minDate() && bookd_time < minTime()) {
+			var error = 'Time must be ahead of current time';
+			$("#warning").css({"display": "initial", "color" : "red"});
+			flash = $('#warning').html(error);
+
+			setTimeout(function() {
+				flash.empty();
+				console.log("emptied error message")
+			}, 3000);
 
 			return false;
 		}
@@ -537,6 +619,10 @@ $(document).ready(function(){
 					console.log('index ', index)
 
 					var values = [];
+
+					if (values.length > 0) {
+						values.length = 0;
+					}
 					
 					values.push({ name: 'id', value: data[index].booking_id });   
 

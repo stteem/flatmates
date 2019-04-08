@@ -206,3 +206,15 @@
     width: 40%;
   }
 }
+
+#status {
+  position: fixed;
+  width: 100%;
+  font: bold 1em sans-serif;
+  color: #FFF;
+  padding: 0.5em;
+}
+
+.offline {
+  background: red;
+}
