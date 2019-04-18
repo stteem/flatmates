@@ -5,6 +5,7 @@
   "main": "index.html",
   "dependencies": {
     "git": "^0.1.5",
+    "i18next": "^15.0.9",
     "workbox": "0.0.0"
   },
   "scripts": {

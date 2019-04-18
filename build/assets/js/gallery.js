@@ -377,6 +377,7 @@ $(document).ready(function(){
 		var mins = today.getMinutes();
 
 		var currentTime = hr + ':' + mins;
+		console.log('currentTime ', currentTime)
 		return currentTime;
 	}
 
@@ -473,7 +474,7 @@ $(document).ready(function(){
 		}	
   	}
   	
-  	
+
 	// Ajax function to post date, time, and product data to our php backend
 	$("#product_button").click(async function() {
 		event.preventDefault();
@@ -544,6 +545,13 @@ $(document).ready(function(){
 		let decline_button = '<button class="btn-light decline">';
 	    return new Handlebars.SafeString( decline_button + 'Decline' + '</button>' );
 	});*/
+
+
+	function formatNumber() {
+	 	var c = $('.formati');
+		return new Intl.NumberFormat().format(c);   
+	};
+	formatNumber();
 	
 
     //fetches bookings in dashboard
@@ -565,7 +573,7 @@ $(document).ready(function(){
 			};
 
 			
-			for (var i = 0; i < data.length; i++) {
+			/*for (var i = 0; i < data.length; i++) {
 					output.categories.push({
 					album : data[i].album,
 					source : data[i].source,
@@ -576,9 +584,9 @@ $(document).ready(function(){
 				});
 
 				showTemplate(template, output);
-			}
+			}*/
 
-			/* return data.map(async function(row) {
+			data.map(async function(row) {
 	            					
 					output.categories.push({
 						album : row.album,
@@ -593,7 +601,8 @@ $(document).ready(function(){
 					//$("#content").html(await template(output));
 					await showTemplate(template, output);
 
-	        	});*/
+	        	});
+
 
 			$('body').on('click', '.accept', function() {
 				console.log('accept button clicked');
@@ -604,6 +613,53 @@ $(document).ready(function(){
 				console.log(data[index]);
 
 				console.log('Your card will be debited ',data[index].installation_price)
+
+				var splitName = data[index].username;
+				var splitted = splitName.split(" ");
+				console.log(splitted[0])
+
+				var tRef = 'FM' + data[index].booking_id + 'A';
+
+
+				/*document.addEventListener("DOMContentLoaded", function(event) {
+				  document.getElementById("submit").addEventListener("click", function(e) {*/
+				    var PBFKey = "FLWPUBK-65d3a83eb4c97e048016e53bb6d4a5aa-X";
+				    
+				getpaidSetup({
+				      PBFPubKey: PBFKey,
+				      customer_email: data[index].email,
+				      customer_firstname: splitted[0],
+				      customer_lastname: splitted[1],
+				      custom_description: "Make Payment",
+				      custom_logo: "",
+				      custom_title: "Flatmates Africa",
+				      amount: data[index].installation_price,
+				      customer_phone: data[index].phone,
+				      country: "NG",
+				      currency: "NGN",
+				      txref: tRef,
+				      integrity_hash: "",
+				      onclose: function() {},
+				      callback: function(response) {
+				        var flw_ref = response.tx.flwRef; // collect flwRef returned and pass to a server page to complete status check.
+				        console.log("This is the response returned after a charge", response);
+				        if (
+				          response.tx.chargeResponseCode == "00" ||
+				          response.tx.chargeResponseCode == "0"
+				        ) {
+				          // redirect to a success page
+				      		console.log("successfull!")
+				        } else {
+				          // redirect to a failure page.
+				          	console.log("Failed!")
+				        }
+
+				        //x.close();
+				      }
+				    });
+				  //});
+				//});
+
 				
 			});
 

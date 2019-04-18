@@ -3,3 +3,4 @@ node_modules/
 unit-testing/
 fontawesome-free/
 composer.lock
+package-lock.json

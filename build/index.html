@@ -40,6 +40,9 @@
     <!--<script src="assets/js/vue.js"> </script>-->
     
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://unpkg.com/i18next/i18next.min.js"></script>
+	<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+
     
     <!--<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>-->
 
@@ -272,7 +275,7 @@
           
         <div class="caption">
             <h3>{{title}}</h3>
-            <p>&#8358;{{price}} {{description}}</p> 
+            <p class='formati'>&#8358;{{price}} {{description}}</p> 
             
         </div>
 
@@ -302,7 +305,7 @@
 			  &nbsp;
 			  <li><b>Shared Rent:</b> &#8358;{{installation_price}}</li>
 			  &nbsp;
-			  <li><button class='btn-light accept' data-id="{{@index}}">Accept</button></li>
+			  <li><button class='btn-light accept' data-id="{{@index}}">Accept and Pay Now</button></li>
 			  &nbsp;
 			  <li><button class='decline btn-light' data-id="{{@index}}">Decline and Delete</button></li>
 			  &nbsp;
