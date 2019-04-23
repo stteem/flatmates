@@ -347,6 +347,81 @@ $(document).ready(function(){
 	    });	
 	}
 	fetchSession('session.php');
+
+
+	//This function returns the number of days when the start date and end date calenders are selected
+	function datePickerDifference() {
+		var t1 = $('#date_picker1').val();
+		t1 = t1.split('-');
+		dt_t1 = new Date(t1[2], t1[1]-1, t1[0]); // YYYY,mm,dd format to create date object
+		dt_t1_tm = dt_t1.getTime(); // time in milliseconds for day 1
+		//alert(dt_t1_tm);
+		var t2 = $('#date_picker2').val();
+		t2 = t2.split('-');
+		dt_t2 = new Date(t2[2], t2[1]-1, t2[0]); // YYYY,mm,dd format to create date object
+		dt_t2_tm = dt_t2.getTime(); // time in milliseconds for day 2
+		/////////////////
+		var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+		var diff_days = Math.abs((dt_t2_tm - dt_t1_tm)/one_day) // difference in days
+
+		let rent_per_day = Math.round(current_object[0].installation_price/365);
+		let calculated_cost = rent_per_day * diff_days;
+		let formated_sum = new Intl.NumberFormat().format(calculated_cost);
+		var nairaSymbol = decodeURI("&#8358;");
+
+		if (diff_days > 1) {
+			$("#result").html(diff_days + " Days " + "Cost " + nairaSymbol + formated_sum);
+			$("#cost-info").css({"background-color": "#00bcd4", 
+								"color" : "white",
+								"text-align" : "center" });
+			$("#result").show();
+			
+		}
+		else {
+			$("#result").html(diff_days + " Day " + "Costs " + nairaSymbol + formated_sum);
+			$("#cost-info").css({"background-color": "#00bcd4", 
+								"color" : "white",
+								"text-align" : "center" });
+			$("#result").show();
+		}
+
+		$('#calculated_cost').val(calculated_cost).text();
+		$('#num_of_days').val(diff_days).text();
+	}
+
+///////
+	var startDate;
+	var endDate;
+	 $("#date_picker1").datepicker({
+	dateFormat: 'dd-mm-yy',
+	minDate: '0'
+	});
+	///////
+	///////
+	 $( "#date_picker2" ).datepicker({
+	dateFormat: 'dd-mm-yy',
+	minDate: '0'
+	});
+	///////
+	$('#date_picker1').change(function() {
+	startDate = $(this).datepicker('getDate');
+	$("#date_picker2").datepicker("option", "minDate", startDate );
+		////////////////
+		if ($("#date_picker2").val()) {
+			datePickerDifference();
+		}
+	});
+
+	///////
+	$('#date_picker2').change(function() {
+		endDate = $(this).datepicker('getDate');
+		$("#date_picker1").datepicker("option", "maxDate", endDate );
+		////////////////
+		datePickerDifference();
+
+	});
+
+////////////////
 		
 
 
@@ -532,19 +607,7 @@ $(document).ready(function(){
 
 	// Calling clear input function to clear form of data sent to the PHP backend
 	clearInput();
-	
 
-	//Handlebars helper function to dynamically generate Accept buttons
-	/*Handlebars.registerHelper('acceptButton', function() {
-		let accept_button = '<button class="btn-light accept">';
-	    return new Handlebars.SafeString( accept_button + 'Accept' + '</button>' );
-	});
-
-	//Handlebars helper function to dynamically generate Decline buttons
-	Handlebars.registerHelper('declineButton', function() {
-		let decline_button = '<button class="btn-light decline">';
-	    return new Handlebars.SafeString( decline_button + 'Decline' + '</button>' );
-	});*/
 
 
 	function formatNumber() {
@@ -565,7 +628,7 @@ $(document).ready(function(){
 	    		throw "You have no reservations.";
 	    	}
 
-	        var source = $("#bookings-template").html();
+			var source = $("#bookings-template").html();
 			var template = Handlebars.compile(source);
 
 			var output = {
@@ -588,20 +651,46 @@ $(document).ready(function(){
 
 			data.map(async function(row) {
 	            					
-					output.categories.push({
-						album : row.album,
-						source : row.source,
-						title : row.title,
-						booked_date : row.booked_date,
-						booked_time : row.booked_time,
-						installation_price : row.installation_price
-					});
-					
-					console.log("Now Awaiting: ", await output.categories);
-					//$("#content").html(await template(output));
-					await showTemplate(template, output);
+				output.categories.push({
+					album : row.album,
+					source : row.source,
+					title : row.title,
+					booked_date : row.booked_date,
+					booked_time : row.booked_time,
+					installation_price : row.installation_price,
+					status : row.status
+				});
+        	});
 
-	        	});
+        	console.log("Now Awaiting1: ", output.categories);
+			//$("#content").html(await template(output));
+			showTemplate(template, output);
+    	
+
+	    		
+	        
+
+			//Handlebars helper function to dynamically generate Accept buttons
+			/*Handlebars.registerHelper('acceptButton', function() {
+				let accept_button = '<button class="btn-light accept" data-id="{{@index}}">';
+			    return new Handlebars.SafeString( accept_button + 'Accept and Pay Now' + '</button>' );
+			});
+
+			//Handlebars helper function to dynamically generate Decline buttons
+			Handlebars.registerHelper('declineButton', function() {
+				let decline_button = '<button class="btn-light decline" data-id="{{@index}}">';
+			    return new Handlebars.SafeString( decline_button + 'Decline and Delete' + '</button>' );
+			});*/
+
+			$('.accept').each(function() {
+				console.log('thisButton ', $(this).data('id'))
+				var findex = $(this).data('id');
+				if (data[findex].status == "Paid") {
+					$(this).css({'display' : 'none'});
+				}
+			});
+			
+
 
 
 			$('body').on('click', '.accept', function() {
@@ -623,7 +712,7 @@ $(document).ready(function(){
 
 				/*document.addEventListener("DOMContentLoaded", function(event) {
 				  document.getElementById("submit").addEventListener("click", function(e) {*/
-				    var PBFKey = "FLWPUBK-65d3a83eb4c97e048016e53bb6d4a5aa-X";
+			    var PBFKey = "FLWPUBK-65d3a83eb4c97e048016e53bb6d4a5aa-X";
 				    
 				getpaidSetup({
 				      PBFPubKey: PBFKey,
@@ -647,7 +736,10 @@ $(document).ready(function(){
 				          response.tx.chargeResponseCode == "00" ||
 				          response.tx.chargeResponseCode == "0"
 				        ) {
-				          // redirect to a success page
+				          //redirect to a success page
+				      		var acceptClass = $('.accept');
+				      		console.log('acceptClass', acceptClass[index])
+				      		acceptClass[index].remove();
 				      		console.log("successfull!")
 				        } else {
 				          // redirect to a failure page.

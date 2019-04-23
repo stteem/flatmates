@@ -7,8 +7,10 @@ $timezone = date_default_timezone_set("Africa/Accra");
 
 
 
-if (isset($_POST['bookd_date']) || isset($_POST['bookd_time'])  || isset($_POST['installation_price'])
-	|| isset($_POST['hairstyle_title']) || isset($_POST['hairstyle_src']) || isset($_POST['album'])) {
+if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bookd_date']) 
+	|| isset($_POST['bookd_time'])  || isset($_POST['installation_price'])|| isset($_POST['hairstyle_title']) 
+	|| isset($_POST['hairstyle_src']) || isset($_POST['album']) || isset($_POST['calculated_cost']) 
+	|| isset($_POST['num_of_days'])) {
 
 	if (! isset($_SESSION['user_id'])) {
 		$_SESSION['error'] = "You need to sign in to be able to book";
@@ -29,28 +31,38 @@ if (isset($_POST['bookd_date']) || isset($_POST['bookd_time'])  || isset($_POST[
 	//$timestamp = date("Y-m-d H:i:s");
 
 	// Preparing ajax post data for database
+	$start_date = htmlentities($_POST['start_date']);
+	$end_date = htmlentities($_POST['end_date']);
 	$booked_date = htmlentities($_POST['bookd_date']);
 	$booked_time = htmlentities($_POST['bookd_time']);
 	$installation_price = $_POST['installation_price'];
 	$title = $_POST['hairstyle_title'];
 	$source = $_POST['hairstyle_src'];
 	$album = $_POST['album'];
+	$calculated_cost = $_POST['calculated_cost'];
+	$num_of_days = $_POST['num_of_days'];
+	$status = "Pending";
 
 
-	$stmt = $pdo->prepare('INSERT INTO bookings_js(user_id, username, email, address, phone, album, booked_date, booked_time, installation_price, title, source )
+	$stmt = $pdo->prepare('INSERT INTO bookings_js(user_id, username, email, address, phone, album, start_date, end_date, booked_date, booked_time, installation_price, title, source, calculated_cost, num_of_days, status )
 
-							VALUES ( :uid, :un, :em, :ad, :ph, :al, :bd, :bt, :ip, :tl, :sr)');
+							VALUES ( :uid, :un, :em, :ad, :ph, :al, :sd, :ed, :bd, :bt, :ip, :tl, :sr, :cc, :nd, :st)');
 	$stmt->execute(array(':uid' => $user_id,
 						':un' => $username,
 						':em' => $email,
 						':ad' => $address,
 						':ph' => $phone,
 						':al' => $album,
+						':sd' => $start_date,
+						':ed' => $end_date,
 						':bd' => $booked_date,
 						':bt' => $booked_time,
 						':ip' => $installation_price,
 						':tl' => $title,
-						':sr' => $source));
+						':sr' => $source,
+						':cc' => $calculated_cost,
+						':nd' => $num_of_days,
+						':st' => $status));
 
 	//$_SESSION['b_success'] = "Congratulations, you have been booked";
 	//header("Location: dashboard.php");

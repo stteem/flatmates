@@ -28,8 +28,12 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/about.css">
 	<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="assets/js/jquery-ui-1.12.1/jquery-ui.min.css">
+	<link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
 	
+	<script src="assets/js/jquery-ui-1.12.1/external/jquery/jquery.js"> </script>
 	<script src="assets/js/jquery-3.3.1.min.js"></script>
+
 
 	
 	<script src="assets/js/handlebars-v3.0.3.js"></script>
@@ -37,8 +41,12 @@
 	<script src="assets/js/collections.js"> </script>
     <script src="assets/js/gallery.js"> </script>
     <script src="assets/js/idb.js" async> </script>
+    
     <!--<script src="assets/js/vue.js"> </script>-->
     
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+ 	 crossorigin="anonymous"></script>
+ 	<script src="assets/js/jquery-ui-1.12.1/jquery-ui.min.js" async> </script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://unpkg.com/i18next/i18next.min.js"></script>
 	<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
@@ -282,6 +290,7 @@
     </div> <!-- / col -->
 	    
   </div> <!-- / row -->
+
 </script>
 
 
@@ -305,7 +314,9 @@
 			  &nbsp;
 			  <li><b>Shared Rent:</b> &#8358;{{installation_price}}</li>
 			  &nbsp;
-			  <li><button class='btn-light accept' data-id="{{@index}}">Accept and Pay Now</button></li>
+			  <li><b>Payment Status:</b> {{status}}</li>
+			  &nbsp;
+			  <li><div class="acceptClass"><button class='btn-light accept' data-id="{{@index}}">Accept and Pay Now</button></div></li>
 			  &nbsp;
 			  <li><button class='decline btn-light' data-id="{{@index}}">Decline and Delete</button></li>
 			  &nbsp;
@@ -318,6 +329,9 @@
 		{{/each}}
 
 </script>
+
+
+
 
 
 <script id="about-template" type="text/x-handlebars-template">
@@ -356,12 +370,21 @@
 
 
 
-<div class="container">
+<div class="container ">
 <div id="booking_form" style="display: none;">
 <form id="dateTimeData" method="post" action="index.php">	
+	
+	<p>To Get Total Cost, Choose Start Date (Move in date) and End Date (Move out date).<br>
+		In order to arrive at your total sum, we divide rent per year by 365 days to get<br>
+		 rent per day, and multiply rent per day by number of days chosen by you.</p>
+	Start Date <br> <input type="text" id="date_picker1" name="start_date" class="form-control empty" placeholder="Calender" required><br>
+	End Date <br> <input type="text" id="date_picker2" name="end_date" class="form-control empty" placeholder="dd-mm-yy" required>
+	<div id="cost-info" class="empty"><p id='result'> Number of days and Total Cost will be displayed here.. </p></div>
+
 	<div id="warning"></div>
 	<div id="success"></div>
-	<p>Choose inspection date and time (Inspection hours are 08:00 to 18:00):</p>
+
+	<p>Choose Inspection Date and Time (Inspection hours are 08:00 to 18:00):</p>
 	<input type="date" id="bookd_date" class="form-control empty" class="is-invalid .is-valid"  name="bookd_date" value="" required />
 	<input type="time" id="bookd_time" class="form-control empty" class="is-invalid .is-valid"  name="bookd_time" value="" required />
 	
@@ -369,6 +392,8 @@
 	<input type="hidden" class="empty" id="hairstyle_title" name="hairstyle_title" value="" />
 	<input type="hidden" class="empty" id="hairstyle_src" name="hairstyle_src" value="" />
 	<input type="hidden" class="empty" id="album" name="album" value="" />
+	<input type="hidden" class="empty" id="calculated_cost" name="calculated_cost" value="" />
+	<input type="hidden" class="empty" id="num_of_days" name="num_of_days" value="" />
 	
 	<button id="product_button" type="submit" name="product_button" class="btn btn-light">Request Inspection</button>
 </form>
