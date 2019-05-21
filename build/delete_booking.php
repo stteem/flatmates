@@ -10,6 +10,7 @@ else {
 	$user_id = $_SESSION['user_id'];
 }
 
+	//$stmt = $pdo->query("DELETE FROM bookings_js WHERE user_id = '$user_id' AND booked_date < CURRENT_TIME");
 
 
 if (isset($_POST['id'])) {

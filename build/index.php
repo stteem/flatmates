@@ -10,7 +10,7 @@ $timezone = date_default_timezone_set("Africa/Accra");
 if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bookd_date']) 
 	|| isset($_POST['bookd_time'])  || isset($_POST['installation_price'])|| isset($_POST['hairstyle_title']) 
 	|| isset($_POST['hairstyle_src']) || isset($_POST['album']) || isset($_POST['calculated_cost']) 
-	|| isset($_POST['num_of_days'])) {
+	|| isset($_POST['hostPhone']) || isset($_POST['num_of_days'])) {
 
 	if (! isset($_SESSION['user_id'])) {
 		$_SESSION['error'] = "You need to sign in to be able to book";
@@ -38,15 +38,16 @@ if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bo
 	$installation_price = $_POST['installation_price'];
 	$title = $_POST['hairstyle_title'];
 	$source = $_POST['hairstyle_src'];
+	$hostPhone = $_POST['hostPhone'];
 	$album = $_POST['album'];
 	$calculated_cost = $_POST['calculated_cost'];
 	$num_of_days = $_POST['num_of_days'];
 	$status = "Pending";
 
 
-	$stmt = $pdo->prepare('INSERT INTO bookings_js(user_id, username, email, address, phone, album, start_date, end_date, booked_date, booked_time, installation_price, title, source, calculated_cost, num_of_days, status )
+	$stmt = $pdo->prepare('INSERT INTO bookings_js(user_id, username, email, address, phone, album, start_date, end_date, booked_date, booked_time, installation_price, title, source, hostPhone, calculated_cost, num_of_days, status )
 
-							VALUES ( :uid, :un, :em, :ad, :ph, :al, :sd, :ed, :bd, :bt, :ip, :tl, :sr, :cc, :nd, :st)');
+							VALUES ( :uid, :un, :em, :ad, :ph, :al, :sd, :ed, :bd, :bt, :ip, :tl, :sr, :hp, :cc, :nd, :st)');
 	$stmt->execute(array(':uid' => $user_id,
 						':un' => $username,
 						':em' => $email,
@@ -60,6 +61,7 @@ if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bo
 						':ip' => $installation_price,
 						':tl' => $title,
 						':sr' => $source,
+						':hp' => $hostPhone,
 						':cc' => $calculated_cost,
 						':nd' => $num_of_days,
 						':st' => $status));

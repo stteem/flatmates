@@ -18,7 +18,7 @@ var current_photo = current_album.photos[0];
 var current_object = [];
 
 
-var installation_price, hairstyle, hairstyle_src, title, album;
+var installation_price, hairstyle, hairstyle_src, title, album, hostPhone;
 
 
 // a helper function that instantiates a template
@@ -128,12 +128,15 @@ $(document).ready(function(){
 				hairstyle = current_photo.title;
 				hairstyle_src = current_photo.src;
 				installation_price = current_photo.price;
+				hostPhone = current_photo.hostPhone;
 				album = current_album.name;
+
 
 				var obj = {
 					hairstyle : current_photo.title,
 					hairstyle_src : current_photo.src,
 					installation_price : current_photo.price,
+					hostPhone : current_photo.hostPhone,
 					album : current_album.name
 				}
 				console.log('obj is ', obj)
@@ -157,12 +160,14 @@ $(document).ready(function(){
 				console.log("new title is :", hairstyle);
 				console.log("new source is :", hairstyle_src);
 				console.log("new installation_price is :", installation_price);
+				console.log("new hostPhone is :", hostPhone);
 				console.log("new album is :", album);
 
 				// Logging variables(without material variables) in dateTimeData hidden input forms
 				$('#hairstyle_title').val(hairstyle).text();
 				$('#hairstyle_src').val(hairstyle_src).text();
 				$('#installation_price').val(installation_price).text();
+				$('#hostPhone').val(hostPhone).text();
 				$('#album').val(album).text();
 
 			});
@@ -219,6 +224,7 @@ $(document).ready(function(){
 			hairstyle = current_photo.title;
 			hairstyle_src = current_photo.src;
 			installation_price = current_photo.price;
+			hostPhone = current_photo.hostPhone;
 			album = current_album.name;
 
 
@@ -226,6 +232,7 @@ $(document).ready(function(){
 		        hairstyle : current_photo.title,
 		        hairstyle_src : current_photo.src,
 		        installation_price : current_photo.price,
+		        hostPhone : current_photo.hostPhone,
 		        album : current_album.name
 		    }
 		      console.log('obj is ', obj)
@@ -248,6 +255,7 @@ $(document).ready(function(){
 
 			console.log("new title is :", hairstyle);
 			console.log("new source is :", hairstyle_src);
+			console.log("new hostPhone is :", hostPhone);
 			console.log("new installation_price is :", installation_price);
 			console.log("new album is :", album);
 
@@ -255,6 +263,7 @@ $(document).ready(function(){
 			$('#hairstyle_title').val(hairstyle).text();
 			$('#hairstyle_src').val(hairstyle_src).text();
 			$('#installation_price').val(installation_price).text();
+			$('#hostPhone').val(hostPhone).text();
 			$('#album').val(album).text();
 
 		});
@@ -686,7 +695,8 @@ $(document).ready(function(){
 				console.log('thisButton ', $(this).data('id'))
 				var findex = $(this).data('id');
 				if (data[findex].status == "Paid") {
-					$(this).css({'display' : 'none'});
+					//$(this).css({'display' : 'none'});
+					$(this).remove();
 				}
 			});
 			
@@ -805,6 +815,7 @@ $(document).ready(function(){
 
 
 	$('#dashboard').click(async function() {
+
 		await $("#booking_form").css({'display':'none'});	 
 
 		const response = await fetch('dashboard_session.php')
