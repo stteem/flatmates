@@ -668,7 +668,9 @@ $(document).ready(function(){
 					host_phone : row.hostPhone,
 					booked_date : row.booked_date,
 					booked_time : row.booked_time,
-					installation_price : row.installation_price,
+					installation_price : new Intl.NumberFormat().format(row.installation_price),
+					cost : new Intl.NumberFormat().format(row.calculated_cost),
+					days : row.num_of_days,
 					status : row.status
 				});
         	});
@@ -676,10 +678,8 @@ $(document).ready(function(){
         	console.log("Now Awaiting1: ", output.categories);
 			//$("#content").html(await template(output));
 			showTemplate(template, output);
-    	
 
-	    		
-	        
+			
 
 			//Handlebars helper function to dynamically generate Accept buttons
 			/*Handlebars.registerHelper('acceptButton', function() {
@@ -713,7 +713,7 @@ $(document).ready(function(){
 
 				console.log(data[index]);
 
-				console.log('Your card will be debited ',data[index].installation_price)
+				console.log('Your card will be debited ', new Intl.NumberFormat().format(data[index].calculated_cost))
 
 				var splitName = data[index].username;
 				var splitted = splitName.split(" ");
@@ -734,7 +734,7 @@ $(document).ready(function(){
 				      custom_description: "Make Payment",
 				      custom_logo: "",
 				      custom_title: "Flatmates Africa",
-				      amount: data[index].installation_price,
+				      amount: new Intl.NumberFormat().format(data[index].calculated_cost),
 				      customer_phone: data[index].phone,
 				      country: "NG",
 				      currency: "NGN",
