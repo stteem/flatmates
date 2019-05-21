@@ -664,6 +664,8 @@ $(document).ready(function(){
 					album : row.album,
 					source : row.source,
 					title : row.title,
+					address : row.address,
+					host_phone : row.hostPhone,
 					booked_date : row.booked_date,
 					booked_time : row.booked_time,
 					installation_price : row.installation_price,
