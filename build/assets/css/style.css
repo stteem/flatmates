@@ -396,7 +396,25 @@ h4 {
   border-color: #dae0e5;
 }
 
-
+.faxs {
+  margin-left: 10px; 
+  /*box-shadow: 1px 1px 9px #888888;*/
+  padding: 5px;
+}
+@media (min-width: 992px) {
+  .faxs {
+    margin-left: 40px;
+  }
+}
+.fax {
+  margin-bottom: 20px;
+}
+.colr {
+  color: #00bcd4;
+}
+.formati {
+  font-size: 0.9em;
+}
 
 #roomie {
   margin-top: 70px;

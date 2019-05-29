@@ -24,7 +24,6 @@
 }
 
 .list {
-  list-style-type: none;
   font-size: 0.7em;
   box-shadow: 1px 1px 9px #888888;
   padding-top: 30px;
@@ -39,7 +38,7 @@
 @media (min-width: 992px) {
   
   .dash_img {
-    width: 40%;
+    width: 100%;
   }
 
   .dashboard-buttons {
@@ -47,7 +46,8 @@
   }
 
   .list {
-    font-size: 1em;
+    font-size: 0.8em;
+    margin-bottom: 50px;
   }
 }
 

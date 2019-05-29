@@ -124,12 +124,23 @@ $(document).ready(function(){
 				showTemplate(photo_template, current_photo);
 
 				// Assign variables(without material variables) 
-				//to log into dateTimeData hidden input forms
+				//to log into dateTimeData hidden input forms for posting
 				hairstyle = current_photo.title;
 				hairstyle_src = current_photo.src;
 				installation_price = current_photo.price;
 				hostPhone = current_photo.hostPhone;
 				album = current_album.name;
+				var unisex = current_photo.unisex;
+				var bedroom = current_photo.bedroom;
+				var wifi = current_photo.wifi;
+				var gen = current_photo.gen;
+				var tv = current_photo.tv;
+				var service = current_photo.service;
+				var electricity = current_photo.electricity;
+				var kitchen = current_photo.kitchen;
+				var bath = current_photo.bath;
+				var toilet = current_photo.toilet;
+				var address = current_photo.address;
 
 
 				var obj = {
@@ -137,7 +148,18 @@ $(document).ready(function(){
 					hairstyle_src : current_photo.src,
 					installation_price : current_photo.price,
 					hostPhone : current_photo.hostPhone,
-					album : current_album.name
+					album : current_album.name,
+					unisex : current_photo.unisex,
+					bedroom : current_photo.bedroom,
+					wifi : current_photo.wifi,
+					gen : current_photo.gen,
+					tv : current_photo.tv,
+					service : current_photo.service,
+					electricity : current_photo.electricity,
+					kitchen : current_photo.kitchen,
+					bath : current_photo.bath,
+					toilet : current_photo.toilet,
+					address : current_photo.address
 				}
 				console.log('obj is ', obj)
 
@@ -165,10 +187,23 @@ $(document).ready(function(){
 
 				// Logging variables(without material variables) in dateTimeData hidden input forms
 				$('#hairstyle_title').val(hairstyle).text();
+				$('#address').val(address).text();
 				$('#hairstyle_src').val(hairstyle_src).text();
 				$('#installation_price').val(installation_price).text();
 				$('#hostPhone').val(hostPhone).text();
 				$('#album').val(album).text();
+				$('#unisex').val(unisex).text();
+				$('#service').val(service).text();
+				$('#bedroom').val(bedroom).text();
+				$('#wifi').val(wifi).text();
+				$('#tv').val(tv).text();
+				$('#electricity').val(electricity).text();
+				$('#kitchen').val(kitchen).text();
+				$('#bath').val(bath).text();
+				$('#toilet').val(toilet).text();
+				$('#gen').val(gen).text();
+
+
 
 			});
 
@@ -226,6 +261,17 @@ $(document).ready(function(){
 			installation_price = current_photo.price;
 			hostPhone = current_photo.hostPhone;
 			album = current_album.name;
+			var unisex = current_photo.unisex;
+			var bedroom = current_photo.bedroom;
+			var wifi = current_photo.wifi;
+			var gen = current_photo.gen;
+			var tv = current_photo.tv;
+			var service = current_photo.service;
+			var electricity = current_photo.electricity;
+			var kitchen = current_photo.kitchen;
+			var bath = current_photo.bath;
+			var toilet = current_photo.toilet;
+			var address = current_photo.address;
 
 
 			var obj = {
@@ -233,7 +279,18 @@ $(document).ready(function(){
 		        hairstyle_src : current_photo.src,
 		        installation_price : current_photo.price,
 		        hostPhone : current_photo.hostPhone,
-		        album : current_album.name
+		        album : current_album.name,
+		        unisex : current_photo.unisex,
+				bedroom : current_photo.bedroom,
+				wifi : current_photo.wifi,
+				gen : current_photo.gen,
+				tv : current_photo.tv,
+				service : current_photo.service,
+				electricity : current_photo.electricity,
+				kitchen : current_photo.kitchen,
+				bath : current_photo.bath,
+				toilet : current_photo.toilet,
+				address : current_photo.address
 		    }
 		      console.log('obj is ', obj)
 
@@ -261,10 +318,21 @@ $(document).ready(function(){
 
 			// Logging variables(without material variables) in dateTimeData hidden input forms
 			$('#hairstyle_title').val(hairstyle).text();
+			$('#address').val(address).text();
 			$('#hairstyle_src').val(hairstyle_src).text();
 			$('#installation_price').val(installation_price).text();
 			$('#hostPhone').val(hostPhone).text();
 			$('#album').val(album).text();
+			$('#unisex').val(unisex).text();
+			$('#service').val(service).text();
+			$('#bedroom').val(bedroom).text();
+			$('#wifi').val(wifi).text();
+			$('#tv').val(tv).text();
+			$('#electricity').val(electricity).text();
+			$('#kitchen').val(kitchen).text();
+			$('#bath').val(bath).text();
+			$('#toilet').val(toilet).text();
+			$('#gen').val(gen).text();
 
 		});
 
@@ -671,6 +739,16 @@ $(document).ready(function(){
 					installation_price : new Intl.NumberFormat().format(row.installation_price),
 					cost : new Intl.NumberFormat().format(row.calculated_cost),
 					days : row.num_of_days,
+					unisex : row.unisex,
+					bedroom : row.bedroom,
+					wifi : row.wifi,
+					gen : row.gen,
+					tv : row.tv,
+					service : row.service,
+					electricity : row.electricity,
+					kitchen : row.kitchen,
+					bath : row.bath,
+					toilet : row.toilet,
 					status : row.status
 				});
         	});
@@ -700,112 +778,7 @@ $(document).ready(function(){
 					//$(this).css({'display' : 'none'});
 					$(this).remove();
 				}
-			});
-			
-
-
-
-			$('body').on('click', '.accept', function() {
-				console.log('accept button clicked');
-		
-				var index = $(this).data('id');
-				console.log('index ', index)
-
-				console.log(data[index]);
-
-				console.log('Your card will be debited ', new Intl.NumberFormat().format(data[index].calculated_cost))
-
-				var splitName = data[index].username;
-				var splitted = splitName.split(" ");
-				console.log(splitted[0])
-
-				var tRef = 'FM' + data[index].booking_id + 'A';
-
-
-				/*document.addEventListener("DOMContentLoaded", function(event) {
-				  document.getElementById("submit").addEventListener("click", function(e) {*/
-			    var PBFKey = "FLWPUBK-65d3a83eb4c97e048016e53bb6d4a5aa-X";
-				    
-				getpaidSetup({
-				      PBFPubKey: PBFKey,
-				      customer_email: data[index].email,
-				      customer_firstname: splitted[0],
-				      customer_lastname: splitted[1],
-				      custom_description: "Make Payment",
-				      custom_logo: "",
-				      custom_title: "Flatmates Africa",
-				      amount: new Intl.NumberFormat().format(data[index].calculated_cost),
-				      customer_phone: data[index].phone,
-				      country: "NG",
-				      currency: "NGN",
-				      txref: tRef,
-				      integrity_hash: "",
-				      onclose: function() {},
-				      callback: function(response) {
-				        var flw_ref = response.tx.flwRef; // collect flwRef returned and pass to a server page to complete status check.
-				        console.log("This is the response returned after a charge", response);
-				        if (
-				          response.tx.chargeResponseCode == "00" ||
-				          response.tx.chargeResponseCode == "0"
-				        ) {
-				          //redirect to a success page
-				      		var acceptClass = $('.accept');
-				      		console.log('acceptClass', acceptClass[index])
-				      		acceptClass[index].remove();
-				      		console.log("successfull!")
-				        } else {
-				          // redirect to a failure page.
-				          	console.log("Failed!")
-				        }
-
-				        //x.close();
-				      }
-				    });
-				  //});
-				//});
-
-				
-			});
-
-			$('body').on('click', '.decline', async function() {
-				console.log('decline button clicked');
-
-				var index = $(this).data('id');
-
-				var confam = confirm('Are you sure you want to decline and delete this item?');
-
-				if (confam == true) {
-					
-					console.log('index ', index)
-
-					var values = [];
-
-					if (values.length > 0) {
-						values.length = 0;
-					}
-					
-					values.push({ name: 'id', value: data[index].booking_id });   
-
-					var post = $.post("delete_booking.php", values);
-
-					post.fail(function() {
-						var error = 'Failed to post, check internet connection and try again';
-						$('#warning').html(error);
-					});
-					
-					//Callback function to display ajax post request on DOM without page reload
-					post.done(function() {
-						//Calling dashboard click event to update list
-						$('#dashboard').click();
-
-						console.log('Deleted')
-
-					});
-				} 
-				else {
-					console.log("Canceled!");
-				}
-			});
+			});		
 	    })
 	    .catch((error) => {	    				    					    				    			    			    			    	
 	    	//console.log('this is array length ', response.length);
@@ -843,10 +816,150 @@ $(document).ready(function(){
 
 			generateLoginButton();
 			
-		}
-		
+		}	
 	});
 
+
+	$('body').on('click', '.accept', function() {
+		console.log('accept button clicked');
+
+		var index = $(this).data('id');
+		console.log('index ', index)
+
+		fetch('json_data.php')
+    	.then(validateResponse)
+		.then(readResponseAsJSON)
+		.then(data => {
+
+			console.log(data[index]);
+
+			console.log('Your card will be debited ', new Intl.NumberFormat().format(data[index].calculated_cost))
+
+			var splitName = data[index].username;
+			var splitted = splitName.split(" ");
+			console.log(splitted[0])
+
+			var tRef = 'FM' + data[index].booking_id + 'A';
+
+
+			/*document.addEventListener("DOMContentLoaded", function(event) {
+			  document.getElementById("submit").addEventListener("click", function(e) {*/
+		    var PBFKey = "FLWPUBK-65d3a83eb4c97e048016e53bb6d4a5aa-X";
+			    
+			getpaidSetup({
+				PBFPubKey: PBFKey,
+				customer_email: data[index].email,
+				customer_firstname: splitted[0],
+				customer_lastname: splitted[1],
+				custom_description: "Make Payment",
+				custom_logo: "",
+				custom_title: "Flatmates Africa",
+				amount: data[index].calculated_cost,
+				customer_phone: data[index].phone,
+				country: "NG",
+				currency: "NGN",
+				txref: tRef,
+				integrity_hash: "",
+				onclose: function() {},
+				callback: function(response) {
+					var flw_ref = response.tx.flwRef; // collect flwRef returned and pass to a server page to complete status check.
+					console.log("This is the response returned after a charge", response);
+					if (response.tx.chargeResponseCode == "00" || response.tx.chargeResponseCode == "0") {
+					  //redirect to a success page
+
+					  	/*var data = {
+					  		booking_id : data[index].booking_id,
+					  		status : 'Paid'
+					  	}*/
+						//console.log("data is life ",data);
+
+						var post = $.post("payment_status.php", {booking_id : data[index].booking_id, status : 'Paid'});
+
+						post.done(function() {
+
+							console.log("Data posted");
+							/*var acceptClass = $('.accept');
+							console.log('acceptClass', acceptClass[index])
+							acceptClass[index].remove();
+							console.log("successfull!")*/
+							$('#dashboard').click();
+						});
+
+						post.fail(function() {
+							console.log("sorry it failed");
+						})
+					
+						/*fetch('payment_status.php', {				  
+						  method: 'POST',
+						  body: JSON.stringify({ booking_id: data[index].booking_id, status: 'Paid' })
+						})
+						.then(validateResponse)
+						.then(function() {
+							var acceptClass = $('.accept');
+							console.log('acceptClass', acceptClass[index])
+							acceptClass[index].remove();
+							console.log("successfull!")
+						})*/		
+					} else {
+					  // redirect to a failure page.
+					  	console.log("sorry Failed!")
+					}
+				//x.close();
+				}
+		    });	
+		})	
+	});
+
+
+
+	$('body').on('click', '.decline', async function() {
+		console.log('decline button clicked');
+
+
+
+		var index = $(this).data('id');
+
+		var confam = confirm('Are you sure you want to decline and delete this item?');
+
+		if (confam == true) {
+
+			fetch('json_data.php')
+	    	.then(validateResponse)
+			.then(readResponseAsJSON)
+			.then(data => {
+				
+				console.log('index ', index)
+
+				var values = [];
+
+				if (values.length > 0) {
+					values.length = 0;
+				}
+				
+				values.push({ name: 'id', value: data[index].booking_id });   
+
+				var post = $.post("delete_booking.php", values);
+
+				post.fail(function() {
+					var error = 'Failed to post, check internet connection and try again';
+					$('#warning').html(error);
+				});
+				
+				//Callback function to display ajax post request on DOM without page reload
+				post.done(function() {
+					//Calling dashboard click event to update list
+					$('#dashboard').click();
+					//$(this).remove();
+
+					console.log('Deleted')
+
+				});
+			})	
+		} 
+		else {
+			console.log("Canceled!");
+		}
+	});
 	
 
 	//Function for About tab	

@@ -15,7 +15,7 @@
 	<meta charset="UTF-8" >
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="Flatmates" content="The urban upwardly mobile working class, and students of tertiary institutions in Nigeria go to Flatmates to share accomodation rent. Do you want to make extra money? Rent out 1 bedroom of your flat, or share your off campus room with fellow students.">
+	<meta name="Flatmates" content="The urban upwardly mobile working class, and students of tertiary institutions in Nigeria go to Flatmates to share accomodation rent. Do you want to make extra money? Rent out 1 bedroom of your 2 bedroom flat, or share your off campus room with fellow students.">
 	<title>Apartment Sharing Platform</title>
 
 	<!-- CSS -->
@@ -143,10 +143,11 @@
 <script id="albums-template" type="text/x-handlebars-template">
 	
 	<h5 class="recommended">Recommended Cities Where People Are Sharing Apartments</h5>
-  <div class="row">
 
-    {{#each albums}}
-    <div class="col-xs-2 col-md-3"> 
+  <div class="row">
+  	{{#each albums}}
+    
+    <div class="col-6 col-md-3"> 
         <div class="photo-border album-thumbnail"  data-id="{{@index}}">
           <a href="#"><img class="crop-img" src="{{thumbnail}}" alt="Top recommended apartments in major cities"/> </a>
             
@@ -160,6 +161,8 @@
     {{/each}}
 
   </div> <!-- / row -->
+
+  
 
   <br>
   <hr class="my-4">
@@ -259,8 +262,8 @@
         <img class="crop-img thumb-photo" src="{{src}}" alt=""/> 
           
          <div class="caption">
-            <h5>{{title}}</h5>
-            <p>&#8358;{{price}} {{description}}</p>
+            <h6>{{title}}</h6>
+            <p class='formati'>&#8358;{{price}} {{description}}</p>
             
          </div>
       </div>
@@ -280,14 +283,43 @@
     <div class="col-xs-12 col-md-6 phot">
     	
         <img class="large-img" src="{{src}}" alt=""/> 
+
+        
+        <div class="row no-gutters">
+    	{{#if thumbnail_pics}}
+    		{{#each thumbnail_pics}}
+        	
+	        <div class="col-sm col-md-3" >
+	        	<img class="crop-img" src="{{src1}}" alt=""/>
+	        </div>
+	        {{/each}}
+        {{/if}}
+	        
+        </div>
+        
           
         <div class="caption">
-            <h3>{{title}}</h3>
-            <p class='formati'>&#8358;{{price}} {{description}}</p> 
+            <h6>{{title}}</h6>
+            <p class='formati'>&#8358; {{price}} {{description}}</p> 
             
         </div>
 
     </div> <!-- / col -->
+
+    <div class="row">
+    <div class="col-12 faxs">
+    	<div class="fax"><i class="colr fas fa-restroom"></i>  Unisex: {{unisex}} </div>
+    	<div class="fax"><i class="colr fas fa-concierge-bell"></i>  Serviced: {{service}} </div>
+    	<div class="fax"><i class="colr fas fa-bed"></i>  Bedroom: {{bedroom}} </div>
+    	<div class="fax"><i class="colr fas fa-blender"></i>  Kitchen: {{kitchen}} </div>
+    	<div class="fax"><i class="colr fas fa-bolt"></i>  Electricity: {{electricity}}</div>
+    	<div class="fax"><i class="colr fas fa-plug"></i>  Standby Power Generator: {{gen}}</div>
+    	<div class="fax"><i class="colr fas fa-wifi"></i>  WiFi: {{wifi}} </div>
+    	<div class="fax"><i class="colr fas fa-tv"></i>  Cable Tv: {{tv}} </div>    	
+    	<div class="fax"><i class="colr fas fa-shower"></i>  Bath: {{bath}} </div>
+    	<div class="fax"><i class="colr fas fa-toilet"></i>  Toilet: {{toilet}} </div>
+    </div>
+	</div>
 	    
   </div> <!-- / row -->
 
@@ -298,41 +330,55 @@
 <script id="bookings-template" type="text/x-handlebars-template">
 	
 	<p><b>Dashboard</b></p>
+	<div class="row">
 		{{#each categories}}
-		<div class="col-xs-12 col-md-8"> 
+		<div class="col-sm col-md-8 list"> 
+			<div class="row">	
+				<div class="col-sm">
+				  <p><img class="dash_img" src="{{source}}" alt=""/></p>
+				  
+				  <p><b>Location:</b> {{album}}</p>
+				  
+				  <p><b>Title:</b> {{title}}</p>
+				  
+				  <p><b>Address:</b> {{address}}</p>
+				  
+				  <p><b>Host Phone:</b><a class="social" href="tel:{{host_phone}}"> {{host_phone}}</a></p>
+				  
+				  <p><b>Inpection Date:</b> {{booked_date}}</p>
+				 
+				  <p><b>Inspection Time:</b> {{booked_time}}</p>
+				  
+				  <p><b>Shared Rent:</b> &#8358;{{installation_price}}</p>
+				  
+				  <p><b>Your Payment:</b> &#8358;{{cost}} for {{days}} days</p>
+				  
+				  <p><b>Payment Status:</b> {{status}}</p>  
+				</div>	
 			
-			<ul class="list">
-			  <li><img class="dash_img" src="{{source}}" alt=""/></li>
-			  &nbsp;
-			  <li><b>Location:</b> {{album}}</li>
-			  &nbsp;
-			  <li><b>Title:</b> {{title}}</li>
-			  &nbsp;
-			  <li><b>Address:</b> {{address}}</li>
-			  &nbsp;
-			  <li><b>Host Phone:</b> {{host_phone}}</li>
-			  &nbsp;
-			  <li><b>Inpection Date:</b> {{booked_date}}</li>
-			  &nbsp;
-			  <li><b>Inspection Time:</b> {{booked_time}}</li>
-			  &nbsp;
-			  <li><b>Shared Rent:</b> &#8358;{{installation_price}}</li>
-			  &nbsp;
-			  <li><b>Your Payment:</b> &#8358;{{cost}} for {{days}} days</li>
-			  &nbsp;
-			  <li><b>Payment Status:</b> {{status}}</li>
-			  &nbsp;
-			  <li><div class="acceptClass"><button class='btn-light accept' data-id="{{@index}}">Accept and Pay Now</button></div></li>
-			  &nbsp;
-			  <li><button class='decline btn-light' data-id="{{@index}}">Decline and Delete</button></li>
-			  &nbsp;
-			</ul>
-			
+				<div class="col-sm">
+					<p><i class="colr fas fa-restroom"></i>  Unisex: {{unisex}} </p>
+			    	<p><i class="colr fas fa-concierge-bell"></i>  Serviced: {{service}} </p>
+			    	<p><i class="colr fas fa-bed"></i>  Bedroom: {{bedroom}} </p>
+			    	<p><i class="colr fas fa-blender"></i>  Kitchen: {{kitchen}} </p>
+			    	<p><i class="colr fas fa-bolt"></i>  Electricity: {{electricity}}</p>
+			    	<p><i class="colr fas fa-plug"></i>  Standby Power Generator: {{gen}}</p>
+			    	<p><i class="colr fas fa-wifi"></i>  WiFi: {{wifi}} </p>
+			    	<p><i class="colr fas fa-tv"></i>  Cable Tv: {{tv}} </p>    	
+			    	<p><i class="colr fas fa-shower"></i>  Bath: {{bath}} </p>
+			    	<p><i class="colr fas fa-toilet"></i>  Toilet: {{toilet}} </p>
+				</div>
+			</div> <!--second row -->
+				<div class="acceptClass"><button class='btn-light accept' data-id="{{@index}}">Accept and Pay Now</button></div>
+				&nbsp;
+				<div><button class='decline btn-light' data-id="{{@index}}">Decline and Delete</button></div>
+				&nbsp;
 		</div>
 		&nbsp;
 		<hr>
 		&nbsp;
 		{{/each}}
+	</div>
 
 </script>
 
@@ -396,12 +442,24 @@
 	
 	<input type="hidden" class="empty" id="installation_price" name="installation_price" value="" />
 	<input type="hidden" class="empty" id="hairstyle_title" name="hairstyle_title" value="" />
+	<input type="hidden" class="empty" id="address" name="address" value="" />
 	<input type="hidden" class="empty" id="hairstyle_src" name="hairstyle_src" value="" />
 	<input type="hidden" class="empty" id="hostPhone" name="hostPhone" value="" />
 	<input type="hidden" class="empty" id="album" name="album" value="" />
 	<input type="hidden" class="empty" id="calculated_cost" name="calculated_cost" value="" />
 	<input type="hidden" class="empty" id="num_of_days" name="num_of_days" value="" />
-	
+
+	<input type="hidden" class="empty" id="unisex" name="unisex" value="" />
+	<input type="hidden" class="empty" id="bedroom" name="bedroom" value="" />
+	<input type="hidden" class="empty" id="kitchen" name="kitchen" value="" />
+	<input type="hidden" class="empty" id="tv" name="tv" value="" />
+	<input type="hidden" class="empty" id="wifi" name="wifi" value="" />
+	<input type="hidden" class="empty" id="electricity" name="electricity" value="" />
+	<input type="hidden" class="empty" id="gen" name="gen" value="" />
+	<input type="hidden" class="empty" id="bath" name="bath" value="" />
+	<input type="hidden" class="empty" id="service" name="service" value="" />
+	<input type="hidden" class="empty" id="toilet" name="toilet" value="" />
+
 	<button id="product_button" type="submit" name="product_button" class="btn btn-light">Request Inspection</button>
 </form>
 </div>
