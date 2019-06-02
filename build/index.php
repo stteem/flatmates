@@ -7,7 +7,7 @@ $timezone = date_default_timezone_set("Africa/Lagos");
 
 
 
-if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bookd_date']) 
+if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bookd_date']) || isset($_POST['inspection_date'])
 	|| isset($_POST['bookd_time'])  || isset($_POST['installation_price'])|| isset($_POST['hairstyle_title']) 
 	|| isset($_POST['hairstyle_src']) || isset($_POST['album']) || isset($_POST['calculated_cost']) 
 	|| isset($_POST['hostPhone']) || isset($_POST['num_of_days']) || isset($_POST['unisex']) || isset($_POST['bedroom']) 
@@ -37,6 +37,7 @@ if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bo
 	$start_date = htmlentities($_POST['start_date']);
 	$end_date = htmlentities($_POST['end_date']);
 	$booked_date = htmlentities($_POST['bookd_date']);
+	$inspection_date = htmlentities($_POST['inspection_date']);
 	$booked_time = htmlentities($_POST['bookd_time']);
 	$installation_price = $_POST['installation_price'];
 	$title = $_POST['hairstyle_title'];
@@ -59,10 +60,10 @@ if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bo
 	$status = "Pending";
 
 
-	$stmt = $pdo->prepare('INSERT INTO bookings_js(user_id, username, email, address, phone, album, start_date, end_date, booked_date, booked_time, installation_price, title, source, hostPhone, calculated_cost, num_of_days, unisex, bedroom, kitchen, electricity,
+	$stmt = $pdo->prepare('INSERT INTO bookings_js(user_id, username, email, address, phone, album, start_date, end_date, booked_date, inspection_date, booked_time, installation_price, title, source, hostPhone, calculated_cost, num_of_days, unisex, bedroom, kitchen, electricity,
 		gen, tv, wifi, service, bath, toilet, status )
 
-							VALUES ( :uid, :un, :em, :ad, :ph, :al, :sd, :ed, :bd, :bt, :ip, :tl, :sr, :hp, :cc, :nd, :us, :br, :kt, :el,
+							VALUES ( :uid, :un, :em, :ad, :ph, :al, :sd, :ed, :bd, :ind, :bt, :ip, :tl, :sr, :hp, :cc, :nd, :us, :br, :kt, :el,
 									:gn, :tv, :wf, :sv, :bh, :to, :st)');
 	$stmt->execute(array(':uid' => $user_id,
 						':un' => $username,
@@ -73,6 +74,7 @@ if (isset($_POST['start_date']) || isset($_POST['end_date']) || isset($_POST['bo
 						':sd' => $start_date,
 						':ed' => $end_date,
 						':bd' => $booked_date,
+						':ind' => $inspection_date,
 						':bt' => $booked_time,
 						':ip' => $installation_price,
 						':tl' => $title,

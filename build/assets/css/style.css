@@ -217,13 +217,6 @@ h4 {
 
 #logo {
   width: 10%;
-  color: #484848;
-}
-@media(min-width: 900px) {
-  #logo {
-    width: 20%;
-    color: #484848;
-  }
 }
 /*span {
   font-size: 0.6em;
@@ -401,14 +394,18 @@ h4 {
   /*box-shadow: 1px 1px 9px #888888;*/
   padding: 5px;
 }
+.fax {
+  margin-bottom: 20px;
+}
 @media (min-width: 992px) {
   .faxs {
     margin-left: 40px;
   }
+  .fax {
+    font-size: 0.8em;
+  }
 }
-.fax {
-  margin-bottom: 20px;
-}
+
 .colr {
   color: #00bcd4;
 }

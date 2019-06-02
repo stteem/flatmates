@@ -428,12 +428,12 @@ $(document).ready(function(){
 
 	//This function returns the number of days when the start date and end date calenders are selected
 	function datePickerDifference() {
-		var t1 = $('#date_picker1').val();
+		var t1 = $('#date_picker1_alternate_date').val();
 		t1 = t1.split('-');
 		dt_t1 = new Date(t1[2], t1[1]-1, t1[0]); // YYYY,mm,dd format to create date object
 		dt_t1_tm = dt_t1.getTime(); // time in milliseconds for day 1
 		//alert(dt_t1_tm);
-		var t2 = $('#date_picker2').val();
+		var t2 = $('#date_picker2_alternate_date').val();
 		t2 = t2.split('-');
 		dt_t2 = new Date(t2[2], t2[1]-1, t2[0]); // YYYY,mm,dd format to create date object
 		dt_t2_tm = dt_t2.getTime(); // time in milliseconds for day 2
@@ -445,6 +445,7 @@ $(document).ready(function(){
 		let calculated_cost = rent_per_day * diff_days;
 		let formated_sum = new Intl.NumberFormat().format(calculated_cost);
 		var nairaSymbol = decodeURI("&#8358;");
+
 
 		if (diff_days > 1) {
 			$("#result").html(diff_days + " Days " + "Cost " + nairaSymbol + formated_sum);
@@ -470,19 +471,45 @@ $(document).ready(function(){
 	var startDate;
 	var endDate;
 	 $("#date_picker1").datepicker({
-	dateFormat: 'dd-mm-yy',
-	minDate: '0'
+		dateFormat: 'DD, d MM, yy',
+		minDate: '0',
+		altField: "#date_picker1_alternate_date",
+     	altFormat: 'dd-mm-yy'
 	});
 	///////
 	///////
 	 $( "#date_picker2" ).datepicker({
-	dateFormat: 'dd-mm-yy',
-	minDate: '0'
+		dateFormat: 'DD, d MM, yy',
+		minDate: '0',
+	 	altField: "#date_picker2_alternate_date",
+     	altFormat: 'dd-mm-yy'
 	});
+
+	 $("#bookd_date").datepicker({
+	 	dateFormat : "DD, d MM, yy",
+	 	minDate : '0',
+	 	maxDate : 'startDate',
+	 	altField: "#alternate_inspection_date",
+     	altFormat: 'yy-mm-dd'
+	 });
+
+	 $('#bookd_date').change(function() {
+
+	 	let alternate_date = $('#alternate_inspection_date').val();
+	 	console.log('alt date ', alternate_date);
+
+		/*if (!$("#date_picker1").val()) {
+			var error = 'Choose your Start Date first';
+			$('#warning').html(error);
+			return false;
+		}*/
+	});
+
 	///////
 	$('#date_picker1').change(function() {
 	startDate = $(this).datepicker('getDate');
 	$("#date_picker2").datepicker("option", "minDate", startDate );
+	$("#bookd_date").datepicker("option", "maxDate", startDate );
 		////////////////
 		if ($("#date_picker2").val()) {
 			datePickerDifference();
@@ -494,11 +521,47 @@ $(document).ready(function(){
 		endDate = $(this).datepicker('getDate');
 		$("#date_picker1").datepicker("option", "maxDate", endDate );
 		////////////////
-		datePickerDifference();
-
+		if ($('#date_picker1_alternate_date').val()) {
+			datePickerDifference();
+		}
 	});
 
-////////////////
+	/*$('#bookd_time').change(function() {
+		var time = new Date();
+		var maxTime = time.setHours(17);
+		if ($(this).val() > maxTime) {
+			var timeError = "Inspection hours are between 8AM and 6PM";
+			$('#warning').html(timeError);
+			return false;
+		}
+	});*/
+
+	/*const input = document.getElementById('bookd_time');
+	const log = document.getElementById('warning');
+	var maxi = document.getElementById("bookd_time").max;
+
+	input.addEventListener('change', updateValue);
+
+	function updateValue(input) {
+		console.log('maxi ', maxi)
+		if (input.value > maxi) {
+			log.textContent = "Inspection hours are between 8AM and 6PM";
+			//return false;
+		}
+	}*/
+
+	/*var maxi = document.getElementById("bookd_time").max;
+	input.addEventListener("input", function() {
+		console.log('maxi ', maxi)
+		if (input.value > maxi) {
+			log.innerText = "Inspection hours are between 8AM and 6PM";
+			return false;
+		}
+	  
+	});*/
+
+
+	////////////////
 		
 
 
@@ -522,6 +585,9 @@ $(document).ready(function(){
 
 	//Disable past dates
 	$('#bookd_date').attr('min', minDate());
+	//$('#bookd_date').attr('max', startDate);
+
+
 
 	function minTime() {
 		var today = new Date();
@@ -633,10 +699,24 @@ $(document).ready(function(){
 
 		var bookd_date = $('#bookd_date').val();
 		var bookd_time = $('#bookd_time').val();
+		//var start_date = $('#date_picker2').val();
+		//var end_date = $('#date_picker1').val();
 		var flash;
+
+		if (startDate == null || startDate == "" || endDate == null || endDate == "") {
+			var error = "Start date and end date must be chosen";
+			flash = $('#warning').html(error);
+
+			setTimeout(function() {
+				flash.empty();
+				console.log("emptied error message")
+			}, 3000);
+
+			return false;
+		}
 		
 		if (bookd_date == null || bookd_date == "" || bookd_time == null || bookd_time == "") {
-			var error = "Date and time must be chosen";
+			var error = "Inspection date and time must be chosen";
 			
 			flash = $("#warning").html(error);
 
@@ -650,7 +730,7 @@ $(document).ready(function(){
 			return false;
 		}
 
-		if (bookd_date < minDate()) {
+		/*if (bookd_date < minDate()) {
 			var error = 'Date must be today or ahead of today';
 			$("#warning").css({"display": "initial", "color" : "red"});
 			flash = $('#warning').html(error);
@@ -661,7 +741,7 @@ $(document).ready(function(){
 			}, 3000);
 
 			return false;
-		}
+		}*/
 
 		if (bookd_date == minDate() && bookd_time < minTime()) {
 			var error = 'Time must be ahead of current time';
@@ -676,6 +756,42 @@ $(document).ready(function(){
 			return false;
 		}
 
+		if (bookd_date > startDate) {
+			var error = "Your inspection date must be ahead of your start/arrival date or the same day";
+
+			flash = $("#warning").html(error);
+
+			setTimeout(function() {
+				flash.empty();
+				console.log("emptied error message")
+			}, 3000);
+
+			
+			//alert('date and time must be chosen');
+			return false;
+		}
+
+		const input = $('#bookd_time').val();
+		//const log = document.getElementById('warning');
+		//var maxi = document.getElementById("bookd_time").max;
+		//var mini = document.getElementById("bookd_time").min;
+		var maxi = $( "#bookd_time" ).attr( "max" );
+		var mini = $( "#bookd_time" ).attr( "min" );
+		
+		console.log('maxi ', maxi)
+		if (input > maxi || input < mini) {
+			var error = "Inspection hours must be between 8AM and 6PM";
+			flash = $("#warning").html(error);
+
+			setTimeout(function() {
+				flash.empty();
+				console.log("emptied error message")
+			}, 3000);
+
+			return false;
+		}
+	
+
 		checkSessionBeforePosting();
 
 		checkLengthBeforePosting('json_data.php');
@@ -684,14 +800,6 @@ $(document).ready(function(){
 
 	// Calling clear input function to clear form of data sent to the PHP backend
 	clearInput();
-
-
-
-	function formatNumber() {
-	 	var c = $('.formati');
-		return new Intl.NumberFormat().format(c);   
-	};
-	formatNumber();
 	
 
     //fetches bookings in dashboard
@@ -734,6 +842,8 @@ $(document).ready(function(){
 					title : row.title,
 					address : row.address,
 					host_phone : row.hostPhone,
+					start_date : row.start_date,
+					end_date : row.end_date,
 					booked_date : row.booked_date,
 					booked_time : row.booked_time,
 					installation_price : new Intl.NumberFormat().format(row.installation_price),
@@ -791,7 +901,9 @@ $(document).ready(function(){
 
 	$('#dashboard').click(async function() {
 
-		await $("#booking_form").css({'display':'none'});	 
+		await $("#booking_form").css({'display':'none'});
+			 //$("#bookd_date").empty();
+			 //$("#bookd_time").empty();
 
 		const response = await fetch('dashboard_session.php')
 		let data = await response.json();

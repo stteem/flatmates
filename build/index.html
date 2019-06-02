@@ -344,6 +344,10 @@
 				  <p><b>Address:</b> {{address}}</p>
 				  
 				  <p><b>Host Phone:</b><a class="social" href="tel:{{host_phone}}"> {{host_phone}}</a></p>
+
+				  <p><b>Start Date:</b> {{start_date}}</p>
+
+				  <p><b>End Date:</b> {{end_date}}</p>
 				  
 				  <p><b>Inpection Date:</b> {{booked_date}}</p>
 				 
@@ -429,16 +433,19 @@
 	<p>To Get Total Cost, Choose Start Date (Move in date) and End Date (Move out date).<br>
 		In order to arrive at your total sum, we divide rent per year by 365 days to get<br>
 		 rent per day, and multiply rent per day by number of days chosen by you.</p>
-	Start Date <br> <input type="text" id="date_picker1" name="start_date" class="form-control empty" placeholder="Calender" required><br>
+	Start Date <br> <input type="text" id="date_picker1" name="start_date" class="form-control empty" placeholder='dd-mm-yy' required><br>
+					<input type="text" class="empty" hidden id="date_picker1_alternate_date" size="30">
 	End Date <br> <input type="text" id="date_picker2" name="end_date" class="form-control empty" placeholder="dd-mm-yy" required>
+					<input type="text" class="empty" hidden id="date_picker2_alternate_date" size="30">
 	<div id="cost-info" class="empty"><p id='result'> Number of days and Total Cost will be displayed here.. </p></div>
 
 	<div id="warning"></div>
 	<div id="success"></div>
 
-	<p>Choose Inspection Date and Time (Inspection hours are 08:00 to 18:00):</p>
-	<input type="date" id="bookd_date" class="form-control empty" class="is-invalid .is-valid"  name="bookd_date" value="" required />
-	<input type="time" id="bookd_time" class="form-control empty" class="is-invalid .is-valid"  name="bookd_time" value="" required />
+	<p>Choose Inspection Date and Time (Inspection hours are 8am to 6pm):</p>
+	<input type="text" id="bookd_date" class="form-control empty" class="is-invalid .is-valid"  name="bookd_date" value="" required />
+	<input type="text" class="empty" hidden id="alternate_inspection_date" name="inspection_date" size="30">
+	<input type="time" id="bookd_time" class="form-control empty" class="is-invalid .is-valid"  name="bookd_time"  min="8:00" max="6:00" value="" required />
 	
 	<input type="hidden" class="empty" id="installation_price" name="installation_price" value="" />
 	<input type="hidden" class="empty" id="hairstyle_title" name="hairstyle_title" value="" />
@@ -459,7 +466,8 @@
 	<input type="hidden" class="empty" id="bath" name="bath" value="" />
 	<input type="hidden" class="empty" id="service" name="service" value="" />
 	<input type="hidden" class="empty" id="toilet" name="toilet" value="" />
-
+	<p><b>Note</b>: To request inspection, you will be charged an authentication fee of &#8358;1000,<br>
+	 only then will you be able to see house address and host's phone number in your dashboard.</p>
 	<button id="product_button" type="submit" name="product_button" class="btn btn-light">Request Inspection</button>
 </form>
 </div>
