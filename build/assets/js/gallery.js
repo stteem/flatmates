@@ -779,8 +779,9 @@ $(document).ready(function(){
 		var mini = $( "#bookd_time" ).attr( "min" );
 		
 		console.log('maxi ', maxi)
+		console.log('input ', input)
 		if (input > maxi || input < mini) {
-			var error = "Inspection hours must be between 8AM and 6PM";
+			var error = "Inspection hours must be between 8am and 6pm";
 			flash = $("#warning").html(error);
 
 			setTimeout(function() {
