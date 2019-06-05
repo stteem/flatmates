@@ -1,5 +1,5 @@
 	
-#about, #about2, #about3 {
+#about {
 	width: 95%;
 	line-height: 1.5em;
 	margin-top: 1%;
@@ -14,22 +14,6 @@
 		margin-left: 0%;
 		line-height: 1.5em;
 		
-	}
-
-	#about2 {
-		width: 46%;
-		display: inline-block;
-		margin-left: 0%;
-		margin-top: 21px;
-		line-height: 1.5em;
-		
-	}
-
-	#about3 {
-		line-height: 1.5em;
-		width: 63%;
-		margin-left: 20%;
-	
 	}
 }
 
