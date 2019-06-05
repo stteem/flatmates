@@ -771,23 +771,23 @@ $(document).ready(function(){
 			return false;
 		}
 
-		const input = $('#bookd_time').val();
-		//const log = document.getElementById('warning');
+		
+		
 		//var maxi = document.getElementById("bookd_time").max;
 		//var mini = document.getElementById("bookd_time").min;
 		var maxi = $( "#bookd_time" ).attr( "max" );
 		var mini = $( "#bookd_time" ).attr( "min" );
 		
 		console.log('maxi ', maxi)
-		console.log('input ', input)
-		if (input > maxi || input < mini) {
+		console.log('input ', bookd_time)
+		if (bookd_time > maxi || bookd_time < mini) {
 			var error = "Inspection hours must be between 8am and 6pm";
 			flash = $("#warning").html(error);
 
 			setTimeout(function() {
 				flash.empty();
 				console.log("emptied error message")
-			}, 3000);
+			}, 4000);
 
 			return false;
 		}
