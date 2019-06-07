@@ -357,10 +357,12 @@
 				  
 				  <p><b>Your Payment:</b> &#8358;{{cost}} for {{days}} days</p>
 				  
-				  <p><b>Payment Status:</b> {{status}}</p>  
+				  <p><b>Payment Status:</b> {{status}}</p> 
+
+				  <p id="showMore"><a href="">Show more</a></p> 
 				</div>	
-			
-				<div class="col-sm">
+				
+				<div class="col-sm" id="showLess">
 					<p><i class="colr fas fa-restroom"></i>  Unisex: {{unisex}} </p>
 			    	<p><i class="colr fas fa-concierge-bell"></i>  Serviced: {{service}} </p>
 			    	<p><i class="colr fas fa-bed"></i>  Bedroom: {{bedroom}} </p>
@@ -371,6 +373,7 @@
 			    	<p><i class="colr fas fa-tv"></i>  Cable Tv: {{tv}} </p>    	
 			    	<p><i class="colr fas fa-shower"></i>  Bath: {{bath}} </p>
 			    	<p><i class="colr fas fa-toilet"></i>  Toilet: {{toilet}} </p>
+			    	<p id="showLesser"><a href="">Show less</a></p> 
 				</div>
 			</div> <!--second row -->
 				<div class="acceptClass"><button class='btn-light accept' data-id="{{@index}}">Accept and Pay Now</button></div>

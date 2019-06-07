@@ -1084,6 +1084,20 @@ $(document).ready(function(){
 
 	});
 
+	$('body').on('click', '#showMore', async function() {
+		event.preventDefault();
+		$("#showMore").hide(function() {
+			$("#showLess").show(500);
+		});
+	});
+
+	$('body').on('click', '#showLesser', async function() {
+		event.preventDefault();
+		$("#showLess").hide(500, function() {
+			$("#showMore").show(500);
+		});
+	});
+
 
 	/*(function() {
 	'use strict';
@@ -1100,10 +1114,8 @@ $(document).ready(function(){
 			  upgradeDb.createObjectStore('booking_form_post_data', {keyPath: 'id', autoIncrement: true});
 			}
 		});
-
 	})();*/
 
-
-
+	
 
 });

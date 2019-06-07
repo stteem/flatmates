@@ -7,7 +7,7 @@ function createDB() {
   	var dbPromise = idb.open('booking-db', 1, function(upgradeDb) {
 		console.log('Making a new object store');
 		if (!upgradeDb.objectStoreNames.contains('booking_form_data')) {
-		  var store = upgradeDb.createObjectStore('booking_form_data', {keyPath: 'id', autoIncrement: true});
+		  var store = upgradeDb.createObjectStore('booking_form_data', {keyPath: 'hostPhone'});
 		}
 
 	});

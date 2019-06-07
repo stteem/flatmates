@@ -437,7 +437,16 @@ h4 {
   width: 100%;
   height: 350px;
 }
+  
+#showLess {
+  display: none;
+}
 
+@media only screen and (min-width: 960px) {
+  #showLess { display: initial; }
+  #showMore { display: none; }
+  #showLesser {display: none;}
+}
 
 footer {
   margin-top: 100px;
