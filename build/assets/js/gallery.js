@@ -620,11 +620,14 @@ $(document).ready(function(){
 				}
 			}
 
+			var formdata = new FormData(document.getElementById('dateTimeData'));
+			//console.log('formdata ', formdata)
+			//navigator.serviceWorker.controller.postMessage(formdata);
 
 			// Fetch an HTML <form> with id of 'dateTimeData'
 			fetch('index.php', {				  
 			  method: 'POST',
-			  body: new FormData(document.getElementById('dateTimeData'))
+			  body: formdata
 			})
 			.then(validateResponse)
 			.then(function() {
@@ -652,7 +655,6 @@ $(document).ready(function(){
 			.catch((error) => {
 				$("#warning").html(error);
 			});	
-
 		})
 		.catch((err) => {
 
@@ -664,9 +666,8 @@ $(document).ready(function(){
 				//flash.css({"display": "none"});
 				console.log("hid message")
 			}, 7000);
-		});
-		
-  	}
+		});	
+  	} //checkLengthBeforePosting() ends
   	
 
   	async function checkSessionBeforePosting() {

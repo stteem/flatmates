@@ -3,31 +3,84 @@ importScripts('assets/js/idb.js');
 
 
 
-function createDB() {
-  	var dbPromise = idb.open('booking-db', 1, function(upgradeDb) {
-		console.log('Making a new object store');
-		if (!upgradeDb.objectStoreNames.contains('booking_form_data')) {
-		  var store = upgradeDb.createObjectStore('booking_form_data', {keyPath: 'id', autoIncrement: true});
-		}
 
-	});
+/*self.addEventListener('message', function (event) {
+  console.log('form data', event.data)
+  if (event.data.hasOwnProperty('formdata')) {
+    // receives form data from script.js upon submission
+    var formdata = event.data.formdata;
+
+  }
+})*/
+
+/*function createDB() {
+  	var dbPromise = idb.open('workbox-precache-http___localhost_flatmates_build_', 2, function(upgradeDb) {
+  		console.log('Making a new object store');
+  		if (!upgradeDb.objectStoreNames.contains('booking_form_data')) {
+  		  var store = upgradeDb.createObjectStore('booking_form_data', {keyPath: 'id', autoIncrement: true});
+  		}
+    });
 }
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(
-    createDB()
+    dbPromise()
   );
-});
-
-/*self.addEventListener('message', function (event) {
-  console.log('form data is', event.data)
-  if (event.data.hasOwnProperty('formData')) {
-    // receives form data from script.js upon submission
-    formData = event.data.formData
-  }
 });*/
 
 
+/*const bgSyncPlugin = new workbox.backgroundSync.Plugin('booking_form_data', {
+  maxRetentionTime: 24 * 60 // Retry for max of 24 Hours
+});
+
+workbox.routing.registerRoute(
+  '/index.php',
+  workbox.strategies.networkOnly({
+    plugins: [bgSyncPlugin]
+  }),
+  'POST'
+);*/
+const queue = new workbox.backgroundSync.Queue('booking_form_data');
+workbox.routing.registerRoute(
+  '/\/*.php/',
+  workbox.strategies.networkOnly(function() {
+    self.addEventListener('fetch', (event) => {
+      // Clone the request to ensure it's save to read when
+      // adding to the Queue.
+      const promiseChain = fetch(event.request.clone())
+      .catch((err) => {
+          return queue.pushRequest({request: event.request});
+      });
+
+      event.waitUntil(promiseChain);
+    });
+  }),
+  'POST'
+);
+
+
+
+
+
+
+
+//for cross origin requests
+/*workbox.routing.registerRoute(
+  new RegExp("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"),
+  workbox.strategies.networkFirst()
+);
+
+workbox.routing.registerRoute(
+  new RegExp("https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"),
+  workbox.strategies.networkFirst()
+);
+
+workbox.routing.registerRoute(
+  new RegExp("https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"),
+  workbox.strategies.networkFirst()
+);*/
+
+//for same origin requests
 workbox.routing.registerRoute(
   new RegExp('.*\.js'),
   workbox.strategies.networkFirst()
@@ -51,7 +104,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/about.css",
-    "revision": "7da924868f475bebcb4e592fdbd8a810"
+    "revision": "80185b8c096d51d793c8d718c029884f"
   },
   {
     "url": "assets/css/bootstrap.css",
@@ -63,7 +116,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/collections.css",
-    "revision": "0d3a2a20e57eeb7e1045b5410576d1ce"
+    "revision": "fefc9c33608675b30c885d8a2fa6ec1b"
   },
   {
     "url": "assets/css/register_style.css",
@@ -71,7 +124,119 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/style.css",
-    "revision": "c547e6a430bc685468a8716d63eab227"
+    "revision": "18cec1b4654fb1fd4a63277bc5e3e597"
+  },
+  {
+    "url": "assets/fontawesome-free/css/all.css",
+    "revision": "a207426366c2b281571ec581ca8acc62"
+  },
+  {
+    "url": "assets/fontawesome-free/css/all.min.css",
+    "revision": "10519cfd3206802f58315b877a9beab5"
+  },
+  {
+    "url": "assets/fontawesome-free/css/brands.css",
+    "revision": "50ae18beebd796d9b9082b9209918456"
+  },
+  {
+    "url": "assets/fontawesome-free/css/brands.min.css",
+    "revision": "38762c06ee069170da13ffb98351ef29"
+  },
+  {
+    "url": "assets/fontawesome-free/css/fontawesome.css",
+    "revision": "73cad59eb2860b3c468d5c3449b68dc5"
+  },
+  {
+    "url": "assets/fontawesome-free/css/fontawesome.min.css",
+    "revision": "990d1b83f594d7989624157b607e31ff"
+  },
+  {
+    "url": "assets/fontawesome-free/css/regular.css",
+    "revision": "c1dabf43b35754bfcd8cb8e573d97451"
+  },
+  {
+    "url": "assets/fontawesome-free/css/regular.min.css",
+    "revision": "0b52012237ecad2b82bbd8aea374b231"
+  },
+  {
+    "url": "assets/fontawesome-free/css/solid.css",
+    "revision": "f3ec1cd710f7f243ba42b55ffea5e6b0"
+  },
+  {
+    "url": "assets/fontawesome-free/css/solid.min.css",
+    "revision": "7b33067702cdc57fc1ce64bbcbaae492"
+  },
+  {
+    "url": "assets/fontawesome-free/css/svg-with-js.css",
+    "revision": "23c782c1fb927e632f74e293fc655968"
+  },
+  {
+    "url": "assets/fontawesome-free/css/svg-with-js.min.css",
+    "revision": "7b88c59c03106d736b4206c6ceafcf06"
+  },
+  {
+    "url": "assets/fontawesome-free/css/v4-shims.css",
+    "revision": "fe0f09381a1440722b64ac99c67e6809"
+  },
+  {
+    "url": "assets/fontawesome-free/css/v4-shims.min.css",
+    "revision": "25b2445e0c1838b110583405b3ec0177"
+  },
+  {
+    "url": "assets/fontawesome-free/js/all.js",
+    "revision": "a4b28c53f67b8e03ec3df1b4621febba"
+  },
+  {
+    "url": "assets/fontawesome-free/js/all.min.js",
+    "revision": "d0482db440697a659af4980d2e841891"
+  },
+  {
+    "url": "assets/fontawesome-free/js/brands.js",
+    "revision": "1a11bd6f2ba52b1a64917befd17cad9c"
+  },
+  {
+    "url": "assets/fontawesome-free/js/brands.min.js",
+    "revision": "db2c756dffd7a2ebd478d717d57f71f3"
+  },
+  {
+    "url": "assets/fontawesome-free/js/fontawesome.js",
+    "revision": "50af86747d568bafc71abdf45fcc6431"
+  },
+  {
+    "url": "assets/fontawesome-free/js/fontawesome.min.js",
+    "revision": "f2a6f85df075827ab70407f852cc4655"
+  },
+  {
+    "url": "assets/fontawesome-free/js/regular.js",
+    "revision": "aa19256d0b1a3ff10ade60fac1ab2f0b"
+  },
+  {
+    "url": "assets/fontawesome-free/js/regular.min.js",
+    "revision": "79cd9e30b4b211801e41beb79bc6a286"
+  },
+  {
+    "url": "assets/fontawesome-free/js/solid.js",
+    "revision": "868fdcf9c37b821a0edf28a7de13958c"
+  },
+  {
+    "url": "assets/fontawesome-free/js/solid.min.js",
+    "revision": "53b10f67bd9ae19de0f16e29c851c622"
+  },
+  {
+    "url": "assets/fontawesome-free/js/v4-shims.js",
+    "revision": "f9e2e19cffd1a01e870624f8c111277b"
+  },
+  {
+    "url": "assets/fontawesome-free/js/v4-shims.min.js",
+    "revision": "ee849cdefc4ea73142659f04402a1a99"
+  },
+  {
+    "url": "assets/fontawesome-free/LICENSE.txt",
+    "revision": "a26077e534d7a5b2bbf9c0fa32aad750"
+  },
+  {
+    "url": "assets/fontawesome-free/package.json",
+    "revision": "574684453195a0b792276a3d42b7ddc4"
   },
   {
     "url": "assets/fonts/Bellota-Bold.otf",
@@ -463,11 +628,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/collections.js",
-    "revision": "2c95b6dc145f027cc02d0cafe54c8e79"
+    "revision": "99466513d46503053375023b44622d99"
   },
   {
     "url": "assets/js/gallery.js",
-    "revision": "bf3663534a7341a6c99c3ba05d8e974e"
+    "revision": "a1c80f9351c399add2a88962be236a22"
   },
   {
     "url": "assets/js/handlebars-v3.0.3.js",
@@ -482,12 +647,108 @@ workbox.precaching.precacheAndRoute([
     "revision": "378087a64e1394fc51f300bb9c11878c"
   },
   {
+    "url": "assets/js/jquery-ui-1.12.1/AUTHORS.txt",
+    "revision": "403511fc6c430ea6179ebcb4a9983eec"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/external/jquery/jquery.js",
+    "revision": "fb2d334dabf4902825df4fe6c2298b4b"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-bg_glass_55_fbf9ee_1x400.png",
+    "revision": "05f30921147118c0ecb6563a02ae722a"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-bg_glass_65_ffffff_1x400.png",
+    "revision": "6d405c3629d91a95b7b31a5c23e91c1e"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-bg_glass_75_dadada_1x400.png",
+    "revision": "e10414255863f4e9035e6e313ee470f6"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-bg_glass_75_e6e6e6_1x400.png",
+    "revision": "51a618141c7cafd94cfc4e3fd8a48624"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-bg_glass_95_fef1ec_1x400.png",
+    "revision": "4f44e2893378b008dc68b6f87e76b35e"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-bg_highlight-soft_75_cccccc_1x100.png",
+    "revision": "e45099efbe463cbfe70b4122316d29a8"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-icons_222222_256x240.png",
+    "revision": "3861e9eb08528ed839cf22c3d51e2042"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-icons_2e83ff_256x240.png",
+    "revision": "18fbb5e53600e6deea5870799c7319a4"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-icons_454545_256x240.png",
+    "revision": "94c724823374be623fd19618399116e5"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-icons_888888_256x240.png",
+    "revision": "5b2c08ae1ffe76987b1ceb831c982c44"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/images/ui-icons_cd0a0a_256x240.png",
+    "revision": "6e8da81c268f3800fc0e1f4264551079"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/index.html",
+    "revision": "11f31c348968868d4ada89d6162c640e"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.css",
+    "revision": "f6dedad0e39d55c9ac8f809d8f9aa015"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.js",
+    "revision": "67ad6d2d9af82afeb3b9dc615a726188"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.min.css",
+    "revision": "644cfad51a19a49c15433842a875396a"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.min.js",
+    "revision": "cec386664a1df302b37a7c1c976d2a20"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.structure.css",
+    "revision": "899dac5b6f23c8e114d4858edb8be962"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.structure.min.css",
+    "revision": "095c78c561b224ce2ab446fa819a14f8"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.theme.css",
+    "revision": "bbbc2dd75c03d25e08f0f9eac4696156"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/jquery-ui.theme.min.css",
+    "revision": "8aaf260d598d7e1f7a8a1877ef6fde28"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/LICENSE.txt",
+    "revision": "e0c0d3d883e83f19efa64feb54d5f63d"
+  },
+  {
+    "url": "assets/js/jquery-ui-1.12.1/package.json",
+    "revision": "ff7dc0c7a69aa51cea5e37fa4dad9b38"
+  },
+  {
     "url": "assets/js/register.js",
     "revision": "0fb3a5058cc845673033ce34d7964672"
   },
   {
     "url": "index.html",
-    "revision": "63df2b1ca84742359728d441222136f4"
+    "revision": "3cbf62dad580819bcd4cac4290bf89dd"
   },
   {
     "url": "manifest.json",
