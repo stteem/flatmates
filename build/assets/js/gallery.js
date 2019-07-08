@@ -416,7 +416,14 @@ $(document).ready(function(){
 	    		document.getElementById("logout").style.display = "inline";
 	    		document.getElementById("username").style.display = "inline";
 	    		document.getElementById("username").innerHTML = row.username;
+
 	        });
+	    })
+	    .then(()=> {
+	    	fetch('json_data.php')
+			.then(validateResponse)
+			.then(readResponseAsJSON)
+			.then(console.log('json_data loaded'))
 	    })
 	    .catch((err) => {
 	    	console.log('Username not found here');
@@ -620,41 +627,43 @@ $(document).ready(function(){
 				}
 			}
 
-			var formdata = new FormData(document.getElementById('dateTimeData'));
-			//console.log('formdata ', formdata)
-			//navigator.serviceWorker.controller.postMessage(formdata);
-
-			// Fetch an HTML <form> with id of 'dateTimeData'
-			fetch('index.php', {				  
-			  method: 'POST',
-			  body: formdata
-			})
-			.then(validateResponse)
-			.then(function() {
-				console.log('promise posted')
-
-			  	var success = "Congratulations, request sent successfully.";
-				$("#success").css({"display": "initial"});
-				$("#success").html(success);
-
-				setTimeout(function() {
-					$("#success").fadeOut(3000, function() {
-						$(this).empty();
-					});
-					//flash.css({"display": "none"});
-					console.log("hid success message")
-				}, 3000);
-
+			//if (navigator.onLine) {
+				//var formdata = new FormData(document.getElementById('dateTimeData'));
+				//console.log('formdata ', formdata)
 				
+				// Fetch an HTML <form> with id of 'dateTimeData'
+				fetch('index.php', {				  
+				  method: 'POST',
+				  body: new FormData(document.getElementById('dateTimeData'))
+				})
+				.then(validateResponse)
+				.then(function() {
+					console.log('promise posted')
 
-				$(".empty").each(function(){
-					$(this).val(" ");
-					console.log('emptied');
-				});
-			})
-			.catch((error) => {
-				$("#warning").html(error);
-			});	
+				  	var success = "Congratulations, request sent successfully.";
+					$("#success").css({"display": "initial"});
+					$("#success").html(success);
+
+					setTimeout(function() {
+						$("#success").fadeOut(3000, function() {
+							$(this).empty();
+						});
+						//flash.css({"display": "none"});
+						console.log("hid success message")
+					}, 3000);
+
+					
+
+					$(".empty").each(function(){
+						$(this).val(" ");
+						console.log('emptied');
+					});
+				})
+			/*}
+			else {
+				throw "No network, try again later";
+			}*/
+				
 		})
 		.catch((err) => {
 
@@ -1055,20 +1064,22 @@ $(document).ready(function(){
 				var post = $.post("delete_booking.php", values);
 
 				post.fail(function() {
-					var error = 'Failed to post, check internet connection and try again';
-					$('#warning').html(error);
+					var error = 'Failed to delete, check internet connection and try again';
+					$('#delete-warning').html(error);
 				});
 				
 				//Callback function to display ajax post request on DOM without page reload
 				post.done(function() {
 					//Calling dashboard click event to update list
 					$('#dashboard').click();
-					//$(this).remove();
+					//var thisOrder = $('.list');
+					//thisOrder[index].remove();
 
 					console.log('Deleted')
 
 				});
-			})	
+			})
+			//.then(fetchBookings('json_data.php'))	
 		} 
 		else {
 			console.log("Canceled!");

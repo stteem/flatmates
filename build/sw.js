@@ -1,68 +1,151 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js');
-importScripts('assets/js/idb.js');
+//importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
+//importScripts('assets/js/idb.js');
+/*importScripts('assets/js/workbox-v4.3.1/workbox-sw.js');
 
 
+workbox.setConfig({
+  modulePathPrefix: 'assets/js/workbox-v4.3.1/'
+});*/
 
 
-/*self.addEventListener('message', function (event) {
-  console.log('form data', event.data)
-  if (event.data.hasOwnProperty('formdata')) {
-    // receives form data from script.js upon submission
-    var formdata = event.data.formdata;
-
-  }
-})*/
-
-/*function createDB() {
-  	var dbPromise = idb.open('workbox-precache-http___localhost_flatmates_build_', 2, function(upgradeDb) {
+//function createDB() {
+  	/*var dbPromise = idb.open('booking_form', 2, function(upgradeDb) {
   		console.log('Making a new object store');
   		if (!upgradeDb.objectStoreNames.contains('booking_form_data')) {
-  		  var store = upgradeDb.createObjectStore('booking_form_data', {keyPath: 'id', autoIncrement: true});
+  		  var store = upgradeDb.createObjectStore('booking_form_data', {autoIncrement:true});
   		}
     });
-}
+//}
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(
-    dbPromise()
+    dbPromise
   );
 });*/
 
 
-/*const bgSyncPlugin = new workbox.backgroundSync.Plugin('booking_form_data', {
-  maxRetentionTime: 24 * 60 // Retry for max of 24 Hours
-});
+//const queue = new workbox.backgroundSync.Queue('booking_form_data');
 
-workbox.routing.registerRoute(
-  '/index.php',
-  workbox.strategies.networkOnly({
-    plugins: [bgSyncPlugin]
-  }),
-  'POST'
-);*/
-const queue = new workbox.backgroundSync.Queue('booking_form_data');
-workbox.routing.registerRoute(
-  '/\/*.php/',
-  workbox.strategies.networkOnly(function() {
-    self.addEventListener('fetch', (event) => {
+//function onsyncRequest() {
+ /*self.addEventListener('fetch', (event) => {
+
+    if (event.request.method === 'POST') {
+     // if (!navigator.onLine) {
+        console.log('we are offline')
+        console.log('cloned event ',event.request)
+        // Clone the request to ensure it's save to read when
+        // adding to the Queue.
+        const promiseChain = fetch(event.request.clone())
+        .catch((err) => {
+            return queue.shiftRequest({request: event.request});
+        });
+
+        event.waitUntil(promiseChain);
+      //}
+    }  
+  });*/
+//}
+
+
+//var queue = new workbox.backgroundSync.Queue('booking_form_data');
+/*self.addEventListener('fetch', (event) => {
+
+  if (event.request.method === 'POST') {
+    
+    console.log('post to php fired ',event.request)
+
+    //var data = event.request;
+    
       // Clone the request to ensure it's save to read when
       // adding to the Queue.
-      const promiseChain = fetch(event.request.clone())
-      .catch((err) => {
-          return queue.pushRequest({request: event.request});
-      });
+      
+      
+          dbPromise.then(function(db) {
+          var tx = db.transaction('booking_form_data', 'readwrite');
+          var store = tx.objectStore('booking_form_data');
+          
+          
+          store.put(event.request.json());
+          return tx.complete;
+        }).then(function() {
+          console.log('added item to the store os!');
+        });
+  }
+  
+});*/
 
-      event.waitUntil(promiseChain);
-    });
+
+
+/*
+let bgQueue = new workbox.backgroundSync.QueuePlugin({
+  callbacks: {
+    replayDidSucceed: async(hash, res) => {
+    self.registration.showNotification('Background sync demo', {
+    body: 'Product has been purchased.',
+    icon: '/images/shop-icon-384.png',
+  });
+},
+replayDidFail: (hash) => {},
+requestWillEnqueue: (reqData) => {},
+requestWillDequeue: (reqData) => {},
+},
+});
+*/
+
+workbox.routing.registerRoute(
+  new RegExp('.*\.php'),
+  new workbox.strategies.NetworkFirst(function() {
+    console.log('get php fired')
+  })
+);
+
+var queue = new workbox.backgroundSync.Queue('booking_form_data');
+var myPlugin = {
+
+  requestWillFetch: async ({request}) => {
+    // Return `request` or a different Request
+    console.log('this is request', request)
+    return request;      
+  },
+  fetchDidFail: async ({originalRequest, request, error, event}) => {
+    console.error('Replay failed for request', event.request, error);
+   /* var log = document.getElementById('warning');
+    log.innerText = 'No network, no worries, we will try again when you are back online';*/
+    // Put the entry back in the queue and re-throw the error:
+    await queue.unshiftRequest({request: event.request});
+    //throw error
+  },
+  fetchDidSucceed: async ({request, response}) => {
+    // Return `response` to use the network response as-is,
+    // or alternatively create and return a new Response object.
+    return response;
+  },
+  onSync: async (queue) => {
+    try {
+      await queue.replayRequests();
+      
+      // The replay was successful! Notification logic can go here.
+      console.log('Replay complete!');
+    } catch (error) {
+      // The replay failed...
+      console.log(error);
+    }
+  }
+}; 
+
+
+/*const bgSyncPlugin = new workbox.backgroundSync.Plugin('booking_form_data', {
+  maxRetentionTime: 24 * 60, // Retry for max of 24 Hours
+});*/
+
+workbox.routing.registerRoute(
+  new RegExp('.*\.index.php'),
+  new workbox.strategies.NetworkOnly({
+    plugins: [myPlugin]
   }),
   'POST'
 );
-
-
-
-
-
-
 
 //for cross origin requests
 /*workbox.routing.registerRoute(
@@ -83,18 +166,20 @@ workbox.routing.registerRoute(
 //for same origin requests
 workbox.routing.registerRoute(
   new RegExp('.*\.js'),
-  workbox.strategies.networkFirst()
+  new workbox.strategies.CacheFirst()
 );
 
 workbox.routing.registerRoute(
   new RegExp('.*\.html'),
-  workbox.strategies.networkFirst()
+  new workbox.strategies.CacheFirst()
 );
 
 workbox.routing.registerRoute(
   new RegExp('.*\.css'),
-  workbox.strategies.networkFirst()
+  new workbox.strategies.CacheFirst()
 );
+
+
 
 
 workbox.precaching.precacheAndRoute([
@@ -632,7 +717,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/gallery.js",
-    "revision": "a1c80f9351c399add2a88962be236a22"
+    "revision": "76894321f71d46f2d0bae8d7f48a967c"
   },
   {
     "url": "assets/js/handlebars-v3.0.3.js",
@@ -747,12 +832,119 @@ workbox.precaching.precacheAndRoute([
     "revision": "0fb3a5058cc845673033ce34d7964672"
   },
   {
+    "url": "assets/js/workbox-v4.3.1/workbox-background-sync.dev.js",
+    "revision": "5446355eef3aa184b5b6eebfcd81f8d9"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-background-sync.prod.js",
+    "revision": "1ffcc362312a9e8ef4e28280ace2a1bd"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-broadcast-update.dev.js",
+    "revision": "0508d13784c9b0549663f40e3fe55d37"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-broadcast-update.prod.js",
+    "revision": "ee27c0fdc836f6a2dc656b25a680f9e4"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-cacheable-response.dev.js",
+    "revision": "ecba3679d285394f1c9e219681662721"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-cacheable-response.prod.js",
+    "revision": "a38e8afa80070ec9dff5dc2fb116f1c2"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-core.dev.js",
+    "revision": "2912182ccc99b017a8c36802cf9d983f"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-core.prod.js",
+    "revision": "5d14d8267f65030735589e4b664ee3bf"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-expiration.dev.js",
+    "revision": "43c236fe62480f042c35e8b898ca3367"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-expiration.prod.js",
+    "revision": "a767f3bbd2773a0bea34ff841b51ab64"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-navigation-preload.dev.js",
+    "revision": "a8f30e409f7037906053acec7d709beb"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-navigation-preload.prod.js",
+    "revision": "e2b19a3eda50f48ce7fc48640a523353"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-offline-ga.dev.js",
+    "revision": "3fba0947d12d42834b81499fafc76e82"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-offline-ga.prod.js",
+    "revision": "6af4fb51a5249c4e0ed7bc61ed59836d"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-precaching.dev.js",
+    "revision": "8fbbefcd70c998a3cd35f02e6a8ac4e7"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-precaching.prod.js",
+    "revision": "e8f5c57430ec7c448d30015ff4bd5896"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-range-requests.dev.js",
+    "revision": "0f15c57cf5c75cc72b6f23ad28a941d1"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-range-requests.prod.js",
+    "revision": "97c430406d13f4b91c805594ef351261"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-routing.dev.js",
+    "revision": "471b8e0f45e6e5e679d04f60c6466e7f"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-routing.prod.js",
+    "revision": "d3fa76a1c38649d596b1d2ffaf398128"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-strategies.dev.js",
+    "revision": "d1c19737e82e2f6bd567aaf384683174"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-strategies.prod.js",
+    "revision": "6033181992f0bc562ab1ef5f9ba34697"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-streams.dev.js",
+    "revision": "eed9eb6f7b0672c45db5408d05efe9b9"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-streams.prod.js",
+    "revision": "4407a13523f1fa1064f616e9047b6148"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-sw.js",
+    "revision": "6e1e47d706556eac8524f396e785d4bb"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-window.dev.umd.js",
+    "revision": "c17834573a1b48bb8cf33b12128bdae9"
+  },
+  {
+    "url": "assets/js/workbox-v4.3.1/workbox-window.prod.umd.js",
+    "revision": "c65238721ed1187cf832e51a9e34724a"
+  },
+  {
     "url": "index.html",
-    "revision": "3cbf62dad580819bcd4cac4290bf89dd"
+    "revision": "f48a8293803776dfe157d073f2e16f73"
   },
   {
     "url": "manifest.json",
     "revision": "d0b72962ee63c41dbc45a91661420db0"
   }
 ]);
-

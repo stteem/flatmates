@@ -15,7 +15,7 @@
 	<meta charset="UTF-8" >
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="Flatmates" content="The urban upwardly mobile working class, and students of tertiary institutions in Nigeria go to Flatmates to share accomodation rent. Do you want to make extra money? Rent out 1 bedroom of your 2 bedroom flat, or share your off campus room with fellow students.">
+	<meta name="Description" content="Do you need a flatmate, or you want to make extra money as a host? Flatmate Africa lets you find or list bedrooms or apartments in 2 easy steps: Register, find, or list.">
 	<title>Apartment Sharing Platform</title>
 
 	<!-- CSS -->
@@ -330,7 +330,7 @@
 <script id="bookings-template" type="text/x-handlebars-template">
 	
 	<p><b>Dashboard</b></p>
-	<div class="row">
+	<div class="row requestId">
 		{{#each categories}}
 		<div class="col-sm col-md-8 list"> 
 			<div class="row">	
@@ -378,6 +378,7 @@
 			</div> <!--second row -->
 				<div class="acceptClass"><button class='btn-light accept' data-id="{{@index}}">Accept and Pay Now</button></div>
 				&nbsp;
+				<div id="delete-warning"></div>
 				<div><button class='decline btn-light' data-id="{{@index}}">Decline and Delete</button></div>
 				&nbsp;
 		</div>
@@ -531,9 +532,10 @@
         }
 
         // Then later, request a one-off sync:
-		/*navigator.serviceWorker.ready.then(function(swRegistration) {
+		navigator.serviceWorker.ready.then(function(swRegistration) {
+			console.log('sync registered')
 		  return swRegistration.sync.register('booking_form_data');
-		});*/
+		});
 
     </script>
 

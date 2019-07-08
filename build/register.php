@@ -133,6 +133,7 @@ if (isset($_POST['register'])) {
 	<meta charset="UTF-8" >
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="Description" content="Do you need a flatmate, or you want to make extra money as a host? Flatmate Africa lets you find or list bedrooms or apartments in 2 easy steps: Register, find, or list.">
 	<title>Register</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/register_style.css">
