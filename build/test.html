@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Test</title>
+	<style type="text/css">
+		
+	div span {
+		display: inline-block;
+		vertical-align: middle;
+		color: blue;
+	}
+
+	span.material-icons {
+		font-size: 60px;
+	}
+
+	[data-credit-card] {
+		width: 435px;
+		margin-top: 100px;
+		min-height: 240px;
+		border-radius: 10px;
+		background-color: #5d6874;
+	}
+
+	[data-card-type] {
+		display: block;
+		width: 120px;
+		height: 60px;
+		border-top-left-radius: 10px;
+	}
+
+	[data-cc-digits] {
+		margin-top: 2em;
+		margin-left: 1em;
+	}
+
+	[data-cc-digits] input {
+		color: #000;
+		font-size: 1.2em;
+		border: none;
+		margin-right: 0.5em;
+	}
+
+	[data-cc-info] {
+		margin-top: 1em;
+		margin-left: 1em;
+	}
+
+	[data-cc-info] input {
+		color: #000;
+		font-size: 1.2em;
+		border: none;
+	}
+
+	[data-cc-info] input:nth-child(3) {
+		margin-left: 0.8em;     
+	}
+
+	[data-pay-btn] {
+		position: fixed;
+		width: 90%;
+		height: 50px;
+		border: solid 1px;
+		bottom: 20px;
+	}
+
+	/* Add Your CSS From Here 
+	div span {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	span.material-icons {
+		font-size: 60px;
+	}
+
+	[data-credit-card] {
+		width: 435px;
+		margin-top: 100px;
+		min-height: 240px;
+		border-radius: 10px;
+		background-color: #5d6874;
+	}
+
+	[data-card-type] {
+		display: block;
+		width: 120px;
+		height: 60px;
+		border-top-left-radius: 10px;
+	}
+
+	[data-cc-digits] {
+		margin-top: 2em;	
+	}
+
+	[data-cc-digits] input {
+		color: #000;
+		font-size: 1em;
+		border: none;
+		margin-right: 0.5em;
+	}
+
+	[data-cc-info] {
+		margin-top: 1em;
+	}
+
+	[data-cc-info] input {
+		color: #000;
+		font-size: 1em;
+		border: none;
+	}
+
+	[data-cc-info] input:nth-child(3) {
+		margin-left: 0.8em;
+	}
+
+	[data-pay-btn] {
+		position: fixed;
+		width: 90%;
+		height: 50px;
+		border: solid 1px;
+		bottom: 20px;
+	}*/
+
+	</style>
+</head>
+<body>
+	
+	<div data-cart-info>
+		<h1 class="mdc-typography--headline4">
+			<span class="material-icons">
+				Shopping Cart
+			</span>
+			<span data-bill></span>
+		</h1>
+	</div>
+	<div data-credit-card class="mdc-card mdc-card--outlined">
+		<div class="mdc-card__primary-action">
+			<img data-card-type 
+			src="https://placehold.it/120x60.png?text=Card" alt="" />
+			<div data-cc-digits>
+				<input type="text" size="4" placeholder="----" />
+				<input type="text" size="4" placeholder="----" />
+				<input type="text" size="4" placeholder="----" />
+				<input type="text" size="4" placeholder="----" />
+			</div>
+			<div data-cc-info>
+				<input type="text" size="9" placeholder="First Name" />
+				<input type="text" size="9" placeholder="Surname" />
+				<input type="text" size="4" placeholder="MM/YY" />
+			</div>
+		</div>
+	</div>
+	<button class="mdc-button" data-pay-btn>Pay Now</button>
+
+
+	<!--original html starts here 
+
+	<div data-cart-info>
+		<h4 class="mdc-typography--headline4">
+			<span class="material-icons">
+				shopping_cart
+			</span>
+			<span data-bill></span>
+		</h4>
+	</div>
+	<div data-credit-card class="mdc-card mdc-card--outlined">
+		<div class="mdc-card__primary-action">
+			<img data-card-type 
+			src="https://placehold.it/120x60.png?text=Card" alt="" />
+			<div data-cc-digits>
+				<input type="text" size="4" placeholder="----" />
+				<input type="text" size="4" placeholder="----" />
+				<input type="text" size="4" placeholder="----" />
+				<input type="text" size="4" placeholder="----" />
+			</div>
+			<div data-cc-info>
+				<input type="text" size="20" placeholder="Name Surname" />
+				<input type="text" size="6" placeholder="MM/YY" />
+			</div>
+		</div>
+	</div>
+	<button class="mdc-button" data-pay-btn>Pay Now</button> -->
+
+<script type="text/javascript">
+
+		/*const smartInput = (event, fieldIndex, fields) => {
+		  const key = event.key;
+		  const tab = (key === 'Tab');
+		  const shift = event.shiftKey;
+		  const space = (key === '');
+		  const backspace = (key === 'Backspace');
+		  const arrowUp = (key === 'ArrowUp');
+		  const arrowDown = (key === 'ArrowDown');
+		  const arrowRight = (key === 'ArrowRight');
+		  const arrowLeft = (key === 'ArrowLeft');
+		  const whichKey = event.which || event.keyCode;
+		  
+		  
+		  const letters = new RegExp('^[A-Za-z]+$');
+		  var cardno = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+
+		  
+
+		  /*if ((fieldIndex <= 3 || fieldIndex == 7) && (targetValue.test(cardno) == false) ) {
+		  		event.preventDefault();
+		  }*/
+
+		  //var output = fields[fieldIndex].value;
+		  //console.log('fields value', output)
+
+		  		
+		 /* if((fieldIndex <= 3 || fieldIndex == 7)  && (!tab || !shift 
+		  		|| !backspace || !arrowUp || !arrowDown || !arrowLeft 
+		  		|| !arrowRight || space) && (whichKey >= 65 && whichKey <= 90 || 
+		  		whichKey >= 97 && whichKey <= 122)) {
+			  	event.preventDefault();
+		  }
+		  if((fieldIndex == 4 || fieldIndex == 5) && (!tab || !shift || !backspace || !arrowUp
+		  		|| !arrowDown || !arrowLeft || !arrowRight || !space) && (whichKey
+				>= 48 && whichKey <= 57 || whichKey >= 96 && whichKey 
+				<= 105)) {
+				event.preventDefault();
+		  }*/
+
+		  	/*var targetLength = event.target.value.length;
+		    console.log('target length', targetLength)
+
+		  	const size = event.target.getAttribute("size");
+		  	console.log('length', length)
+		  	
+			 var focus = event.target.focus();
+			 var blur = event.target.blur();
+			
+				
+
+			const fieldArray = [];
+			while (fieldIndex <= 3) {
+				if(targetLength == size) {
+				  	event.preventDefault();
+				  	fieldArray.push(event.target.value);				  					  
+				  	console.log('event target value', fieldArray);
+			  	
+				  //setTimeout(extractValue.value.substring(0).replace(/\d/g, '*'), 500); 
+			    }
+			    if (target.nextElementSibling == "input") {
+			    	target.nextElementSibling.focus();
+			    }	  	
+			}
+
+			while (next = next.nextElementSibling) {
+	            if (next == null)
+	                break;
+	            if (next.tagName.toLowerCase() === "input") {
+	                next.focus();
+	                break;
+	            }
+	        }
+		    
+
+	  }*/
+
+const appState =  {};
+
+const isPendingInput = false;
+const smartInput = (event, fieldIndex, fields) => {
+ 	if(isPendingInput){}
+ 	if(fields[fieldIndex].getAttribute("placeholder") == "----" || fields[fieldIndex].getAttribute("placeholder") == "MM/YY"){
+ 		if(fields[fieldIndex].getAttribute("placeholder") == "----"){
+			if(event.key != 'Backspace'){
+				event.preventDefault();
+			}
+		}
+	 	if(fields[fieldIndex].getAttribute("placeholder") == "MM/YY"){
+			if(event.key != 'Backspace' && event.key != "/"){
+				event.preventDefault();
+			}
+		}
+		const userInput = parseInt(event.key);
+		if(isNaN(userInput)){
+			return false;
+		}
+		const thisField = fields[fieldIndex];
+		const activeDigit = (fieldIndex * 4) + thisField.value.length;
+		if(thisField.value.length < thisField.getAttribute('size')){
+			if(activeDigit < 16){
+			 appState.cardDigits[fieldIndex][thisField.value.length] = userInput;
+			}
+			thisField.value = thisField.value + userInput;
+			if(fieldIndex == 0){
+				const first4Digits = appState.cardDigits[0];
+				detectCardType(first4Digits);
+			}
+		}
+		if(fieldIndex < 3){
+			isPendingInput = true;
+			setTimeout(() => {
+				isPendingInput = false;
+				let textMask = '';
+				let = firstDigit = '';
+				for(i = 0; i < thisField.value.length; i++){
+		 			textMask += "$";
+		 		}
+		 		thisField.value = textMask;
+		 	}, 500);
+		}
+	} 
+}; 
+
+
+
+	const enableSmartTyping = () => {
+		//const inputArray = [];
+		const inputFields = document.querySelectorAll('input');
+		console.log('input fields ', inputFields)
+		inputFields.forEach((field, index, fields) => {
+		  field.addEventListener('keydown', (event) => {
+		  	console.log('field', field.value)
+			  smartInput(event, index, fields);
+		  });
+		});
+	}
+	enableSmartTyping();
+		
+	const displayCartTotal = ({results}) => {
+		const { results: [{itemsInCart, buyerCountry}] } = results; 
+		const data = {itemsInCart, buyerCountry};
+		console.log('This is data: ',data.itemsInCart)
+	}
+
+	/*const displayCartTotal = ({results}) => {
+		//let [{results: [{itemsInCart, buyerCountry}] }] = results;
+		let [data] = results;
+		let {itemsInCart, buyerCountry} = data; 
+
+		console.log(data.itemsInCart)
+	}*/
+
+	 
+      
+	/*const fetchBill = async() => {
+        const apiHost = 'https://randomapi.com/api';
+		const apiKey = '006b08a801d82d0c9824dcfdfdfa3b3c';
+		const apiEndpoint = `${apiHost}/${apiKey}`;
+
+		await fetch(apiEndpoint)
+		.then(response => response.json())
+		.then(results => {
+			//console.log(results)
+		 	return displayCartTotal({results});
+		})
+		.catch(err => {
+			console.log('This is error', err)
+		});
+		 
+	}
+    
+    const startApp = () => {
+		return fetchBill();
+    };
+
+    startApp();*/
+
+
+       
+    
+	</script>
+
+
+</body>
+</html>
