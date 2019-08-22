@@ -25,73 +25,10 @@ self.addEventListener('activate', function(event) {
 });*/
 
 
-//const queue = new workbox.backgroundSync.Queue('booking_form_data');
-
-//function onsyncRequest() {
- /*self.addEventListener('fetch', (event) => {
-
-    if (event.request.method === 'POST') {
-     // if (!navigator.onLine) {
-        console.log('we are offline')
-        console.log('cloned event ',event.request)
-        // Clone the request to ensure it's save to read when
-        // adding to the Queue.
-        const promiseChain = fetch(event.request.clone())
-        .catch((err) => {
-            return queue.shiftRequest({request: event.request});
-        });
-
-        event.waitUntil(promiseChain);
-      //}
-    }  
-  });*/
-//}
-
-
-//var queue = new workbox.backgroundSync.Queue('booking_form_data');
-/*self.addEventListener('fetch', (event) => {
-
-  if (event.request.method === 'POST') {
-    
-    console.log('post to php fired ',event.request)
-
-    //var data = event.request;
-    
-      // Clone the request to ensure it's save to read when
-      // adding to the Queue.
-      
-      
-          dbPromise.then(function(db) {
-          var tx = db.transaction('booking_form_data', 'readwrite');
-          var store = tx.objectStore('booking_form_data');
-          
-          
-          store.put(event.request.json());
-          return tx.complete;
-        }).then(function() {
-          console.log('added item to the store os!');
-        });
-  }
-  
+/*self.addEventListener('install', function(event) {
+  self.skipWaiting();
 });*/
 
-
-
-/*
-let bgQueue = new workbox.backgroundSync.QueuePlugin({
-  callbacks: {
-    replayDidSucceed: async(hash, res) => {
-    self.registration.showNotification('Background sync demo', {
-    body: 'Product has been purchased.',
-    icon: '/images/shop-icon-384.png',
-  });
-},
-replayDidFail: (hash) => {},
-requestWillEnqueue: (reqData) => {},
-requestWillDequeue: (reqData) => {},
-},
-});
-*/
 
 workbox.routing.registerRoute(
   new RegExp('.*\.php'),
@@ -99,6 +36,44 @@ workbox.routing.registerRoute(
     console.log('get php fired')
   })
 );
+
+
+
+/*const title = 'Flatmates Africa';
+const options = {
+  body: 'You are back online and your post was successfully sent!',
+  icon: '/build/assets/images/icons-transparent/icon-72x72.png'
+};
+
+const displayNotification = () => {
+  // Otherwise, we need to ask the user for permission
+  if (Notification.permission !== "denied") {
+    alert("You must allow notifications to enable the complete user experience of this app");
+    Notification.requestPermission().then(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        navigator.serviceWorker.getRegistration()
+        .then(reg => {
+          reg.showNotification(title, options);
+        });
+      }
+    });
+  } 
+};*/
+
+self.addEventListener('sync', function (event) {
+  if (event.tag === 'booking_form_data') {
+    Notification.requestPermission().then(permission => {
+      console.log('Notification status ',permission)
+      if(permission === "granted") {
+            navigator.serviceWorker.getRegistration()
+            .then(reg => {
+              reg.showNotification(titless, options);
+            });
+        }
+    })
+  }
+});
 
 var queue = new workbox.backgroundSync.Queue('booking_form_data');
 var myPlugin = {
@@ -110,11 +85,26 @@ var myPlugin = {
   },
   fetchDidFail: async ({originalRequest, request, error, event}) => {
     console.error('Replay failed for request', event.request, error);
-   /* var log = document.getElementById('warning');
-    log.innerText = 'No network, no worries, we will try again when you are back online';*/
+   
     // Put the entry back in the queue and re-throw the error:
     await queue.unshiftRequest({request: event.request});
     //throw error
+     var clientId = Client.id;
+      // Exit early if we don't have access to the client.
+      // Eg, if it's cross-origin.
+      if (!event.clientId) return;
+
+      // Get the client.
+      const client = await Clients.get(event.clientId);
+      // Exit early if we don't get the client.
+      // Eg, if it closed.
+      if (!client) return;
+
+      // Send a message to the client.
+      client.postMessage({
+        msg: "Hey I just got a fetch from you!",
+        url: event.request.referrer
+      });      
   },
   fetchDidSucceed: async ({request, response}) => {
     // Return `response` to use the network response as-is,
@@ -124,12 +114,30 @@ var myPlugin = {
   onSync: async (queue) => {
     try {
       await queue.replayRequests();
-      
+       var clientId = Client.id;
+      // Exit early if we don't have access to the client.
+      // Eg, if it's cross-origin.
+      if (!event.clientId) return;
+
+      // Get the client.
+      const client = await Clients.get(event.clientId);
+      // Exit early if we don't get the client.
+      // Eg, if it closed.
+      if (!client) return;
+
+      // Send a message to the client.
+      client.postMessage({
+        msg: "Hey I just got a fetch from you!",
+        url: event.request.referrer
+      });      
       // The replay was successful! Notification logic can go here.
       console.log('Replay complete!');
     } catch (error) {
       // The replay failed...
       console.log(error);
+    } finally {
+      console.log('Replay complete!');
+      
     }
   }
 }; 
@@ -717,7 +725,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/gallery.js",
-    "revision": "76894321f71d46f2d0bae8d7f48a967c"
+    "revision": "8f017a5b3b912bc0ab55adcf5fa17fdd"
   },
   {
     "url": "assets/js/handlebars-v3.0.3.js",
@@ -833,115 +841,115 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-background-sync.dev.js",
-    "revision": "5446355eef3aa184b5b6eebfcd81f8d9"
+    "revision": "ed328bc7e31023203c286db32daa2d0c"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-background-sync.prod.js",
-    "revision": "1ffcc362312a9e8ef4e28280ace2a1bd"
+    "revision": "39793550463647e7c0de6e596b73b601"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-broadcast-update.dev.js",
-    "revision": "0508d13784c9b0549663f40e3fe55d37"
+    "revision": "d57d0b2581673d91c49ca911a05b0aa2"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-broadcast-update.prod.js",
-    "revision": "ee27c0fdc836f6a2dc656b25a680f9e4"
+    "revision": "1a0a5fd8f45cdd7d7622c75c047dd370"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-cacheable-response.dev.js",
-    "revision": "ecba3679d285394f1c9e219681662721"
+    "revision": "1d60c59ad38f262f11ccbdc5e071f203"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-cacheable-response.prod.js",
-    "revision": "a38e8afa80070ec9dff5dc2fb116f1c2"
+    "revision": "208ddb754235411cd7ad1505ee219936"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-core.dev.js",
-    "revision": "2912182ccc99b017a8c36802cf9d983f"
+    "revision": "459e08f930061f50c6950c68f4a36816"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-core.prod.js",
-    "revision": "5d14d8267f65030735589e4b664ee3bf"
+    "revision": "6d0787ad5000c8e66c6ba49046cfbd62"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-expiration.dev.js",
-    "revision": "43c236fe62480f042c35e8b898ca3367"
+    "revision": "83975ed39c895625a8c101b056d91f61"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-expiration.prod.js",
-    "revision": "a767f3bbd2773a0bea34ff841b51ab64"
+    "revision": "cf90701c83b19c444fdd958a736b3076"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-navigation-preload.dev.js",
-    "revision": "a8f30e409f7037906053acec7d709beb"
+    "revision": "277adc85d096aa2027011054172bf8e7"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-navigation-preload.prod.js",
-    "revision": "e2b19a3eda50f48ce7fc48640a523353"
+    "revision": "c0b544ce3e822b9f13b7d70e45f420f3"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-offline-ga.dev.js",
-    "revision": "3fba0947d12d42834b81499fafc76e82"
+    "revision": "d7418bfcbe667500e628de0d64903604"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-offline-ga.prod.js",
-    "revision": "6af4fb51a5249c4e0ed7bc61ed59836d"
+    "revision": "1fdae34f7697cd9132f331db17174244"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-precaching.dev.js",
-    "revision": "8fbbefcd70c998a3cd35f02e6a8ac4e7"
+    "revision": "222d289800aa3922b2e197b317c4333f"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-precaching.prod.js",
-    "revision": "e8f5c57430ec7c448d30015ff4bd5896"
+    "revision": "b036e1a7eacb7d06735c4878173d103c"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-range-requests.dev.js",
-    "revision": "0f15c57cf5c75cc72b6f23ad28a941d1"
+    "revision": "3c5a1bf649a929fd5c7618a22b695836"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-range-requests.prod.js",
-    "revision": "97c430406d13f4b91c805594ef351261"
+    "revision": "5c3730ad5204385ea49adb923f8646a2"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-routing.dev.js",
-    "revision": "471b8e0f45e6e5e679d04f60c6466e7f"
+    "revision": "4f1a25c75907dc9190dcdf0a9d3401c0"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-routing.prod.js",
-    "revision": "d3fa76a1c38649d596b1d2ffaf398128"
+    "revision": "41d9e7f521c3ad95d60921db4346ff20"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-strategies.dev.js",
-    "revision": "d1c19737e82e2f6bd567aaf384683174"
+    "revision": "f24c3e3d147442028af94ea32a7624c3"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-strategies.prod.js",
-    "revision": "6033181992f0bc562ab1ef5f9ba34697"
+    "revision": "c11afdb39d8e4e762fac0b36d7e81686"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-streams.dev.js",
-    "revision": "eed9eb6f7b0672c45db5408d05efe9b9"
+    "revision": "6b32f48e4ad3be4487979e0e3d282102"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-streams.prod.js",
-    "revision": "4407a13523f1fa1064f616e9047b6148"
+    "revision": "a122e0a372bc617d65f7d26f227045a5"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-sw.js",
-    "revision": "6e1e47d706556eac8524f396e785d4bb"
+    "revision": "edf25979d5d95c54e61428c552da0d2e"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-window.dev.umd.js",
-    "revision": "c17834573a1b48bb8cf33b12128bdae9"
+    "revision": "a9e46dd4ac9a26189ab41c60dfe296f1"
   },
   {
     "url": "assets/js/workbox-v4.3.1/workbox-window.prod.umd.js",
-    "revision": "c65238721ed1187cf832e51a9e34724a"
+    "revision": "2072b10dd5eb2c312c5792ef0ac04336"
   },
   {
     "url": "index.html",
-    "revision": "f48a8293803776dfe157d073f2e16f73"
+    "revision": "f44a46c7fdf3fdadb809a17bf66a0fb6"
   },
   {
     "url": "manifest.json",

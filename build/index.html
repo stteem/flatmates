@@ -537,6 +537,44 @@
 		  return swRegistration.sync.register('booking_form_data');
 		});
 
+		const titless = 'Flatmates Africa';
+		const options = {
+		  body: 'You are back online and your post was successfully sent!',
+		  icon: 'assets/images/icons-transparent/icon-72x72.png'
+		};
+
+		/*navigator.serviceWorker.ready.then(function() {
+			Notification.requestPermission().then(permission => {
+				console.log('Notification status ',permission)
+				if(permission === "granted") {
+			        navigator.serviceWorker.getRegistration()
+			        .then(reg => {
+			          reg.showNotification(titless, options);
+			        });
+			    }
+			})
+		})*/
+
+		//new Notification('hi im new here'); // OK
+
+		/*navigator.serviceWorker.addEventListener('message', event => {
+		  console.log(event.data.msg, event.data.referrer);
+		});*/
+
+		navigator.serviceWorker.addEventListener('sync', event => {
+			if (event.tag === 'booking_form_data') {
+				Notification.requestPermission().then(permission => {
+					console.log('Notification status ',permission)
+					if(permission === "granted") {
+				        navigator.serviceWorker.getRegistration()
+				        .then(reg => {
+				          reg.showNotification(titless, options);
+				        });
+				    }
+				})
+			}
+		});
+
     </script>
 
 

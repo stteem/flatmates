@@ -25,73 +25,10 @@ self.addEventListener('activate', function(event) {
 });*/
 
 
-//const queue = new workbox.backgroundSync.Queue('booking_form_data');
-
-//function onsyncRequest() {
- /*self.addEventListener('fetch', (event) => {
-
-    if (event.request.method === 'POST') {
-     // if (!navigator.onLine) {
-        console.log('we are offline')
-        console.log('cloned event ',event.request)
-        // Clone the request to ensure it's save to read when
-        // adding to the Queue.
-        const promiseChain = fetch(event.request.clone())
-        .catch((err) => {
-            return queue.shiftRequest({request: event.request});
-        });
-
-        event.waitUntil(promiseChain);
-      //}
-    }  
-  });*/
-//}
-
-
-//var queue = new workbox.backgroundSync.Queue('booking_form_data');
-/*self.addEventListener('fetch', (event) => {
-
-  if (event.request.method === 'POST') {
-    
-    console.log('post to php fired ',event.request)
-
-    //var data = event.request;
-    
-      // Clone the request to ensure it's save to read when
-      // adding to the Queue.
-      
-      
-          dbPromise.then(function(db) {
-          var tx = db.transaction('booking_form_data', 'readwrite');
-          var store = tx.objectStore('booking_form_data');
-          
-          
-          store.put(event.request.json());
-          return tx.complete;
-        }).then(function() {
-          console.log('added item to the store os!');
-        });
-  }
-  
+/*self.addEventListener('install', function(event) {
+  self.skipWaiting();
 });*/
 
-
-
-/*
-let bgQueue = new workbox.backgroundSync.QueuePlugin({
-  callbacks: {
-    replayDidSucceed: async(hash, res) => {
-    self.registration.showNotification('Background sync demo', {
-    body: 'Product has been purchased.',
-    icon: '/images/shop-icon-384.png',
-  });
-},
-replayDidFail: (hash) => {},
-requestWillEnqueue: (reqData) => {},
-requestWillDequeue: (reqData) => {},
-},
-});
-*/
 
 workbox.routing.registerRoute(
   new RegExp('.*\.php'),
@@ -99,6 +36,32 @@ workbox.routing.registerRoute(
     console.log('get php fired')
   })
 );
+
+
+
+/*const title = 'Flatmates Africa';
+const options = {
+  body: 'You are back online and your post was successfully sent!',
+  icon: '/build/assets/images/icons-transparent/icon-72x72.png'
+};
+
+const displayNotification = () => {
+  // Otherwise, we need to ask the user for permission
+  if (Notification.permission !== "denied") {
+    alert("You must allow notifications to enable the complete user experience of this app");
+    Notification.requestPermission().then(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        navigator.serviceWorker.getRegistration()
+        .then(reg => {
+          reg.showNotification(title, options);
+        });
+      }
+    });
+  } 
+};*/
+
+
 
 var queue = new workbox.backgroundSync.Queue('booking_form_data');
 var myPlugin = {
@@ -110,11 +73,26 @@ var myPlugin = {
   },
   fetchDidFail: async ({originalRequest, request, error, event}) => {
     console.error('Replay failed for request', event.request, error);
-   /* var log = document.getElementById('warning');
-    log.innerText = 'No network, no worries, we will try again when you are back online';*/
+   
     // Put the entry back in the queue and re-throw the error:
     await queue.unshiftRequest({request: event.request});
     //throw error
+     var clientId = Client.id;
+      // Exit early if we don't have access to the client.
+      // Eg, if it's cross-origin.
+      if (!event.clientId) return;
+
+      // Get the client.
+      const client = await Clients.get(event.clientId);
+      // Exit early if we don't get the client.
+      // Eg, if it closed.
+      if (!client) return;
+
+      // Send a message to the client.
+      client.postMessage({
+        msg: "Hey I just got a fetch from you!",
+        url: event.request.referrer
+      });      
   },
   fetchDidSucceed: async ({request, response}) => {
     // Return `response` to use the network response as-is,
@@ -124,12 +102,30 @@ var myPlugin = {
   onSync: async (queue) => {
     try {
       await queue.replayRequests();
-      
+       var clientId = Client.id;
+      // Exit early if we don't have access to the client.
+      // Eg, if it's cross-origin.
+      if (!event.clientId) return;
+
+      // Get the client.
+      const client = await Clients.get(event.clientId);
+      // Exit early if we don't get the client.
+      // Eg, if it closed.
+      if (!client) return;
+
+      // Send a message to the client.
+      client.postMessage({
+        msg: "Hey I just got a fetch from you!",
+        url: event.request.referrer
+      });      
       // The replay was successful! Notification logic can go here.
       console.log('Replay complete!');
     } catch (error) {
       // The replay failed...
       console.log(error);
+    } finally {
+      console.log('Replay complete!');
+      
     }
   }
 }; 

@@ -659,6 +659,9 @@ $(document).ready(function(){
 						console.log('emptied');
 					});
 				})
+				.catch(() => {
+					throw "No network, try again later";
+				})
 			/*}
 			else {
 				throw "No network, try again later";
@@ -1111,22 +1114,16 @@ $(document).ready(function(){
 	});
 
 
-	/*(function() {
-	'use strict';
+	
 
-		//check for support
-		if (!('indexedDB' in window)) {
-		console.log('This browser doesn\'t support IndexedDB');
-		return;
-		}
+	/*self.addEventListener('notificationclick', function(event) {
+	  const clickedNotification = event.notification;
+	  clickedNotification.close();
 
-		var dbPromise = idb.open('booking-form-db', 1, function(upgradeDb) {
-			console.log('Making a new object store');
-			if (!upgradeDb.objectStoreNames.contains('booking_form_post_data')) {
-			  upgradeDb.createObjectStore('booking_form_post_data', {keyPath: 'id', autoIncrement: true});
-			}
-		});
-	})();*/
+	  // Do something as the result of the notification click
+	  const promiseChain = doSomething();
+	  event.waitUntil(promiseChain);
+	});*/
 
 	
 
