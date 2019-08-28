@@ -188,44 +188,6 @@
 
 <script type="text/javascript">
 
-		/*const smartInput = (event, fieldIndex, fields) => {
-		  const key = event.key;
-		  const tab = (key === 'Tab');
-		  const shift = event.shiftKey;
-		  const space = (key === '');
-		  const backspace = (key === 'Backspace');
-		  const arrowUp = (key === 'ArrowUp');
-		  const arrowDown = (key === 'ArrowDown');
-		  const arrowRight = (key === 'ArrowRight');
-		  const arrowLeft = (key === 'ArrowLeft');
-		  const whichKey = event.which || event.keyCode;
-		  
-		  
-		  const letters = new RegExp('^[A-Za-z]+$');
-		  var cardno = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-
-		  
-
-		  /*if ((fieldIndex <= 3 || fieldIndex == 7) && (targetValue.test(cardno) == false) ) {
-		  		event.preventDefault();
-		  }*/
-
-		  //var output = fields[fieldIndex].value;
-		  //console.log('fields value', output)
-
-		  		
-		 /* if((fieldIndex <= 3 || fieldIndex == 7)  && (!tab || !shift 
-		  		|| !backspace || !arrowUp || !arrowDown || !arrowLeft 
-		  		|| !arrowRight || space) && (whichKey >= 65 && whichKey <= 90 || 
-		  		whichKey >= 97 && whichKey <= 122)) {
-			  	event.preventDefault();
-		  }
-		  if((fieldIndex == 4 || fieldIndex == 5) && (!tab || !shift || !backspace || !arrowUp
-		  		|| !arrowDown || !arrowLeft || !arrowRight || !space) && (whichKey
-				>= 48 && whichKey <= 57 || whichKey >= 96 && whichKey 
-				<= 105)) {
-				event.preventDefault();
-		  }*/
 
 		  	/*var targetLength = event.target.value.length;
 		    console.log('target length', targetLength)
@@ -266,7 +228,7 @@
 
 const appState =  {};
 
-const isPendingInput = false;
+/*const isPendingInput = false;
 const smartInput = (event, fieldIndex, fields) => {
  	if(isPendingInput){}
  	if(fields[fieldIndex].getAttribute("placeholder") == "----" || fields[fieldIndex].getAttribute("placeholder") == "MM/YY"){
@@ -309,8 +271,87 @@ const smartInput = (event, fieldIndex, fields) => {
 		 	}, 500);
 		}
 	} 
-}; 
+};*/ 
+appState.cardDigits = [];
+let valu = [];
 
+const smartInput = (event, fieldIndex, fields) => {
+	const cardRegex = /^\d$/, 
+		nameRegex = /^[a-zA-Z|\s]+$/,
+		dateRegex = /^[0-9|\/]$/,
+		element = event.target,
+		backSpace = 'Backspace',
+		deleteKey = 'Delete',
+		//fieldIndex = index,
+		allowedKeys = [
+			
+			
+			'Shift',
+			'Tab',
+			'ArrowLeft',
+			'ArrowRight'
+		];
+
+	if(allowedKeys.includes(event.key)){
+	  return;
+	}
+	if (event.key == backSpace || event.key == deleteKey) {
+		console.log('Reset to start again!')
+	}
+
+	//appState.cardDigits[fieldIndex] = [];
+
+	if(fieldIndex < 4) {
+
+		if(cardRegex.test(event.key)) {
+			const {selectionStart, size, value} = element;
+			console.log('destructured ',selectionStart, size, value)
+			const valueLen = value.length;
+
+			if(selectionStart <= size && valueLen < size) {
+				
+				valu.push(Number(event.key));
+				console.log('valu ',valu, valu.length)
+				/*if (valu.length == 16) {
+					const first4 = valu.slice(0, 4),
+					second4 = valu.slice(4, 8),
+					third4 = valu.slice(8, 12),
+					fourth4 = valu.slice(12, 16);
+
+					appState.cardDigits.push(first4, second4, third4, fourth4);
+					console.log('appState ',appState.cardDigits)
+					console.log('appState.cardDigits[0] ', appState.cardDigits[0])
+				}*/
+								
+				
+				//smartCursor(event, fieldIndex, fields);
+
+			} 
+			else {
+				event.preventDefault();
+			}
+
+			if(fieldIndex <= 2) {
+				(() => {
+				setTimeout(() => {
+				  const {value} = fields[fieldIndex];
+				  fields[fieldIndex].value = "*".repeat(value.length);
+					if(fieldIndex == 0 && value.length == 4) {
+					  const first4Digits = valu.slice(0, 4);
+					  console.log('first4Digits', first4Digits)
+					  //const {inputField} = first4Digits;
+					  //console.log('inputField', inputField)
+					  //detectCardType(first4Digits);
+					}
+				}, 500)
+				})();
+			}
+
+		} else {
+		  event.preventDefault();
+		}
+	}
+}
 
 
 	const enableSmartTyping = () => {
@@ -320,7 +361,10 @@ const smartInput = (event, fieldIndex, fields) => {
 		inputFields.forEach((field, index, fields) => {
 		  field.addEventListener('keydown', (event) => {
 		  	console.log('field', field.value)
+		  	console.log('index', index)
+		  	
 			  smartInput(event, index, fields);
+
 		  });
 		});
 	}
